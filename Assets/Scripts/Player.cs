@@ -109,7 +109,7 @@ public class Player : MonoBehaviour {
     // 弾発射処理
     void ShotBullet()
     {
-        if (Input.GetButtonDown("ShotBullet"))
+        if (Input.GetButtonDown("Fire2"))
         {
             // 弾をプレイヤーと同じ位置/角度で生成
             GameObject initBullet = Instantiate(bullet, transform.position + new Vector3(0.3f, 0.0f), transform.rotation);

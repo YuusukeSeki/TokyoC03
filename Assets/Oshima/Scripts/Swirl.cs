@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Swirl : Obstacle {
+public class Swirl : ObjectHitCheck {
 
 [SerializeField] GameManager _gameManager = null;
 [SerializeField] int swirlId			  = 0;

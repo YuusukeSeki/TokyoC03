@@ -18,7 +18,7 @@ int gameState								= 0;
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//_uiManager.EditHpGauge(_player.maxHP, _player.hp);
 	}
 
 	public void SceneChange(int id){

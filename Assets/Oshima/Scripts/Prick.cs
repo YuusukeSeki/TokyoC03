@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Prick : Obstacle {
+public class Prick : ObjectHitCheck {
 
 [SerializeField] Player _player = null;
 

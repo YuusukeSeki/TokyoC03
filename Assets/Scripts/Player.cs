@@ -2,223 +2,154 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
+    /* memo
+     * ジャンプ時に、意図しないジャンプ力のバラつきがある。
+     *   Jump()
+     * 　rb.AddForce(Vector2.up * _jumpPower * 10);
+     * 　
+    */
 
-    //public int sceneId;    // ランニング、シューティングの切り替えスイッチ
-    //public bool isArrive;  // true でクリア
+    public bool _isOutputDebugLog;
 
-    //public float level;             // レベル
-    //public float experience;        // 今までの取得経験値
-    //public float getExperience;     // 今ステージでの取得経験値
-    //public float attackPower;       // 攻撃力
-    //public float attackCost;        // 攻撃時に消費するMP
+    bool _isGround;
 
-    [SerializeField] float maxHP;             // 最大HP
-    [SerializeField] float maxMP;             // 最大MP
-    [SerializeField] float hp;                // 現在のHP
-    [SerializeField] float mp;                // 現在のMP
-    [SerializeField] float runSpeed;          // 移動速度
-    [SerializeField] float jumpPower;         // ジャンプ力
-    [SerializeField] float healMp_PerSeconds; // フレーム毎のMP自動回復量
-    [SerializeField] float invincibleSeconds; // 攻撃を受けた際の無敵時間（フレーム単位）
+    [SerializeField] float _runForce;    // 加速度
+    float _runSpeed;                     // 現在の速度
+    [SerializeField] float _runMaxSpeed; // 速度切り替え判定のための閾値
 
-    float downSpeed;                            // 落下速度
-    [SerializeField] float downSpeed_PerFrame;  // フレーム毎の落下加速度
-    bool isGround;
-    bool isSliding;
-    float cntSliding;
+    Rigidbody2D _rb;
+    BoxCollider2D _col;
+    ChangeSprite _cs;
 
-    Rigidbody2D rb;             // 物理演算コンポーネント
-    Animator animCtrl;          // アニメーションコントロール
+    [SerializeField] float _jumpPower;  // ジャンプ力
+    float _jumpThreshold;               // 空中判定の閾値
 
-    //[SerializeField] GameObject bullet;             // PlayerBullet　プレハブ
-    //[SerializeField] AudioManager _audioManager;  // オーディオデバイス
+    public float hp, maxHp;
 
 
     // Use this for initialization
     void Start()
     {
-        // プレイヤーパラメータの初期化
-        hp = maxHP;
-        mp = maxMP;
+        _rb = GetComponent<Rigidbody2D>();
+        _col = GetComponent<BoxCollider2D>();
+        _cs = GetComponent<ChangeSprite>();
 
-        // 物理演算コンポーネントの取得
-        rb = GetComponent<Rigidbody2D>();
-
-        // アニメーションの取得
-        animCtrl = GetComponent<Animator>();
-
-        // その他変数初期化
-        downSpeed = 0;  // 落下速度
-        isGround = false;
-        isSliding = false;
-        cntSliding = 0;
-
+        _runSpeed      = 0;
+        _jumpThreshold = 0.00001f;
+        hp             = maxHp;
     }
 
     // Update is called once per frame
-    void Update () {
-        // 接地判定処理
-        if (CheckIsGround())
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                // ジャンプ処理
-                Jump();
-            }
-            if (Input.GetButtonDown("Fire2"))
-            {
-                // スライディング処理
-                Sliding();
-            }
-
-        }
-
-        if (isSliding)
-        {
-            cntSliding += Time.deltaTime;
-            if(cntSliding >= 1)
-            {
-                isSliding = false;
-                cntSliding = 0;
-                animCtrl.SetBool("IsSliding", false);
-
-            }
-
-        }
-
-        // 前方向の障害物判定処理
-        //CheckForword();
+    void Update()
+    {
+        // 状態の変更
+        ChangeState();
 
         // 移動処理
         Move();
-
-        // アニメーション変更処理
-        // downSpeed < 0 : 下降アニメーション
-        // downSpeed > 0 : 上昇アニメーション
-        animCtrl.SetFloat("DownSpeed", downSpeed);
-
-	}
-
-    // 初期化処理
-    void Init()
-    {
     }
 
-    // 移動処理
-    void Move()
+    // 接地判定
+    void OnCollisionEnter2D(Collision2D col)
     {
-        Vector2 nowPos = rb.position;
-        nowPos += new Vector2(runSpeed, downSpeed) * Time.deltaTime;
-        transform.position = new Vector3(nowPos.x, nowPos.y, 0);
-
-
-    }
-
-    // 弾発射処理
-    //void ShotBullet()
-    //{
-    //    if (Input.GetButtonDown("Fire2"))
-    //    {
-    //        // 弾をプレイヤーと同じ位置/角度で生成
-    //        GameObject initBullet = Instantiate(bullet, transform.position + new Vector3(0.3f, 0.0f), transform.rotation);
-    //        initBullet.GetComponent<PlayerBullet>().SetBullet(attackPower, 8);
-
-    //    }
-    //}
-
-    //  接地判定処理
-    bool CheckIsGround()
-    {
-        RaycastHit2D hit;
-
-        // 下方向チェック
-        if (!isSliding)
-            hit = Physics2D.Raycast(transform.position + new Vector3(-0.32f, -0.96f), Vector2.right, 0.64f);
-        else
-            hit = Physics2D.Raycast(transform.position + new Vector3(-0.97f, -0.32f), Vector2.right, 0.64f);
-
-        if (hit.transform != null)
-        {// レイヤー名を取得
-            string layerName = LayerMask.LayerToName(hit.collider.gameObject.layer);
-
-            if (layerName == "Ground")
-            {// 接地中の処理
-                downSpeed = 0;                      // 重力の初期化
-                animCtrl.SetBool("IsGround", true); // アニメーションフラグの切り替え
-
-                isGround = true;
-
-                return true;
+        if (col.gameObject.tag == "Ground")
+        {
+            if(col.gameObject.transform.position.y < transform.position.y)
+            {
+                if (!_isGround)
+                    _isGround = true;
             }
         }
 
-        // 重力処理（等加速度運動）
-        downSpeed -= downSpeed_PerFrame;        // 落下速度をどんどん早くする
-        animCtrl.SetBool("IsGround", false);    // アニメーションフラグの切り替え
-
-        isGround = false;
-
-        return false;
+    }
+    void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Ground")
+        {
+            if (col.gameObject.transform.position.y < transform.position.y)
+            {
+                if (!_isGround)
+                    _isGround = true;
+            }
+        }
 
     }
 
-    // 前方向の障害物判定処理
-    //bool CheckForword()
-    //{
-    //    RaycastHit2D hit;
-
-    //    // 前方向チェック
-    //    hit = Physics2D.Raycast(transform.position + new Vector3(0.34f, 0.26f), Vector2.down, 0.52f);
-    //    if (hit.transform != null)
-    //    {
-    //        // 障害物に当たった
-    //        //animCtrl.SetBool("IsIdle", true);
-
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        // 障害物に当たっていない
-    //        //animCtrl.SetBool("IsIdle", false);
-
-    //        return false;
-    //    }
-    //}
-
-    // ジャンプ&スライディング処理
-    //void JumpAndSlidingProcessing()
-    //{
-
-    //    if (Input.GetButtonUp("Jump") && isGround)
-    //    {
-    //        Jump();
-    //    }
-    //    if (Input.GetButtonUp("Fire2") && isGround)
-    //    {
-    //        Sliding();
-    //    }
-
-    //}
-
-    // 当たり判定
-    public void OnTriggerEnter2D(Collider2D collision)
+    // 被弾判定
+    void OnTriggerEnter2D(Collider2D col)
     {
-        // レイヤー名を取得
-        string layerName = LayerMask.LayerToName(collision.gameObject.layer);
-
-        Debug.Log("Trigger");
-        Debug.Log(layerName);
-
-        // Bullet(Enemy)との被弾処理
-        if (layerName == "Bullet(Enemy)")
+        if (col.gameObject.tag == "Bullet(Enemy)")
         {
-            // ダメージ処理
-            ReceiveDamage(collision.GetComponent<EnemyBullet>()._attackPower);
+            ReceiveDamage(col.GetComponent<EnemyBullet>()._attackPower);
 
-            // Enemyの破棄
-            Destroy(collision.gameObject);
+            Destroy(col.gameObject);
+        }
 
+    }
+
+    // 状態の変更
+    void ChangeState()
+    {
+        // 空中にいるかどうかの判定。上下の速度(rigidbody.velocity.y)が一定の値を超えている場合、空中とみなす
+        if (Mathf.Abs(_rb.velocity.y) > _jumpThreshold)
+        {
+            _isGround = false;
+        }
+
+    }
+
+    // 移動
+    void Move()
+    {
+        //// デバッグ用ジャンプコード
+        //if (Input.GetKey(KeyCode.UpArrow))
+        //{
+        //    Jump();
+        //}
+        //if (Input.GetKey(KeyCode.DownArrow))
+        //{
+        //    Sliding();
+        //}
+        //else
+        //{
+        //    SetStandSprite();
+        //}
+
+        // 左右の移動。一定の速度に達するまでは加速度を足していき、最大速度以降は最大速度に固定する。
+        _runSpeed += _runForce * Time.deltaTime;
+        if (_runSpeed > _runMaxSpeed)
+        {
+            _runSpeed = _runMaxSpeed;
+        }
+
+        transform.position += new Vector3(_runSpeed * Time.deltaTime, 0, 0);
+
+    }
+
+    // ジャンプ
+    public void Jump()
+    {
+        if(_isOutputDebugLog)
+            Debug.Log("Player::Jump() が呼ばれました");
+
+        if (_isGround)
+        {
+            _rb.AddForce(Vector2.up * _jumpPower * 10);
+        }
+
+    }
+
+    // スライディング
+    public void Sliding()
+    {
+        if (_isOutputDebugLog)
+            Debug.Log("Player::Sliding() が呼ばれました");
+
+        if (_isGround)
+        {
+            _cs.Change(true);
         }
 
     }
@@ -227,59 +158,40 @@ public class Player : MonoBehaviour {
     // damage : 受けるダメージ量
     public void ReceiveDamage(float damage)
     {
-        // HPを減らす
         hp -= damage;
-        
-        // HPが0以下でGameOver
-        if(hp <= 0)
+
+        if (hp <= 0)
         {
-            // GameOver処理
+            // キャラクタ交代処理？
 
         }
 
     }
 
-    // ジャンプ処理
-    public bool Jump()
+    // コリジョンの修正
+    public void ResizeCollider2D(bool sliding, Vector2 objectSize)
     {
-        if (isGround)
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        _col.size = objectSize;
+
+        float moveY = objectSize.y * 0.5f;
+
+        if (sliding)
         {
-            downSpeed = jumpPower;
-            transform.Translate(Vector3.up * 0.1f);
-
-            Debug.Log("Jump");
-
-            return true;
-        }
-        else
-            return false;
-    }
-
-    // スライディング処理
-    public bool Sliding()
-    {
-        if (isGround)
-        {
-            isSliding = true;
-            Vector2 pos = rb.position;
-            pos += new Vector2(0, -0.32f);
-            transform.position = new Vector3(pos.x, pos.y, 0);
-
-            animCtrl.SetBool("IsSliding", true);
-
-            Debug.Log("Sliding");
-
-            return true;
+            transform.position += new Vector3(0, -moveY, 0);
         }
         else
-            return false;
+        {
+            transform.position += new Vector3(0, +moveY, 0);
+        }
+
     }
 
-    // HP取得
-    public float GetHp()
+    // spriteを立ち絵に変更する
+    public void SetStandSprite()
     {
-        return hp;
+        _cs.Change(false);
     }
-
 
 }
+

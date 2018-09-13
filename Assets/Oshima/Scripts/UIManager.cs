@@ -17,6 +17,7 @@ void Start(){
 
 }
 
+//HPBarの操作
 public void EditHpGauge(float maxHp, float nowHp){
     float hp = nowHp/maxHp;
     Bars[0].fillAmount = hp;
@@ -34,6 +35,7 @@ public void EditScore(){
 	
 }
 
+//Spriteの交換
 private void EditSprite(int num){
     Sprite touchSprite = Icons[num].sprite;
     Sprite toSprite = Icons[0].sprite;
@@ -42,6 +44,7 @@ private void EditSprite(int num){
     Icons[num].sprite = toSprite;
 }
 
+//Iconをクリックした時
 public void OnIconClick(int num){
     onCanvasClick = true;
     if(num == 0){

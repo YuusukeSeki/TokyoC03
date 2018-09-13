@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50044329828882244}
   - component: {fileID: 61209842135015642}
   - component: {fileID: 114956859748177796}
+  - component: {fileID: 114579020191887658}
   - component: {fileID: 95717100095462244}
   m_Layer: 8
   m_Name: Player
@@ -57,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1101584470066140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.96, y: 0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4815379702834820}
@@ -127,7 +128,7 @@ Rigidbody2D:
   m_Mass: 0.4096
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -150,7 +151,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.64, y: 1.92}
-    newSize: {x: 0.32, y: 0.96}
+    newSize: {x: 0.64, y: 1.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -172,7 +173,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1101584470066140}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 80b1166928d5c694ca3ee2ebd0bfec21, type: 2}
   m_CullingMode: 0
@@ -193,6 +194,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4aa4c33af95d444849a0aaee97797d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114579020191887658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101584470066140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357a0138c852d9c478161b6363ca8219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SpriteStanding: {fileID: 21300000, guid: 5410c8f73d448b441a9816d93138e234, type: 3}
+  _SpriteSliding: {fileID: 21300000, guid: e4c4fef8ef4c1a041ab4b5106a519f10, type: 3}
 --- !u!114 &114956859748177796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,15 +218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53222d9edb642cf4f9969036e06bfb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 0
-  maxMP: 0
+  _isOutputDebugLog: 1
+  _runForce: 3
+  _runMaxSpeed: 3
+  _jumpPower: 10
   hp: 0
-  mp: 0
-  runSpeed: 5
-  jumpPower: 10
-  healMp_PerSeconds: 0
-  invincibleSeconds: 0
-  downSpeed_PerFrame: 0.3
+  maxHp: 100
 --- !u!124 &124234337999687630
 Behaviour:
   m_ObjectHideFlags: 1
@@ -259,7 +270,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.96}
+  m_Size: {x: 0.64, y: 1.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

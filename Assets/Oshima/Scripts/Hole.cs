@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hole : Obstacle {
+public class Hole : ObjectHitCheck {
 
 [SerializeField] GameManager _gameManager = null;
 

@@ -9,12 +9,12 @@ public class UIManager : MonoBehaviour {
 [SerializeField] Image[] Icons 	    = null;
 [SerializeField] Image[] Bars 	    = null;
 [SerializeField] Sprite[] sprites 	= null;
-//Image[] _spriteRenderer    = null;
+
+public bool onCanvasClick = false;
+
 
 void Start(){
-    for(int i = 0; i<Icons.Length;i++){
-        //_spriteRenderer[i] = Icons[i].gameObject.GetComponent<SpriteRenderer>();
-    }
+
 }
 
 public void EditHpGauge(float maxHp, float nowHp){
@@ -34,20 +34,16 @@ public void EditScore(){
 	
 }
 
-public void EditSprite(int num){
-    //Sprite touchSprite = _spriteRenderer[num].sprite;
-    //Sprite toSprite = _spriteRenderer[0].sprite;
+private void EditSprite(int num){
     Sprite touchSprite = Icons[num].sprite;
     Sprite toSprite = Icons[0].sprite;
 
     Icons[0].sprite = touchSprite;
     Icons[num].sprite = toSprite;
-
-    Debug.Log("ok");
 }
 
 public void OnIconClick(int num){
-    //Debug.Log("icon"+num);
+    onCanvasClick = true;
     if(num == 0){
         Debug.Log("skil");
     }

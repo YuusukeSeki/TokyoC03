@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour {
 [SerializeField] Image[] Bars 	    = null;
 [SerializeField] Sprite[] sprites 	= null;
 
-public bool onCanvasClick = false;
 
 
 void Start(){
@@ -46,7 +45,7 @@ private void EditSprite(int num){
 
 //Iconをクリックした時
 public void OnIconClick(int num){
-    onCanvasClick = true;
+    
     if(num == 0){
         Debug.Log("skil");
     }

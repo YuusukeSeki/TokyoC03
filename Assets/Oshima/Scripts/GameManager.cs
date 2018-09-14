@@ -54,7 +54,7 @@ enum Status{
         	{
             	touchLayerName = LayerMask.LayerToName(raycastResult.gameObject.layer);
         	}
-			Debug.Log("layer: "+touchLayerName);
+			//Debug.Log("layer: "+touchLayerName);
 			if(touchLayerName != "Icon"){
 				_player.Jump();
 			}

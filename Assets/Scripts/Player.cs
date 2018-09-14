@@ -11,22 +11,48 @@ public class Player : MonoBehaviour
      * 　
     */
 
+    // デバッグ表示切替
     public bool _isOutputDebugLog;
 
+    // 接地フラグ
     bool _isGround;
 
+    // 横移動
     [SerializeField] float _runForce;    // 加速度
     float _runSpeed;                     // 現在の速度
-    [SerializeField] float _runMaxSpeed; // 速度切り替え判定のための閾値
+    [SerializeField] float _runMaxSpeed; // 最大速度
 
+    // Component
     Rigidbody2D _rb;
     BoxCollider2D _col;
     ChangeSprite _cs;
+    FlashScript _ff;
+    FadeScript _fade;
 
+    // 上移動
     [SerializeField] float _jumpPower;  // ジャンプ力
     float _jumpThreshold;               // 空中判定の閾値
 
+    // 体力
     public float hp, maxHp;
+
+    // 無敵処理関係
+    bool _invincible;
+    public float _invincibleTime;  // 時間
+    float _cntInvincibleTime;    // 計測カウンター
+
+    // ゴールフラグ
+    bool isArrive;
+
+    // 死亡フラグ
+    bool isDead;
+
+
+    // 初期座標（デバッグ用。ゴール時、死亡時にこの地点に戻す）
+    Vector3 respownPosition;
+
+    // 画面の下の座標
+    float _screenBottom;
 
 
     // Use this for initialization
@@ -35,20 +61,61 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<BoxCollider2D>();
         _cs = GetComponent<ChangeSprite>();
+        _ff = GetComponent<FlashScript>();
 
-        _runSpeed      = 0;
+        _runSpeed = 0;
         _jumpThreshold = 0.00001f;
-        hp             = maxHp;
+        hp = maxHp;
+        _invincible = false;
+        _cntInvincibleTime = 0;
+
+        _ff.SetFrashTime(_invincibleTime);
+
+        isArrive = false;
+
+        _fade = GameObject.Find("FadePanel").GetComponent<FadeScript>();
+        respownPosition = transform.position;
+
+        Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        Vector3 buf = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
+        _screenBottom = -buf.y;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        // ゴール判定
+        if (isArrive)
+            return;
+
+        if (_fade.GetFadeState() != FadeScript.FadeState.NONE)
+            return;
+
+
         // 状態の変更
         ChangeState();
 
         // 移動処理
         Move();
+
+        // 穴落ちた判定
+        if(transform.position.y + GetComponent<SpriteRenderer>().bounds.size.y < _screenBottom)
+        {
+            _fade.SetColor(0, 0, 0);
+            _fade.StartFadeOut();
+        }
+
+    }
+
+    public void Init()
+    {
+        hp = maxHp;
+        _invincible = false;
+        _cntInvincibleTime = 0;
+        isArrive = false;
+        transform.position = respownPosition;
+        _rb.velocity = new Vector2(0, 0);
     }
 
     // 接地判定
@@ -56,7 +123,7 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "Ground")
         {
-            if(col.gameObject.transform.position.y < transform.position.y)
+            if (col.gameObject.transform.position.y < transform.position.y)
             {
                 if (!_isGround)
                     _isGround = true;
@@ -77,7 +144,7 @@ public class Player : MonoBehaviour
 
     }
 
-    // 被弾判定
+    // 被弾判定,ゴール判定
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Bullet(Enemy)")
@@ -85,6 +152,15 @@ public class Player : MonoBehaviour
             ReceiveDamage(col.GetComponent<EnemyBullet>()._attackPower);
 
             Destroy(col.gameObject);
+        }
+        else if (col.gameObject.tag == "GoalFlag")
+        {
+            // フェードイン
+            isArrive = true;
+
+            _fade.SetColor(1, 1, 1);
+            _fade.StartFadeOut();
+
         }
 
     }
@@ -97,6 +173,9 @@ public class Player : MonoBehaviour
         {
             _isGround = false;
         }
+
+        // 無敵状態時の処理
+        UpdateInvincible();
 
     }
 
@@ -131,7 +210,7 @@ public class Player : MonoBehaviour
     // ジャンプ
     public void Jump()
     {
-        if(_isOutputDebugLog)
+        if (_isOutputDebugLog)
             Debug.Log("Player::Jump() が呼ばれました");
 
         if (_isGround)
@@ -158,6 +237,9 @@ public class Player : MonoBehaviour
     // damage : 受けるダメージ量
     public void ReceiveDamage(float damage)
     {
+        if (_invincible)
+            return;
+
         hp -= damage;
 
         if (hp <= 0)
@@ -165,13 +247,17 @@ public class Player : MonoBehaviour
             // キャラクタ交代処理？
 
         }
+        else
+        {
+            SetInvincible();
+            _ff.StartFlash();
+        }
 
     }
 
     // コリジョンの修正
     public void ResizeCollider2D(bool sliding, Vector2 objectSize)
     {
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
         _col.size = objectSize;
 
         float moveY = objectSize.y * 0.5f;
@@ -193,5 +279,29 @@ public class Player : MonoBehaviour
         _cs.Change(false);
     }
 
-}
+    // 無敵状態にする
+    void SetInvincible()
+    {
+        _invincible = true;
+        _cntInvincibleTime = 0;
 
+    }
+
+    // 無敵状態時のみ行われる処理
+    void UpdateInvincible()
+    {
+        if (!_invincible)
+            return;
+
+        _cntInvincibleTime += Time.deltaTime;
+
+        if(_cntInvincibleTime > _invincibleTime)
+        {
+            _invincible = false;
+            _cntInvincibleTime = 0;
+            _ff.EndFlash();
+        }
+
+    }
+
+}

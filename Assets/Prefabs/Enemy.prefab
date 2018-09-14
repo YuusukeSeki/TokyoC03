@@ -90,11 +90,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 20
-  attackPower: 40
+  attackPower: 1
   moveSpeed: 0.1
   shotBullet: 1
   aimingPlayer: 1
-  attackPower_Bullet: 40
+  attackPower_Bullet: 1
   speed_Bullet: 10
   numShot_Seconds: 5
   bullet: {fileID: 1935526543435202, guid: cd696f579e3370f4798b048c4903053d, type: 2}

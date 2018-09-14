@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour {
 
@@ -9,17 +10,29 @@ public class UIManager : MonoBehaviour {
 [SerializeField] Image[] Icons 	    = null;
 [SerializeField] Image[] Bars 	    = null;
 [SerializeField] Sprite[] sprites 	= null;
+List<GameObject[]> pointsArray      = null; //pointsArray[i][j] i:HPbarの位置 j:pointの位置
 
-
+public int friend                   = 0; //0:使用可能 1:使用中 2:使用不可
+public bool friendSkil              = true;
 
 void Start(){
-
+    pointsArray = new List<GameObject[]>(); 
+    for(int i = 0; i<4; i++){
+        GameObject[] points = new GameObject[Bars[i].gameObject.transform.childCount];
+        for(int j = 0; Bars[i].gameObject.transform.childCount > j; j++)
+        {
+            points[j] = Bars[i].gameObject.transform.GetChild(j).gameObject;
+        }
+        pointsArray.Add(points);
+    }
+   
 }
 
 //HPBarの操作
-public void EditHpGauge(float maxHp, float nowHp){
-    float hp = nowHp/maxHp;
-    Bars[0].fillAmount = hp;
+public void EditHpGauge(float nowHp, int playerNum){
+    for(int i = 4; i>nowHp; i--){
+        pointsArray[playerNum][i-1].SetActive(false);
+    }
 }
 
 public void EditMpGauge(){
@@ -35,25 +48,40 @@ public void EditScore(){
 }
 
 //Spriteの交換
-private void EditSprite(int num){
-    Sprite touchSprite = Icons[num].sprite;
-    Sprite toSprite = Icons[0].sprite;
+private void EditSprite(int fromNum, int toNum){
+    Sprite touchSprite = Icons[fromNum].sprite;
+    Sprite toSprite = Icons[toNum].sprite;
 
-    Icons[0].sprite = touchSprite;
-    Icons[num].sprite = toSprite;
+    Icons[toNum].sprite = touchSprite;
+    Icons[fromNum].sprite = toSprite;
 }
 
 //Iconをクリックした時
 public void OnIconClick(int num){
-    
     if(num == 0){
-        Debug.Log("skil");
+        if(friend == 1){
+            if(friendSkil == true){
+                Debug.Log("friend skil");
+                friendSkil = false;
+            }
+        }else{
+            Debug.Log("skil");
+        }
+        
     }
-    else if(num == 3){
-        Debug.Log("friend");
-    }
-    else{
-        EditSprite(num);
+    else if(num == 1 || num == 2){
+        if(friend == 1){
+            EditSprite(num,0);
+            EditSprite(3,num);
+            friend += 1;
+        }else{
+            EditSprite(num,0);
+        }
+    }else{
+        if(friend == 0 || friend == 1){
+            EditSprite(num,0);
+            friend += 1;
+        }
     }
     
 }

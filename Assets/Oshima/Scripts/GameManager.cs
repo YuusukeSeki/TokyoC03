@@ -41,6 +41,7 @@ enum Status{
 
 	private void Play(){
 		_uiManager.EditHpGauge(_player.hp, 0);
+		_uiManager.EditMpGauge(0.33f);
 
 		//画面タップ時プレイヤーがジャンプ、アイコンの上ではジャンプしない
 		if(Input.GetMouseButtonDown(0)) {

@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour {
 [SerializeField] Text[] texts 		= null;
 [SerializeField] Image[] Icons 	    = null;
 [SerializeField] Image[] Frames     = null; //0:friend 1:sub
-[SerializeField] Image[] Bars 	    = null;
+[SerializeField] Image[] Bars 	    = null; //0:mainHP 1:HPbar1 2:HPbar2 3:HPbar2 4:MPbar
 [SerializeField] Sprite[] sprites 	= null;
 List<GameObject[]> pointsArray      = null; //pointsArray[i][j] i:HPbarの位置 j:pointの位置
 
@@ -38,8 +38,8 @@ public void EditHpGauge(float nowHp, int playerNum){
     }
 }
 
-public void EditMpGauge(){
-
+public void EditMpGauge(float nowMp){
+    Bars[4].fillAmount = nowMp;
 }
 
 public void EditItemNumber(){

@@ -8,12 +8,13 @@ public class UIManager : MonoBehaviour {
 
 [SerializeField] Text[] texts 		= null;
 [SerializeField] Image[] Icons 	    = null;
+[SerializeField] Image[] Frames     = null; //0:friend 1:sub
 [SerializeField] Image[] Bars 	    = null;
 [SerializeField] Sprite[] sprites 	= null;
 List<GameObject[]> pointsArray      = null; //pointsArray[i][j] i:HPbarの位置 j:pointの位置
 
-public int friend                   = 0; //0:使用可能 1:使用中 2:使用不可
-public bool friendSkil              = true;
+public int friend                   = 0; //0:使用可能 1:使用中
+public bool friendSkil              = true; //スキルが使えるかどうか
 
 void Start(){
     pointsArray = new List<GameObject[]>(); 
@@ -25,6 +26,8 @@ void Start(){
         }
         pointsArray.Add(points);
     }
+    Frames[0].gameObject.SetActive(true);
+    Frames[1].gameObject.SetActive(false);
    
 }
 
@@ -62,7 +65,6 @@ public void OnIconClick(int num){
         if(friend == 1){
             if(friendSkil == true){
                 Debug.Log("friend skil");
-                friendSkil = false;
             }
         }else{
             Debug.Log("skil");
@@ -73,15 +75,23 @@ public void OnIconClick(int num){
         if(friend == 1){
             EditSprite(num,0);
             EditSprite(3,num);
-            friend += 1;
+            friend = 0;
+            Frames[0].gameObject.SetActive(true);
+            Frames[1].gameObject.SetActive(false);
         }else{
             EditSprite(num,0);
         }
     }else{
-        if(friend == 0 || friend == 1){
-            EditSprite(num,0);
-            friend += 1;
+        if(friend == 0){
+            friend = 1;
+            Frames[0].gameObject.SetActive(false);
+            Frames[1].gameObject.SetActive(true);
+        }else{
+            friend = 0;
+            Frames[0].gameObject.SetActive(true);
+            Frames[1].gameObject.SetActive(false);
         }
+        EditSprite(num,0);
     }
     
 }

@@ -51,9 +51,6 @@ public class Player : MonoBehaviour
     // 初期座標（デバッグ用。ゴール時、死亡時にこの地点に戻す）
     Vector3 respownPosition;
 
-    // 画面の下の座標
-    float _screenBottom;
-
 
     // Use this for initialization
     void Start()
@@ -76,35 +73,24 @@ public class Player : MonoBehaviour
         _fade = GameObject.Find("FadePanel").GetComponent<FadeScript>();
         respownPosition = transform.position;
 
-        Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        Vector3 buf = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
-        _screenBottom = -buf.y;
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        // 状態の変更
+        ChangeState();
+
         // ゴール判定
         if (isArrive)
             return;
 
+        // 画面遷移中は動かさない
         if (_fade.GetFadeState() != FadeScript.FadeState.NONE)
             return;
 
-
-        // 状態の変更
-        ChangeState();
-
         // 移動処理
         Move();
-
-        // 穴落ちた判定
-        if(transform.position.y + GetComponent<SpriteRenderer>().bounds.size.y < _screenBottom)
-        {
-            _fade.SetColor(0, 0, 0);
-            _fade.StartFadeOut();
-        }
 
     }
 
@@ -121,6 +107,9 @@ public class Player : MonoBehaviour
     // 接地判定
     void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log(col.gameObject.tag);
+
+
         if (col.gameObject.tag == "Ground")
         {
             if (col.gameObject.transform.position.y < transform.position.y)
@@ -144,21 +133,27 @@ public class Player : MonoBehaviour
 
     }
 
-    // 被弾判定,ゴール判定
+    // 被弾判定,ゴール判定,画面外判定
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Bullet(Enemy)")
-        {
+        {// 被弾判定
             ReceiveDamage(col.GetComponent<EnemyBullet>()._attackPower);
 
             Destroy(col.gameObject);
         }
         else if (col.gameObject.tag == "GoalFlag")
-        {
+        {// ゴール判定
             // フェードイン
             isArrive = true;
 
             _fade.SetColor(1, 1, 1);
+            _fade.StartFadeOut();
+
+        }
+        else if (col.gameObject.tag == "DeadLine")
+        {// 画面外判定（底）
+            _fade.SetColor(0, 0, 0);
             _fade.StartFadeOut();
 
         }

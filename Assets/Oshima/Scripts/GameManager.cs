@@ -16,6 +16,7 @@ EventSystem eventSystem 					= null;
 string touchLayerName						= "";
 Status status 								= Status.PLAYING;
 
+
 enum Status{
 		PLAYING,
 		POUSE
@@ -39,7 +40,7 @@ enum Status{
 	}
 
 	private void Play(){
-		_uiManager.EditHpGauge(_player.maxHp, _player.hp);
+		_uiManager.EditHpGauge(_player.hp, 0);
 
 		//画面タップ時プレイヤーがジャンプ、アイコンの上ではジャンプしない
 		if(Input.GetMouseButtonDown(0)) {
@@ -53,7 +54,7 @@ enum Status{
         	{
             	touchLayerName = LayerMask.LayerToName(raycastResult.gameObject.layer);
         	}
-
+			//Debug.Log("layer: "+touchLayerName);
 			if(touchLayerName != "Icon"){
 				_player.Jump();
 			}

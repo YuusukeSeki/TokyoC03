@@ -3,32 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Target : MonoBehaviour {
+public class Target : ObjectHitCheck {
 
-    Score _letter;
+[SerializeField] GameManager _gameManager = null;
 
-    // Use this for initialization
-    void Start () {
-        _letter = GameObject.Find("Main Camera").GetComponent<Score>();
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
+    public override void DoSomeEvent(){
+        _gameManager.ScoreCal();
+		Debug.Log("target");
+        Destroy(this.gameObject);
 	}
-
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-            _letter.AddScore();
-
-            Destroy(gameObject);
-        }
-
-    }
-
 
 }

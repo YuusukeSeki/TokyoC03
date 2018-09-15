@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour {
 
-[SerializeField] Text[] texts 		= null;
+[SerializeField] Text[] texts 		= null; //0:score
 [SerializeField] Image[] Icons 	    = null;
 [SerializeField] Image[] Frames     = null; //0:friend 1:sub
 [SerializeField] Image[] Bars 	    = null; //0:mainHP 1:HPbar1 2:HPbar2 3:HPbar2 4:MPbar
@@ -46,8 +46,8 @@ public void EditItemNumber(){
 
 }
 
-public void EditScore(){
-	
+public void EditScore(int score){
+	texts[0].text = "× " + score.ToString();
 }
 
 //Spriteの交換

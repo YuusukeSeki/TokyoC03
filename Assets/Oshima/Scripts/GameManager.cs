@@ -15,6 +15,7 @@ int gameState								= 0;
 EventSystem eventSystem 					= null;
 string touchLayerName						= "";
 Status status 								= Status.PLAYING;
+int score									= 0;
 
 
 enum Status{
@@ -60,6 +61,11 @@ enum Status{
 				_player.Jump();
 			}
 　		}
+	}
+
+	public void ScoreCal(){
+		score += 1;
+		_uiManager.EditScore(score);
 	}
 
 	public void SceneChange(int id){

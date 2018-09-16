@@ -21,9 +21,6 @@ public class Player : MonoBehaviour
         FALL_DEAD,  // 穴に落ちて死んだ
     };
 
-    // デバッグ表示切替
-    public bool _isOutputDebugLog;
-
     // 接地フラグ
     bool _isGround;
 
@@ -247,9 +244,6 @@ public class Player : MonoBehaviour
     // ジャンプ
     public void Jump()
     {
-        if (_isOutputDebugLog)
-            Debug.Log("Player::Jump() が呼ばれました");
-
         if (_isGround)
         {
             _rb.AddForce(Vector2.up * _jumpPower * 10);
@@ -260,9 +254,6 @@ public class Player : MonoBehaviour
     // スライディング
     public void Sliding()
     {
-        if (_isOutputDebugLog)
-            Debug.Log("Player::Sliding() が呼ばれました");
-
         if (_isGround)
         {
             _cs.Change(true);
@@ -378,8 +369,7 @@ public class Player : MonoBehaviour
 
     public void Skill()
     {
-        if(_isOutputDebugLog)
-            Debug.Log("Skill()が呼ばれました");
+        Debug.Log("Skill()が呼ばれました");
     }
 
 }

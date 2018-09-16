@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFixing : MonoBehaviour {
 
-    PlayerManager _pm;
+    [SerializeField] PlayerManager _playerManager = null;
     float _offsetX;
     public Vector2 _screenSize;
 
@@ -21,7 +21,6 @@ public class CameraFixing : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        _pm = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         Vector3 leftTop = GetComponent<Camera>().ScreenToWorldPoint(Vector3.zero);
         Vector3 rightBottom = GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
         Vector3 size = rightBottom - leftTop;
@@ -42,7 +41,7 @@ public class CameraFixing : MonoBehaviour {
 
         if (_state == State.NORMAL)
         {
-            pos.x = _pm._charaLists[_pm._nowChara].transform.position.x + _offsetX;
+            pos.x = _playerManager._charaLists[_playerManager._nowChara].transform.position.x + _offsetX;
             pos.y = 0;
 
             transform.position = pos;

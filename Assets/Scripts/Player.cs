@@ -11,6 +11,16 @@ public class Player : MonoBehaviour
      * 　
     */
 
+    public enum State
+    {
+        NONE,
+        ENTRY,      // 交代（登場）
+        EXIT,       // 交代（退場）
+        CLEAR,
+        DEAD,
+        FALL_DEAD,  // 穴に落ちて死んだ
+    };
+
     // デバッグ表示切替
     public bool _isOutputDebugLog;
 
@@ -20,7 +30,7 @@ public class Player : MonoBehaviour
     // 横移動
     [SerializeField] float _runForce;    // 加速度
     float _runSpeed;                     // 現在の速度
-    [SerializeField] float _runMaxSpeed; // 最大速度
+    public float _runMaxSpeed; // 最大速度
 
     // Component
     Rigidbody2D _rb;
@@ -41,37 +51,45 @@ public class Player : MonoBehaviour
     public float _invincibleTime;  // 時間
     float _cntInvincibleTime;    // 計測カウンター
 
-    // ゴールフラグ
-    bool isArrive;
+    // 状態
+    public State _state;
 
-    // 死亡フラグ
-    bool isDead;
-
-
-    // 初期座標（デバッグ用。ゴール時、死亡時にこの地点に戻す）
+    // 初期座標（ゴール時、死亡時にこの地点に戻す）
     Vector3 respownPosition;
+
+    // MPが０からMAXになるまでに掛かる秒数
+    public float healMP_PerSeconds;
+
+    // 交代
+    float _cntTime;
+    float _changeTime;
+    Vector3 _startPos;
+    Vector3 _endPos;
 
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        // コンポーネント取得
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<BoxCollider2D>();
         _cs = GetComponent<ChangeSprite>();
         _ff = GetComponent<FlashScript>();
 
-        _runSpeed = 0;
+        // ジャンプ判定の閾値設定
         _jumpThreshold = 0.00001f;
-        hp = maxHp;
-        _invincible = false;
-        _cntInvincibleTime = 0;
 
+        // 点滅時間の設定
         _ff.SetFrashTime(_invincibleTime);
 
-        isArrive = false;
-
+        // フェード取得
         _fade = GameObject.Find("FadePanel").GetComponent<FadeScript>();
+
+        // 初期座標取得
         respownPosition = transform.position;
+
+        // 初期化処理
+        Init();
 
     }
 
@@ -81,8 +99,12 @@ public class Player : MonoBehaviour
         // 状態の変更
         ChangeState();
 
-        // ゴール判定
-        if (isArrive)
+        // ゴールしてたら動かない
+        if (_state == State.CLEAR)
+            return;
+
+        // 死んでたら動かない
+        if (_state == State.DEAD)
             return;
 
         // 画面遷移中は動かさない
@@ -94,22 +116,32 @@ public class Player : MonoBehaviour
 
     }
 
+    // 初期化処理
     public void Init()
     {
+        // 体力
         hp = maxHp;
+
+        // 無敵
         _invincible = false;
         _cntInvincibleTime = 0;
-        isArrive = false;
+
+        // 状態
+        _state = State.NONE;
+
+        // 座標
         transform.position = respownPosition;
+
+        // 速度
         _rb.velocity = new Vector2(0, 0);
+
+        _cntTime = 0;
+
     }
 
     // 接地判定
     void OnCollisionEnter2D(Collision2D col)
     {
-//        Debug.Log(col.gameObject.tag);
-
-
         if (col.gameObject.tag == "Ground")
         {
             if (col.gameObject.transform.position.y < transform.position.y)
@@ -138,24 +170,25 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet(Enemy)")
         {// 被弾判定
-            ReceiveDamage(col.GetComponent<EnemyBullet>()._attackPower);
+            if (_state != State.NONE)
+                return;
+
+            // 通常時以外は攻撃を受けない
+            if (_state != State.NONE)
+                ReceiveDamage(col.GetComponent<EnemyBullet>()._attackPower);
 
             Destroy(col.gameObject);
         }
         else if (col.gameObject.tag == "GoalFlag")
         {// ゴール判定
-            // フェードイン
-            isArrive = true;
-
-            _fade.SetColor(1, 1, 1);
-            _fade.StartFadeOut();
-
+            _state = State.CLEAR;
         }
         else if (col.gameObject.tag == "DeadLine")
         {// 画面外判定（底）
-            _fade.SetColor(0, 0, 0);
-            _fade.StartFadeOut();
+            if (_state == State.NONE || _state == State.ENTRY)
+                return;
 
+            _state = State.FALL_DEAD;
         }
 
     }
@@ -177,28 +210,37 @@ public class Player : MonoBehaviour
     // 移動
     void Move()
     {
-        //// デバッグ用ジャンプコード
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    Jump();
-        //}
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    Sliding();
-        //}
-        //else
-        //{
-        //    SetStandSprite();
-        //}
+        if (_state == State.ENTRY)
+        {// 登場中
+            _cntTime += Time.deltaTime;
 
-        // 左右の移動。一定の速度に達するまでは加速度を足していき、最大速度以降は最大速度に固定する。
-        _runSpeed += _runForce * Time.deltaTime;
-        if (_runSpeed > _runMaxSpeed)
-        {
-            _runSpeed = _runMaxSpeed;
+            Vector3 pos = transform.position;
+
+            pos.x = Mathf.MoveTowards(pos.x, _endPos.x, (_endPos.x - _startPos.x) * (Time.deltaTime / _changeTime));
+            transform.position = pos;
+
+            if (_cntTime >= _changeTime)
+            {
+                _state = State.NONE;
+                _cntTime = 0;
+            }
+
         }
+        else if (_state == State.EXIT)
+        {// 退場中
+            transform.position += new Vector3(-_runMaxSpeed * 0.5f * Time.deltaTime, 0, 0);
+        }
+        else
+        {// 通常時
+            // 左右の移動。一定の速度に達するまでは加速度を足していき、最大速度以降は最大速度に固定する。
+            _runSpeed += _runForce * Time.deltaTime;
+            if (_runSpeed > _runMaxSpeed)
+            {
+                _runSpeed = _runMaxSpeed;
+            }
 
-        transform.position += new Vector3(_runSpeed * Time.deltaTime, 0, 0);
+            transform.position += new Vector3(_runSpeed * Time.deltaTime, 0, 0);
+        }
 
     }
 
@@ -237,9 +279,10 @@ public class Player : MonoBehaviour
 
         hp -= damage;
 
+        // 死亡時状態切り替え。キャラ交代はChangeCharaに任せる
         if (hp <= 0)
         {
-            // キャラクタ交代処理？
+            _state = State.DEAD;
 
         }
         else
@@ -297,6 +340,46 @@ public class Player : MonoBehaviour
             _ff.EndFlash();
         }
 
+    }
+
+    // 登場時の処理
+    public void SetEntry(Vector3 startPos, Vector3 endPos, float changeTime)
+    {
+        // 状態の変更
+        _state = State.ENTRY;
+
+        // 初期座標を設定
+        transform.position = startPos;
+
+        // 始点、終点、交代にかかる時間を取得
+        _startPos = startPos;
+        _endPos = endPos;
+        _changeTime = changeTime;
+
+    }
+
+    // 退場時の処理
+    public void SetExit()
+    {
+        _state = State.EXIT;
+
+    }
+
+    // 画面外判定
+    void OnBecameInvisible()
+    {
+        if (_state == State.EXIT)
+        {
+            _state = State.NONE;
+            gameObject.SetActive(false);
+
+        }
+    }
+
+    public void Skill()
+    {
+        if(_isOutputDebugLog)
+            Debug.Log("Skill()が呼ばれました");
     }
 
 }

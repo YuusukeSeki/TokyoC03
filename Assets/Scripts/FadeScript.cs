@@ -9,13 +9,12 @@ public class FadeScript : MonoBehaviour
     float speed = 0.01f;
     float red, green, blue;
 
-    Player _player;
-
     public enum FadeState
     {
         NONE,
+        FADE_OUT,
+        FADE_OUT_COMPRETED,
         FADE_IN,
-        FADE_OUT
     };
 
     FadeState _fadeState;
@@ -28,8 +27,6 @@ public class FadeScript : MonoBehaviour
         green = GetComponent<Image>().color.g;
         blue = GetComponent<Image>().color.b;
 
-        _player = GameObject.Find("Player").GetComponent<Player>();
-
     }
 
     void Update()
@@ -37,33 +34,41 @@ public class FadeScript : MonoBehaviour
         if (_fadeState == FadeState.NONE)
             return;
 
-        if (_fadeState == FadeState.FADE_OUT)
+        switch (_fadeState)
         {
-            alfa += speed;
-            if(alfa >= 1)
-            {
-                alfa = 1;
+            case FadeState.FADE_OUT:
+                alfa += speed;
+                if (alfa >= 1)
+                {
+                    alfa = 1;
+                    _fadeState = FadeState.FADE_OUT_COMPRETED;
+                }
+                break;
+
+            case FadeState.FADE_OUT_COMPRETED:
                 _fadeState = FadeState.FADE_IN;
-                _player.Init();
-            }
-        }
-        else
-        {
-            alfa -= speed;
-            if (alfa <= 0)
-            {
-                alfa = 0;
-                _fadeState = FadeState.NONE;
-            }
+                break;
+
+            case FadeState.FADE_IN:
+                alfa -= speed;
+                if (alfa <= 0)
+                {
+                    alfa = 0;
+                    _fadeState = FadeState.NONE;
+                }
+                break;
+
         }
 
         GetComponent<Image>().color = new Color(red, green, blue, alfa);
-
 
     }
 
     public void StartFadeOut()
     {
+        if (_fadeState != FadeState.NONE)
+            return;
+
         _fadeState = FadeState.FADE_OUT;
 
     }

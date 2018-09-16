@@ -15,8 +15,9 @@ public class Enemy : MonoBehaviour {
     public float speed_Bullet;          // 弾の移動速度
     public float numShot_Seconds;       // 秒間発射数
     float cntTime;                      // 秒数記憶バッファ
-    
-    GameObject player;
+
+    PlayerManager _pm;
+    //GameObject player;
     [SerializeField] GameObject bullet;
 
 	// Use this for initialization
@@ -42,7 +43,8 @@ public class Enemy : MonoBehaviour {
         // フレームカウンター初期化
         cntTime = 0;
 
-        player =  GameObject.Find("Player");
+        _pm =  GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        //player = _pm._charaLists[_pm._nowChara];
 
         enabled = false;
     }
@@ -58,7 +60,7 @@ public class Enemy : MonoBehaviour {
     {
         if (aimingPlayer)
         {// 追尾
-            Vector3 vec = (player.GetComponent<Player>().transform.position - transform.position) * moveSpeed;
+            Vector3 vec = (_pm._charaLists[_pm._nowChara].GetComponent<Player>().transform.position - transform.position) * moveSpeed;
             vec.Normalize();
 
             transform.position += vec * moveSpeed * Time.deltaTime;
@@ -123,7 +125,7 @@ public class Enemy : MonoBehaviour {
             if (aimingPlayer)
             {// プレイヤーを狙う場合
                 // バレット生成位置からプレイヤーへの単位ベクトルを算出
-                Vector3 aimVector = player.GetComponent<Player>().transform.position - initBullet.transform.position;
+                Vector3 aimVector = _pm._charaLists[_pm._nowChara].GetComponent<Player>().transform.position - initBullet.transform.position;
                 aimVector.Normalize();
 
                 // 進行方向をバレットに設定する

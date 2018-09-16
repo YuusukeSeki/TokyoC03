@@ -7,10 +7,12 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour {
 
 [SerializeField] Player _player 			= null;
+[SerializeField] GameObject player_obj 			= null;
 //[SerializeField] Boss _boss					= null;
 [SerializeField] UIManager _uiManager 		= null;
 [SerializeField] AudioManager _audioManager = null;
 [SerializeField] GameObject pousePanel 		= null;
+[SerializeField] GameObject letter			= null;
 int gameState								= 0;
 EventSystem eventSystem 					= null;
 string touchLayerName						= "";
@@ -46,8 +48,20 @@ enum Status{
 		MpCal(2, 3f);
 		MpCal(3, 4f);
 
-		//画面タップ時プレイヤーがジャンプ、アイコンの上ではジャンプしない
+		
 		if(Input.GetMouseButtonDown(0)) {
+
+		//アイコン以外をタップ時何をタップしているかの判定
+			Vector2 tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    		Collider2D collition2d = Physics2D.OverlapPoint(tapPoint);
+    		if (collition2d) {
+        		RaycastHit2D hitObject = Physics2D.Raycast(tapPoint,-Vector2.up);
+        		if (hitObject) {
+            		Debug.Log("hit object is " + hitObject.collider.gameObject.tag);
+        		}
+    		}
+
+		//画面タップ時アイコンをタップしているかどうかの判定
 			touchLayerName = "";
 　　　		 PointerEventData pointer = new PointerEventData(EventSystem.current);
         	pointer.position = Input.mousePosition;
@@ -115,5 +129,9 @@ enum Status{
 		if(playerMPs[playerNum] >= 1){
 			playerMPs[playerNum] = 0;
 		}
+	}
+
+	public void OnPostButton(){
+		Instantiate(letter,player_obj.transform.position + new Vector3(1f,0,0), Quaternion.identity);
 	}
 }

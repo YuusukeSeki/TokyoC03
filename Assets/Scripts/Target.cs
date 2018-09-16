@@ -9,8 +9,12 @@ public class Target : ObjectHitCheck {
 
     public override void DoSomeEvent(){
         _gameManager.ScoreCal();
-		Debug.Log("target");
-        Destroy(this.gameObject);
+		//Debug.Log("target");
+        //Destroy(this.gameObject);
 	}
+
+    public void SendSelfPos(){
+        Debug.Log(this.gameObject.transform.position);
+    }
 
 }

@@ -84,6 +84,8 @@ public class FlashScript : MonoBehaviour {
         _cntFlash = 0;
         _alpha = 1;
         _reverse = true;
+
+        _sr.color = new Color(1, 1, 1, _alpha);
     }
 
     // 点滅時間の設定

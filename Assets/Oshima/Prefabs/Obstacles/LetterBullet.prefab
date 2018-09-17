@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114984433217137102}
   m_Layer: 0
   m_Name: LetterBullet
-  m_TagString: Untagged
+  m_TagString: LetterBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

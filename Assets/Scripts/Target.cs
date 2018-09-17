@@ -7,10 +7,15 @@ public class Target : ObjectHitCheck {
 
 [SerializeField] GameManager _gameManager = null;
 
-    public override void DoSomeEvent(){
+    public override void DoSomeEvent(int patern){
+        if(patern == 0){
+            Debug.Log("player");
+        }
+        else if(patern == 1){
+            Debug.Log("letter");
+        }
         _gameManager.ScoreCal();
-		//Debug.Log("target");
-        //Destroy(this.gameObject);
+		Destroy(this.gameObject);
 	}
 
     public void SendSelfPos(){

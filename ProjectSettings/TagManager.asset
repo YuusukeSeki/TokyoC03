@@ -10,6 +10,8 @@ TagManager:
   - GoalFlag
   - DeadLine
   - Barrier
+  - Target
+  - LetterBullet
   layers:
   - Default
   - TransparentFX

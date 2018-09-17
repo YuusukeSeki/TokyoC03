@@ -17,14 +17,20 @@ public void OnCollisionEnter2D(Collision2D collision){
 
 public void OnTriggerEnter2D(Collider2D collider){
 	// レイヤー名を取得
-    string layerName = LayerMask.LayerToName(collider.gameObject.layer);
-	if (layerName == "Player"){
+    //string layerName = LayerMask.LayerToName(collider.gameObject.tag);
+	if (collider.gameObject.tag == "Player"){
 		//Debug.Log("trigger");
-		DoSomeEvent();
+		DoSomeEvent(0);
+	}
+	else if(collider.gameObject.tag == "LetterBullet"){
+		DoSomeEvent(1);
+	}
+	else if(collider.gameObject.tag == "Target"){
+		DoSomeEvent(2);
 	}
 }
 
-public virtual void DoSomeEvent(){
+public virtual void DoSomeEvent(int patern){
 	Debug.Log("collision");
 }
 

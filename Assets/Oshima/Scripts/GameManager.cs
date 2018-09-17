@@ -41,10 +41,10 @@ enum Status{
 			Play();
 		}
 		//Debug.Log(playerMPs[0]+" "+playerMPs[1]+" "+playerMPs[2]+" "+playerMPs[3]);
-		Debug.Log("0: hp "+_playerManager.GetCharacterParamater(0)._hp+" pos "+_uiManager.SearchPlayerPos(0));
-		Debug.Log("1: hp "+_playerManager.GetCharacterParamater(1)._hp+" pos "+_uiManager.SearchPlayerPos(1));
-		Debug.Log("2: hp "+_playerManager.GetCharacterParamater(2)._hp+" pos "+_uiManager.SearchPlayerPos(2));
-		Debug.Log("3: hp "+_playerManager.GetCharacterParamater(3)._hp+" pos "+_uiManager.SearchPlayerPos(3));
+		//Debug.Log("0: hp "+_playerManager.GetCharacterParamater(0)._hp+" pos "+_uiManager.SearchPlayerPos(0));
+		//Debug.Log("1: hp "+_playerManager.GetCharacterParamater(1)._hp+" pos "+_uiManager.SearchPlayerPos(1));
+		//Debug.Log("2: hp "+_playerManager.GetCharacterParamater(2)._hp+" pos "+_uiManager.SearchPlayerPos(2));
+		//Debug.Log("3: hp "+_playerManager.GetCharacterParamater(3)._hp+" pos "+_uiManager.SearchPlayerPos(3));
 	}
 
 	private void Play(){

@@ -95,7 +95,8 @@ MonoBehaviour:
   shotBullet: 1
   aimingPlayer: 1
   attackPower_Bullet: 25
-  shotBullet_Interval: 30
+  speed_Bullet: 0
+  numShot_Seconds: 0
   bullet: {fileID: 0}
 --- !u!212 &212110944906382842
 SpriteRenderer:
@@ -131,12 +132,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 461f3104db4f6e347a96ca3bf1344947, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c37363d0f066834fb4ba3aa5fb6afd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.48}
+  m_Size: {x: 19.2, y: 11.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

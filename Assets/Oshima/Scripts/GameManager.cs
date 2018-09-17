@@ -141,6 +141,6 @@ enum Status{
 	}
 
 	public void OnPostButton(){
-		Instantiate(letter,player_obj.transform.position + new Vector3(1f,0,0), Quaternion.identity);
+		Instantiate(letter,_playerManager.GetMainCharacterPosition() + new Vector3(1f,0,0), Quaternion.identity);
 	}
 }

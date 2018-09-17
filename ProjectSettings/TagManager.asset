@@ -9,6 +9,7 @@ TagManager:
   - Bullet(Enemy)
   - GoalFlag
   - DeadLine
+  - Barrier
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Box
   - Ground
   - Icon
-  - 
+  - Barrier
   - 
   - 
   - 
@@ -51,4 +52,7 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 1305718991
+    locked: 0
+  - name: Barrier
+    uniqueID: 2966188673
     locked: 0

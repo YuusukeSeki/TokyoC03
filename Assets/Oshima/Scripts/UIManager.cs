@@ -6,17 +6,18 @@ using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour {
 
-[SerializeField] Text[] texts 		= null; //0:score
-[SerializeField] Image[] Icons 	    = null;
-[SerializeField] Image[] Frames     = null; //0:friend 1:sub
-[SerializeField] Image[] HpBars 	= null; //0:mainHP 1:HPbar1 2:HPbar2 3:HPbar2 
-[SerializeField] Image[] MpBars 	= null; //0:mainMPbar 1:MPbar1 2:MPbar2 3:MPbar3
-[SerializeField] Sprite[] sprites 	= null;
-List<GameObject[]> pointsArray      = null; //pointsArray[i][j] i:HPbarの位置 j:pointの位置
+[SerializeField] Text[] texts 		          = null; //0:score
+[SerializeField] Image[] Icons 	              = null;
+[SerializeField] Image[] Frames               = null; //0:friend 1:sub
+[SerializeField] Image[] HpBars 	          = null; //0:mainHP 1:HPbar1 2:HPbar2 3:HPbar2 
+[SerializeField] Image[] MpBars 	          = null; //0:mainMPbar 1:MPbar1 2:MPbar2 3:MPbar3
+[SerializeField] Sprite[] sprites 	          = null;
+List<GameObject[]> pointsArray                = null; //pointsArray[i][j] i:HPbarの位置 j:pointの位置
+[SerializeField] PlayerManager _playerManager = null;
 
-public int[] playerPos              = new int[4]; //playerのposition
-public int friend                   = 0; //0:使用可能 1:使用中
-public bool friendSkil              = true; //スキルが使えるかどうか
+public int[] playerPos                        = new int[4]; //playerのposition
+public int friend                             = 0; //0:使用可能 1:使用中
+public bool friendSkil                        = true; //スキルが使えるかどうか
 
 void Start(){
     pointsArray = new List<GameObject[]>(); 
@@ -35,9 +36,9 @@ void Start(){
 }
 
 //HPBarの操作
-public void EditHpGauge(float nowHp, int playerNum){
+public void EditHpGauge(float nowHp, int gaugeNum){
     for(int i = 4; i>nowHp; i--){
-        pointsArray[playerNum][i-1].SetActive(false);
+        pointsArray[gaugeNum][i-1].SetActive(false);
     }
 }
 
@@ -92,6 +93,7 @@ public void OnIconClick(int num){
         
     }
     else if(num == 1 || num == 2){
+        _playerManager.ChangeCharacter(playerPos[num]);
         if(friend == 1){
             EditSprite(num,0);
             EditSprite(3,num);
@@ -105,6 +107,7 @@ public void OnIconClick(int num){
             ExChangePos(num,0);
         }
     }else{
+        _playerManager.ChangeCharacter(playerPos[num]);
         if(friend == 0){
             friend = 1;
             Frames[0].gameObject.SetActive(false);

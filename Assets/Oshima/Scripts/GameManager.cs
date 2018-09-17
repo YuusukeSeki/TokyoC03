@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour {
 
-[SerializeField] Player _player 			= null;
+[SerializeField] PlayerManager _playerManager 	= null;
+[SerializeField] Player _player				 	= null;
 [SerializeField] GameObject player_obj 			= null;
 //[SerializeField] Boss _boss					= null;
 [SerializeField] UIManager _uiManager 		= null;
@@ -73,7 +74,7 @@ enum Status{
             	touchLayerName = LayerMask.LayerToName(raycastResult.gameObject.layer);
         	}
 			if(touchLayerName != "Icon"){
-				_player.Jump();
+				_playerManager.Jump();
 			}
 　		}
 	}

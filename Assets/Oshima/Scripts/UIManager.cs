@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour {
 
@@ -11,7 +10,7 @@ public class UIManager : MonoBehaviour {
 [SerializeField] Image[] Frames               = null; //0:friend 1:sub
 [SerializeField] Image[] HpBars 	          = null; //0:mainHP 1:HPbar1 2:HPbar2 3:HPbar2 
 [SerializeField] Image[] MpBars 	          = null; //0:mainMPbar 1:MPbar1 2:MPbar2 3:MPbar3
-[SerializeField] Sprite[] sprites 	          = null;
+//[SerializeField] Sprite[] sprites 	          = null;
 List<GameObject[]> pointsArray                = null; //pointsArray[i][j] i:HPbarの位置 j:pointの位置
 [SerializeField] PlayerManager _playerManager = null;
 

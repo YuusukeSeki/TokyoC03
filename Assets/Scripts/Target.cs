@@ -9,8 +9,9 @@ public class Target : ObjectHitCheck {
 
     public override void DoSomeEvent(int patern){
         if(patern == 0){
-            Debug.Log("player");
+            Debug.Log("playeraaa");
             _gameManager.hitTarget = true;
+
         }
         else if(patern == 1){
             Debug.Log("letter");
@@ -19,9 +20,5 @@ public class Target : ObjectHitCheck {
         }
        
 	}
-
-    public void SendSelfPos(){
-        Debug.Log(this.gameObject.transform.position);
-    }
 
 }

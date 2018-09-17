@@ -7,15 +7,13 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour {
 
 [SerializeField] PlayerManager _playerManager 	= null;
-[SerializeField] Player _player				 	= null;
-[SerializeField] GameObject player_obj 			= null;
 //[SerializeField] Boss _boss					= null;
 [SerializeField] UIManager _uiManager 			= null;
-[SerializeField] AudioManager _audioManager 	= null;
+//[SerializeField] AudioManager _audioManager 	= null;
 [SerializeField] GameObject pousePanel 			= null;
 [SerializeField] GameObject letter				= null;
-int gameState									= 0;
-EventSystem eventSystem 						= null;
+//int gameState									= 0;
+//EventSystem eventSystem 						= null;
 string touchLayerName							= "";
 Status status 									= Status.PLAYING;
 int score										= 0;
@@ -23,7 +21,7 @@ public bool hitTarget							= false;
 private bool isJump								= true;
 
 
-float[] playerMPs								= new float[4]; // 仮のMPです
+float[] playerMPs								= new float[4];
 
 
 enum Status{
@@ -40,7 +38,6 @@ enum Status{
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log(isJump);
 		if(status == Status.PLAYING){
 			Play();
 		}
@@ -108,7 +105,7 @@ enum Status{
 
 	public void Init(){
 		status = Status.PLAYING;
-		eventSystem = EventSystem.current;
+		//eventSystem = EventSystem.current;
 		pousePanel.SetActive(false);
 		for(int i = 0; i<4; i++){
 			playerMPs[i] = 0.5f;

@@ -21,7 +21,7 @@ public class Enemy_Jump : Enemy {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(attackPower);
+            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
         }
         else if (col.gameObject.tag == "Ground")
         {
@@ -33,7 +33,7 @@ public class Enemy_Jump : Enemy {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(attackPower);
+            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
         }
         else if (col.gameObject.tag == "Ground")
         {
@@ -46,7 +46,7 @@ public class Enemy_Jump : Enemy {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(attackPower);
+            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
         }
         else if (col.gameObject.tag == "Ground")
         {
@@ -59,7 +59,7 @@ public class Enemy_Jump : Enemy {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(attackPower);
+            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
         }
         else if (col.gameObject.tag == "Ground")
         {

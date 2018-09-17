@@ -3,50 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeSprite : MonoBehaviour {
+    public enum Switch
+    {
+        STAND,  // 立ち
+        SLIDE,  // 滑り
+        CHANGE, // ※切り替え
+    };
+
     SpriteRenderer _sr;
     public Sprite _SpriteStanding;
     public Sprite _SpriteSliding;
-    bool _flag = false;
-    bool _preFlag;
+    Switch _switch;
 
-    Player _player;
 
     // Use this for initialization
     void Start () {
-        _player = GetComponent<Player>();
         _sr = GetComponent<SpriteRenderer>();
-        _preFlag = _flag;
+        _switch = Switch.STAND;
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-    }
-
-    public void Change(bool sliding)
+    // 画像の変更
+    public void Change(Switch spriteSwitch)
     {
-        if (sliding == _preFlag)
+        if (spriteSwitch == _switch)
             return;
 
-        _flag = sliding;
-
-        if (!_flag)
+        switch(spriteSwitch)
         {
-            _sr.sprite = _SpriteStanding;
-        }
-        else
-        {
-            _sr.sprite = _SpriteSliding;
+            case Switch.STAND:
+                _sr.sprite = _SpriteStanding;
+                _switch = spriteSwitch;
+                break;
+
+            case Switch.SLIDE:
+                _sr.sprite = _SpriteSliding;
+                _switch = spriteSwitch;
+                break;
+
+            case Switch.CHANGE:
+                if(_switch != Switch.STAND)
+                {
+                    _sr.sprite = _SpriteStanding;
+                    _switch = Switch.STAND;
+                }
+                else
+                {
+                    _sr.sprite = _SpriteSliding;
+                    _switch = Switch.SLIDE;
+                }
+                break;
+
         }
 
-        if (_preFlag != _flag)
-        {
-            Vector2 objectSize = _sr.bounds.size;
-            _player.ResizeCollider2D(_flag, objectSize);
-        }
-
-        _preFlag = _flag;
     }
 
 }

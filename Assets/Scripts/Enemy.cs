@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public float hp;                    // 体力
-    public float attackPower;           // 攻撃力
-    public float moveSpeed;             // 移動速度
+    public float _hp;                    // 体力
+    public float _attackPower;           // 攻撃力
+    public float _moveSpeed;             // 移動速度
 
-    public bool shotBullet;             // true で射撃行動を取る
-    public bool aimingPlayer;           // true で弾をプレイヤー方向に撃つ
+    public bool _shotBullet;             // true で射撃行動を取る
+    public bool _aimingPlayer;           // true で弾をプレイヤー方向に撃つ
 
-    public float attackPower_Bullet;    // 弾による攻撃力
-    public float speed_Bullet;          // 弾の移動速度
-    public float numShot_Seconds;       // 秒間発射数
-    float cntTime;                      // 秒数記憶バッファ
+    public float _attackPower_Bullet;    // 弾による攻撃力
+    public float _speed_Bullet;          // 弾の移動速度
+    public float _numShot_Seconds;       // 秒間発射数
+    float _cntTime;                      // 秒数記憶バッファ
 
     PlayerManager _pm;
     //GameObject player;
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour {
     public virtual void Init()
     {
         // フレームカウンター初期化
-        cntTime = 0;
+        _cntTime = 0;
 
         _pm =  GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         //player = _pm._charaLists[_pm._nowChara];
@@ -58,16 +58,16 @@ public class Enemy : MonoBehaviour {
     // 移動処理
     public virtual void Move()
     {
-        if (aimingPlayer)
+        if (_aimingPlayer)
         {// 追尾
-            Vector3 vec = (_pm._charaLists[_pm._nowChara].GetComponent<Player>().transform.position - transform.position) * moveSpeed;
+            Vector3 vec = (_pm._charaLists[_pm._nowChara].GetComponent<Player>().transform.position - transform.position) * _moveSpeed;
             vec.Normalize();
 
-            transform.position += vec * moveSpeed * Time.deltaTime;
+            transform.position += vec * _moveSpeed * Time.deltaTime;
         }
         else
         {// まっすぐ左に進行
-            transform.position += transform.right * -moveSpeed * Time.deltaTime;
+            transform.position += transform.right * -_moveSpeed * Time.deltaTime;
         }
 
     }
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(attackPower);
+            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
         }
 
     }
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(attackPower);
+            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
         }
 
     }
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(attackPower);
+            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
         }
 
     }
@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(attackPower);
+            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
         }
 
     }
@@ -112,17 +112,17 @@ public class Enemy : MonoBehaviour {
     public void ShotBullet()
     {
         // 射撃フラグがfalseで無処理
-        if (!shotBullet)
+        if (!_shotBullet)
             return;
 
         // 発射間隔毎に弾を撃つ
-        cntTime += Time.deltaTime * numShot_Seconds;
+        _cntTime += Time.deltaTime * _numShot_Seconds;
 
-        if(cntTime >= 1)
+        if(_cntTime >= 1)
         {
             GameObject initBullet = Instantiate(bullet, transform.position + new Vector3(-0.6f, 0.0f), transform.rotation);
 
-            if (aimingPlayer)
+            if (_aimingPlayer)
             {// プレイヤーを狙う場合
                 // バレット生成位置からプレイヤーへの単位ベクトルを算出
                 Vector3 aimVector = _pm._charaLists[_pm._nowChara].GetComponent<Player>().transform.position - initBullet.transform.position;
@@ -132,9 +132,9 @@ public class Enemy : MonoBehaviour {
                 initBullet.GetComponent<EnemyBullet>()._vector = aimVector;
             }
 
-            initBullet.GetComponent<EnemyBullet>().SetBullet(aimingPlayer, attackPower_Bullet, speed_Bullet);
+            initBullet.GetComponent<EnemyBullet>().SetBullet(_aimingPlayer, _attackPower_Bullet, _speed_Bullet);
 
-            cntTime = 0;
+            _cntTime = 0;
         }
 
     }
@@ -143,10 +143,10 @@ public class Enemy : MonoBehaviour {
     public void ReceiveDamage(float damage)
     {
         // HPを減らす
-        hp -= damage;
+        _hp -= damage;
 
         // HPが0以下で破棄
-        if (hp <= 0)
+        if (_hp <= 0)
         {
             Destroy(gameObject);
 

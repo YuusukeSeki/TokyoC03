@@ -75,8 +75,11 @@ public class PlayerManager : MonoBehaviour {
             {
                 ChangeCharacter(3);
             }
+            else if (Input.GetKeyDown("s"))
+            {
+                Skill();
+            }
         }
-
     }
 
     // 初期化処理
@@ -217,7 +220,7 @@ public class PlayerManager : MonoBehaviour {
 
         // ① 目標地点の算出
         _targetPos = _charaLists[_nowChara].transform.position;
-        _targetPos.x += _charaLists[nextChara].GetComponent<Player>()._runMaxSpeed * _changeTime;
+        _targetPos.x += _charaLists[nextChara].GetComponent<Player>()._paramater._runMaxSpeed * _changeTime;
 
         // ② 初期座標の算出し、次のキャラクターに設定
         Vector3 initPos = _cf.transform.position;
@@ -249,14 +252,34 @@ public class PlayerManager : MonoBehaviour {
 
     }
 
+    // 操作中のキャラクタをジャンプさせる
     public void Jump()
     {
         _charaLists[_nowChara].GetComponent<Player>().Jump();
     }
 
+    // 操作中のキャラクタのスキル使用
     public void Skill()
     {
         _charaLists[_nowChara].GetComponent<Player>().Skill();
+    }
+
+    // 操作中のキャラクタ座標を取得
+    public Vector3 GetMainCharacterPosition()
+    {
+        return _charaLists[_nowChara].transform.position;
+    }
+
+    // キャラクタパラメータ取得
+    public Player.Paramater GetCharacterParamater(int numCharacter)
+    {
+        if (numCharacter < 0 || numCharacter >= _charaLists.Count)
+        {
+            Debug.Log("GetCharacterParamater(int numCharacter)\n" + numCharacter + ": は範囲外の番号です。現在のキャラクタのパラメータを返します。");
+            return _charaLists[_nowChara].GetComponent<Player>()._paramater; ;
+        }
+
+        return _charaLists[numCharacter].GetComponent<Player>()._paramater;
     }
 
 }

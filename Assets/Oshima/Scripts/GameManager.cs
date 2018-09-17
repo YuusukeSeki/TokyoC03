@@ -10,17 +10,17 @@ public class GameManager : MonoBehaviour {
 [SerializeField] Player _player				 	= null;
 [SerializeField] GameObject player_obj 			= null;
 //[SerializeField] Boss _boss					= null;
-[SerializeField] UIManager _uiManager 		= null;
-[SerializeField] AudioManager _audioManager = null;
-[SerializeField] GameObject pousePanel 		= null;
-[SerializeField] GameObject letter			= null;
-int gameState								= 0;
-EventSystem eventSystem 					= null;
-string touchLayerName						= "";
-Status status 								= Status.PLAYING;
-int score									= 0;
+[SerializeField] UIManager _uiManager 			= null;
+[SerializeField] AudioManager _audioManager 	= null;
+[SerializeField] GameObject pousePanel 			= null;
+[SerializeField] GameObject letter				= null;
+int gameState									= 0;
+EventSystem eventSystem 						= null;
+string touchLayerName							= "";
+Status status 									= Status.PLAYING;
+int score										= 0;
 
-float[] playerMPs							= new float[4]; // 仮のMPです
+float[] playerMPs								= new float[4]; // 仮のMPです
 
 
 enum Status{
@@ -32,6 +32,7 @@ enum Status{
 	// Use this for initialization
 	void Start () {
 		Init();
+		//Debug.Log(_playerManager.GetCharacterParamater(1)._hp);
 	}
 	
 	// Update is called once per frame
@@ -40,10 +41,17 @@ enum Status{
 			Play();
 		}
 		//Debug.Log(playerMPs[0]+" "+playerMPs[1]+" "+playerMPs[2]+" "+playerMPs[3]);
+		Debug.Log("0: hp "+_playerManager.GetCharacterParamater(0)._hp+" pos "+_uiManager.SearchPlayerPos(0));
+		Debug.Log("1: hp "+_playerManager.GetCharacterParamater(1)._hp+" pos "+_uiManager.SearchPlayerPos(1));
+		Debug.Log("2: hp "+_playerManager.GetCharacterParamater(2)._hp+" pos "+_uiManager.SearchPlayerPos(2));
+		Debug.Log("3: hp "+_playerManager.GetCharacterParamater(3)._hp+" pos "+_uiManager.SearchPlayerPos(3));
 	}
 
 	private void Play(){
-		_uiManager.EditHpGauge(_player.hp, 0);
+		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(0)._hp, _uiManager.SearchPlayerPos(0));
+		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(1)._hp, _uiManager.SearchPlayerPos(1));
+		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(2)._hp, _uiManager.SearchPlayerPos(2));
+		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(3)._hp, _uiManager.SearchPlayerPos(3));
 		MpCal(0, 1f);
 		MpCal(1, 2f);
 		MpCal(2, 3f);

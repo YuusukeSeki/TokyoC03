@@ -40,6 +40,9 @@ public void EditHpGauge(float nowHp, int gaugeNum){
     for(int i = 4; i>nowHp; i--){
         pointsArray[gaugeNum][i-1].SetActive(false);
     }
+    for(int j = 0; j<nowHp; j++){
+        pointsArray[gaugeNum][j].SetActive(true);
+    }
 }
 
 public void EditMpGauge(float nowMp, int playerPos){

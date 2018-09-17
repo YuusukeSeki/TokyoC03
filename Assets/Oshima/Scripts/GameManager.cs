@@ -19,6 +19,9 @@ EventSystem eventSystem 						= null;
 string touchLayerName							= "";
 Status status 									= Status.PLAYING;
 int score										= 0;
+public bool hitTarget							= false;
+private bool isJump								= true;
+
 
 float[] playerMPs								= new float[4]; // 仮のMPです
 
@@ -37,6 +40,7 @@ enum Status{
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log(isJump);
 		if(status == Status.PLAYING){
 			Play();
 		}
@@ -66,7 +70,11 @@ enum Status{
     		if (collition2d) {
         		RaycastHit2D hitObject = Physics2D.Raycast(tapPoint,-Vector2.up);
         		if (hitObject) {
-            		Debug.Log("hit object is " + hitObject.collider.gameObject.tag);
+					if(hitObject.collider.gameObject.tag == "Target"){
+						GameObject Letter = Instantiate(letter,_playerManager.GetMainCharacterPosition() + new Vector3(1f,0,0), Quaternion.identity);
+						Letter.GetComponent<LetterBullet>().target = hitObject.collider.gameObject.transform;
+						isJump = false;
+					}
         		}
     		}
 
@@ -81,10 +89,20 @@ enum Status{
         	{
             	touchLayerName = LayerMask.LayerToName(raycastResult.gameObject.layer);
         	}
-			if(touchLayerName != "Icon"){
+			if(touchLayerName == "Icon"){
+				isJump = false;
+			}
+
+			if(isJump == true){
 				_playerManager.Jump();
 			}
+
 　		}
+
+			if(Input.GetMouseButtonUp (0)){
+				isJump = true;
+			}	
+
 	}
 
 
@@ -115,6 +133,7 @@ enum Status{
 	public void ScoreCal(){
 		score += 1;
 		_uiManager.EditScore(score);
+		hitTarget = false;
 	}
 
 	public void SceneChange(int id){
@@ -142,5 +161,11 @@ enum Status{
 
 	public void OnPostButton(){
 		Instantiate(letter,_playerManager.GetMainCharacterPosition() + new Vector3(1f,0,0), Quaternion.identity);
+	}
+
+	public void OnPostButton2(){
+		if(hitTarget == true){
+			ScoreCal();
+		}
 	}
 }

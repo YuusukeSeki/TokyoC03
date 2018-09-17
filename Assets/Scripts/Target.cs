@@ -10,12 +10,14 @@ public class Target : ObjectHitCheck {
     public override void DoSomeEvent(int patern){
         if(patern == 0){
             Debug.Log("player");
+            _gameManager.hitTarget = true;
         }
         else if(patern == 1){
             Debug.Log("letter");
+            _gameManager.ScoreCal();
+		    //Destroy(this.gameObject);
         }
-        _gameManager.ScoreCal();
-		Destroy(this.gameObject);
+       
 	}
 
     public void SendSelfPos(){

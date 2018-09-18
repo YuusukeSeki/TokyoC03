@@ -73,23 +73,6 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        // コンポーネント取得
-        _rb = GetComponent<Rigidbody2D>();
-        _ff = GetComponent<FlashScript>();
-        _skill = GetComponent<Skill>();
-
-        // ジャンプ判定の閾値設定
-        _jumpThreshold = 0.00001f;
-
-        // 点滅時間の設定
-        _ff.SetFrashTime(_invincibleTime);
-
-        // フェード取得
-        _fade = GameObject.Find("FadePanel").GetComponent<FadeScript>();
-
-        // 初期座標取得
-        respownPosition = transform.position;
-
         // 初期化処理
         Init();
 
@@ -121,6 +104,23 @@ public class Player : MonoBehaviour
     // 初期化処理
     public void Init()
     {
+        // コンポーネント取得
+        _rb = GetComponent<Rigidbody2D>();
+        _ff = GetComponent<FlashScript>();
+        _skill = GetComponent<Skill>();
+
+        // ジャンプ判定の閾値設定
+        _jumpThreshold = 0.00001f;
+
+        // 点滅時間の設定
+        _ff.SetFrashTime(_invincibleTime);
+
+        // フェード取得
+        _fade = GameObject.Find("FadePanel").GetComponent<FadeScript>();
+
+        // 初期座標取得
+        respownPosition = transform.position;
+
         // Unity 上の数字と同期
         _paramater._maxHp = _maxHp;
         _paramater._jumpPower = _jumpPower;
@@ -178,10 +178,7 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet(Enemy)")
         {// 被弾判定
-            // 通常時と登場時以外は攻撃を受けない
-            if (_state != State.NONE || _state != State.ENTRY)
-                ReceiveDamage(col.GetComponent<EnemyBullet>()._attackPower);
-
+            ReceiveDamage(col.GetComponent<EnemyBullet>()._attackPower);
             Destroy(col.gameObject);
         }
         else if (col.gameObject.tag == "GoalFlag")
@@ -263,12 +260,14 @@ public class Player : MonoBehaviour
     // damage : 受けるダメージ量
     public void ReceiveDamage(float damage)
     {
+        // ダメージを受けない条件
         if (_invincible)
             return;
+        if (_state != State.NONE && _state != State.ENTRY)
+            return;
 
+        // HP減少
         _paramater._hp -= damage;
-
-        Debug.Log(_paramater._hp);
 
         // 死亡時状態切り替え。キャラ交代はChangeCharaに任せる
         if (_paramater._hp <= 0)
@@ -279,6 +278,8 @@ public class Player : MonoBehaviour
         else
         {
             SetInvincible();
+
+            gameObject.layer = LayerMask.NameToLayer("PlayerDamage"); ;
         }
 
     }
@@ -305,6 +306,8 @@ public class Player : MonoBehaviour
             _invincible = false;
             _cntInvincibleTime = 0;
             _ff.EndFlash();
+
+            gameObject.layer = LayerMask.NameToLayer("Player"); ;
         }
 
     }

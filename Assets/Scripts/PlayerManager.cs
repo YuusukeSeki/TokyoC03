@@ -34,9 +34,11 @@ public class PlayerManager : MonoBehaviour {
         ChangeCharacter(_charaLists.Count);
         _state = State.NONE;
 
+        Init();
+
     }
 
-	// Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
         // クリアかゲームオーバーで初期化処理

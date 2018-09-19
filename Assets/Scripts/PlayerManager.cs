@@ -24,7 +24,9 @@ public class PlayerManager : MonoBehaviour {
     float _entryCharaSpeed;                     // 交代後のキャラクタのスピード
     float _exitCharaSpeed;                      // 交代前のキャラクタのスピード
     Vector3 _targetPos = new Vector3(0, 0, 0);  // 交代が完了する目標座標
-    
+
+    Vector3 _respownPosition;   // 復帰時の座標
+
 
     // Use this for initialization
     void Start()
@@ -32,7 +34,6 @@ public class PlayerManager : MonoBehaviour {
         _fs = GameObject.Find("FadePanel").GetComponent<FadeScript>();
         _cf = GameObject.Find("Main Camera").GetComponent<CameraFixing>();
         ChangeCharacter(_charaLists.Count);
-        _state = State.NONE;
 
         Init();
 
@@ -88,8 +89,8 @@ public class PlayerManager : MonoBehaviour {
     public void Init()
     {
         _state = State.NONE;
-        _nowChara = 0;
-        ChangeCharacter(_nowChara);
+
+        ChangeCharacter(0);
 
         for (int i = 0; i < _charaLists.Count; i++)
         {
@@ -100,6 +101,8 @@ public class PlayerManager : MonoBehaviour {
             else
                 _charaLists[i].SetActive(false);
         }
+
+        _cf.SetNowCharacterPosition();
 
     }
 
@@ -180,12 +183,6 @@ public class PlayerManager : MonoBehaviour {
             _fs.SetColor((192f / 255f), (192f / 255f), (192f / 255f));
             _fs.StartFadeOut();
 
-            if (_fs.GetFadeState() == FadeScript.FadeState.FADE_OUT_COMPRETED)
-            {
-                // 自分も初期化
-                Init();
-
-            }
         }
 
         // 死亡していたらキャラクタを次のキャラクタに変える。いなければGameOver

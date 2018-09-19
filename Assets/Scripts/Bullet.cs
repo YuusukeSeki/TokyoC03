@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    public float _attackPower;   // 攻撃力
-    public float _speed;         // 移動速度
-    public Vector3 _vector;         // 進行方向
+    [SerializeField] protected Rigidbody2D _rb;
+
+    public float _attackPower;  // 攻撃力
+    protected float _speed;     // 移動速度
+    protected Vector3 _vector;  // 進行方向
 
 	// Use this for initialization
 	void Start () {
@@ -19,38 +21,34 @@ public class Bullet : MonoBehaviour {
 	}
 
     // 移動処理
-    public virtual void Move()
+    protected virtual void Move()
     {
 
     }
 
-    // 当たり判定
-    public void OnTriggerEnter2D(Collider2D collision)
+    // 地面との接触処理
+    protected void OnCollisionEnter2D(Collision2D col)
     {
-        // レイヤー名を取得
-        string layerName = LayerMask.LayerToName(collision.gameObject.layer);
-
-        if (layerName == "Box" || layerName == "Ground")
+        if (col.gameObject.tag == "Ground")
         {
-            // このBulletを破棄
+            Destroy(gameObject);
+        }
+
+    }
+    protected virtual void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Ground")
+        {
             Destroy(gameObject);
         }
 
     }
 
-    // イベント処理
-    public virtual void DoSomeEvent()
-    {
-
-    }
-
-    // 画面外判定
-    void OnBecameInvisible()
+    // 画面外処理
+    protected virtual void OnBecameInvisible()
     {
         // オブジェクトの破棄
         Destroy(gameObject);
-
-        //enabled = false;
 
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_Jump : Enemy {
 
     Rigidbody2D _rb;
-    [SerializeField] float _jumpPower;  // ジャンプ力
+    //[SerializeField] float _jumpPower;  // ジャンプ力
 
     // Use this for initialization
     void Start () {
@@ -15,55 +15,31 @@ public class Enemy_Jump : Enemy {
 
     // Update is called once per frame
     void Update () {
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
-        }
-        else if (col.gameObject.tag == "Ground")
-        {
-            _rb.AddForce(Vector2.up * _jumpPower * 10);
-        }
-
-    }
-    void OnCollisionStay2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
-        }
-        else if (col.gameObject.tag == "Ground")
-        {
-            _rb.AddForce(Vector2.up * _jumpPower * 10);
-        }
 
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    // 接地時にジャンプ
+    protected override void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")
+        base.OnCollisionEnter2D(col);
+
+        if (col.gameObject.tag == "Ground")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
-        }
-        else if (col.gameObject.tag == "Ground")
-        {
-            _rb.AddForce(Vector2.up * _jumpPower * 10);
+            if(col.transform.position.y <= transform.position.y)
+                _rb.AddForce(Vector2.up * _moveSpeed.y);
+
         }
 
     }
-
-    void OnTriggerStay2D(Collider2D col)
+    protected override void OnCollisionStay2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")
+        base.OnCollisionStay2D(col);
+
+        if (col.gameObject.tag == "Ground")
         {
-            col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
-        }
-        else if (col.gameObject.tag == "Ground")
-        {
-            _rb.AddForce(Vector2.up * _jumpPower * 10);
+            if (col.transform.position.y <= transform.position.y)
+                _rb.AddForce(Vector2.up * _moveSpeed.y);
+
         }
 
     }

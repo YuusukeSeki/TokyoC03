@@ -26,7 +26,6 @@ public class CameraFixing : MonoBehaviour {
         Vector3 size = rightBottom - leftTop;
         _screenSize = new Vector2(size.x, size.y);
         _offsetX = _screenSize.x * 0.25f;
-        //_offsetX = 0;
 
         _state = State.NORMAL;
         _movePos = new Vector2(0, 0);
@@ -36,8 +35,7 @@ public class CameraFixing : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        Vector3 pos = new Vector3(0, 0, 0);
-        pos = transform.position;
+        Vector3 pos = transform.position;
 
         if (_state == State.NORMAL)
         {
@@ -76,5 +74,16 @@ public class CameraFixing : MonoBehaviour {
 
     }
 
+    public void SetNowCharacterPosition()
+    {
+        _state = State.NORMAL;
+
+        Vector3 pos = transform.position;
+
+        pos.x = _playerManager._charaLists[_playerManager._nowChara].transform.position.x + _offsetX;
+        pos.y = 0;
+
+        transform.position = pos;
+    }
 
 }

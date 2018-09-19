@@ -12,6 +12,7 @@ public class EnemyBullet : Bullet {
 
     // Update is called once per frame
     void Update () {
+
     }
 
     // バレットの設定処理
@@ -23,15 +24,25 @@ public class EnemyBullet : Bullet {
 
         if (aimPlayer)
         {// プレイヤーの方向に撃つ
-            GetComponent<Rigidbody2D>().velocity = _vector * speed;
+            _rb.velocity = _vector * speed;
 
         }
         else
         {// 左方向に撃つ
-            GetComponent<Rigidbody2D>().velocity = transform.right.normalized * -speed;
+            _rb.velocity = transform.right.normalized * -speed;
 
         }
 
+
+    }
+
+    public void SetBullet(Vector3 vector, float speed, float attackPower)
+    {
+        _vector = vector;
+        _speed = speed;
+        _attackPower = attackPower;
+
+        _rb.velocity = _vector * _speed;
 
     }
 

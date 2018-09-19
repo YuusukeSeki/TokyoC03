@@ -73,6 +73,9 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        // 初期座標取得
+        respownPosition = transform.position;
+
         // 初期化処理
         Init();
 
@@ -117,9 +120,6 @@ public class Player : MonoBehaviour
 
         // フェード取得
         _fade = GameObject.Find("FadePanel").GetComponent<FadeScript>();
-
-        // 初期座標取得
-        respownPosition = transform.position;
 
         // Unity 上の数字と同期
         _paramater._maxHp = _maxHp;
@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet(Enemy)")
         {// 被弾判定
-            ReceiveDamage(col.GetComponent<EnemyBullet>()._attackPower);
+            ReceiveDamage(col.GetComponent<Bullet>()._attackPower);
             Destroy(col.gameObject);
         }
         else if (col.gameObject.tag == "GoalFlag")
@@ -187,9 +187,6 @@ public class Player : MonoBehaviour
         }
         else if (col.gameObject.tag == "DeadLine")
         {// 画面外判定（底）
-            if (_state == State.NONE || _state == State.ENTRY)
-                return;
-
             _state = State.FALL_DEAD;
         }
 
@@ -279,6 +276,7 @@ public class Player : MonoBehaviour
         {
             SetInvincible();
 
+            gameObject.tag = "PlayerDamage";
             gameObject.layer = LayerMask.NameToLayer("PlayerDamage"); ;
         }
 
@@ -307,6 +305,7 @@ public class Player : MonoBehaviour
             _cntInvincibleTime = 0;
             _ff.EndFlash();
 
+            gameObject.tag = "Player";
             gameObject.layer = LayerMask.NameToLayer("Player"); ;
         }
 

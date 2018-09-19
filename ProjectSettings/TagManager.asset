@@ -12,6 +12,7 @@ TagManager:
   - Barrier
   - Target
   - LetterBullet
+  - PlayerDamage
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Ground
   - Icon
   - Barrier
-  - 
+  - PlayerDamage
   - 
   - 
   - 
@@ -57,4 +58,7 @@ TagManager:
     locked: 0
   - name: Barrier
     uniqueID: 2966188673
+    locked: 0
+  - name: Enemy
+    uniqueID: 3880116829
     locked: 0

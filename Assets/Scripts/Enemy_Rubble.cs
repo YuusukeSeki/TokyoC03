@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : Enemy {
-
-    bool isArrive;
+public class Enemy_Rubble : Enemy {
 
 	// Use this for initialization
 	void Start () {
@@ -15,15 +13,4 @@ public class Boss : Enemy {
 	void Update () {
 		
 	}
-
-    public override void Init()
-    {
-        base.Init();
-    }
-
-    void Move()
-    {
-
-    }
-
 }

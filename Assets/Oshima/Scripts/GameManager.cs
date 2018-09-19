@@ -6,18 +6,24 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour {
 
-[SerializeField] Player _player 			= null;
+[SerializeField] PlayerManager _playerManager 	= null;
 //[SerializeField] Boss _boss					= null;
-[SerializeField] UIManager _uiManager 		= null;
-[SerializeField] AudioManager _audioManager = null;
-[SerializeField] GameObject pousePanel 		= null;
-int gameState								= 0;
-EventSystem eventSystem 					= null;
-string touchLayerName						= "";
-Status status 								= Status.PLAYING;
-int score									= 0;
+[SerializeField] UIManager _uiManager 			= null;
+//[SerializeField] AudioManager _audioManager 	= null;
+[SerializeField] GameObject pousePanel 			= null;
+[SerializeField] GameObject letter				= null;
+//int gameState									= 0;
+//EventSystem eventSystem 						= null;
+string touchLayerName							= "";
+Status status 									= Status.PLAYING;
+int score										= 0;
+public bool hitTarget							= false;
+private bool isJump								= true;
 
-float[] playerMPs							= new float[4]; // 仮のMPです
+public int sceneState 							= 0;
+
+
+float[] playerMPs								= new float[4];
 
 
 enum Status{
@@ -29,6 +35,7 @@ enum Status{
 	// Use this for initialization
 	void Start () {
 		Init();
+		//Debug.Log(_playerManager.GetCharacterParamater(1)._hp);
 	}
 	
 	// Update is called once per frame
@@ -37,37 +44,76 @@ enum Status{
 			Play();
 		}
 		//Debug.Log(playerMPs[0]+" "+playerMPs[1]+" "+playerMPs[2]+" "+playerMPs[3]);
+		//Debug.Log("0: hp "+_playerManager.GetCharacterParamater(0)._hp+" pos "+_uiManager.SearchPlayerPos(0));
+		//Debug.Log("1: hp "+_playerManager.GetCharacterParamater(1)._hp+" pos "+_uiManager.SearchPlayerPos(1));
+		//Debug.Log("2: hp "+_playerManager.GetCharacterParamater(2)._hp+" pos "+_uiManager.SearchPlayerPos(2));
+		//Debug.Log("3: hp "+_playerManager.GetCharacterParamater(3)._hp+" pos "+_uiManager.SearchPlayerPos(3));
 	}
 
 	private void Play(){
-		_uiManager.EditHpGauge(_player.hp, 0);
+		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(0)._hp, _uiManager.SearchPlayerPos(0));
+		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(1)._hp, _uiManager.SearchPlayerPos(1));
+		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(2)._hp, _uiManager.SearchPlayerPos(2));
+		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(3)._hp, _uiManager.SearchPlayerPos(3));
 		MpCal(0, 1f);
 		MpCal(1, 2f);
 		MpCal(2, 3f);
 		MpCal(3, 4f);
 
-		//画面タップ時プレイヤーがジャンプ、アイコンの上ではジャンプしない
-		if(Input.GetMouseButtonDown(0)) {
-			touchLayerName = "";
-　　　		 PointerEventData pointer = new PointerEventData(EventSystem.current);
-        	pointer.position = Input.mousePosition;
-        	List<RaycastResult> result = new List<RaycastResult>();
-        	EventSystem.current.RaycastAll(pointer, result);
+		
+		//if(Input.GetMouseButtonDown(0)) {
+		if(Input.touchCount > 0){
+			Touch touch = Input.GetTouch(0);
+			if(touch.phase == TouchPhase.Began){
+			//アイコン以外をタップ時何をタップしているかの判定
+				Vector2 tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    			Collider2D collition2d = Physics2D.OverlapPoint(tapPoint);
+    			if (collition2d) {
+        			RaycastHit2D hitObject = Physics2D.Raycast(tapPoint,-Vector2.up);
+        			if (hitObject) {
+						if(hitObject.collider.gameObject.tag == "Target" && sceneState == 1){
+							GameObject Letter = Instantiate(letter,_playerManager.GetMainCharacterPosition() + new Vector3(1f,0,0), Quaternion.identity);
+							Letter.GetComponent<LetterBullet>().target = hitObject.collider.gameObject.transform;
+							Letter.GetComponent<LetterBullet>().sceneState = sceneState;
+							isJump = false;
+						}
+        			}
+    			}
 
-        	foreach (RaycastResult raycastResult in result)
-        	{
-            	touchLayerName = LayerMask.LayerToName(raycastResult.gameObject.layer);
-        	}
-			if(touchLayerName != "Icon"){
-				_player.Jump();
+			//画面タップ時アイコンをタップしているかどうかの判定
+				touchLayerName = "";
+　　　		 	PointerEventData pointer = new PointerEventData(EventSystem.current);
+        		pointer.position = Input.mousePosition;
+        		List<RaycastResult> result = new List<RaycastResult>();
+        		EventSystem.current.RaycastAll(pointer, result);
+
+        		foreach (RaycastResult raycastResult in result)
+        		{
+            		touchLayerName = LayerMask.LayerToName(raycastResult.gameObject.layer);
+        		}
+				if(touchLayerName == "Icon"){
+					isJump = false;
+				}
+
+				if(isJump == true){
+					_playerManager.Jump();
+				}
+			}else if (touch.phase == TouchPhase.Ended){
+				isJump = true;
 			}
+
 　		}
+
+			//if(Input.GetMouseButtonUp (0)){
+			//	isJump = true;
+			//}	
+
 	}
 
 
 	public void Init(){
 		status = Status.PLAYING;
-		eventSystem = EventSystem.current;
+		//eventSystem = EventSystem.current;
 		pousePanel.SetActive(false);
 		for(int i = 0; i<4; i++){
 			playerMPs[i] = 0.5f;
@@ -92,6 +138,7 @@ enum Status{
 	public void ScoreCal(){
 		score += 1;
 		_uiManager.EditScore(score);
+		hitTarget = false;
 	}
 
 	public void SceneChange(int id){
@@ -114,6 +161,16 @@ enum Status{
 		int playerNum = _uiManager.playerPos[0];
 		if(playerMPs[playerNum] >= 1){
 			playerMPs[playerNum] = 0;
+		}
+	}
+
+	public void OnPostButton(){
+		Instantiate(letter,_playerManager.GetMainCharacterPosition() + new Vector3(1f,0,0), Quaternion.identity);
+	}
+
+	public void OnPostButton2(){
+		if(hitTarget == true){
+			ScoreCal();
 		}
 	}
 }

@@ -27,8 +27,8 @@ public class Skill_TheWorld : Skill
         // foreachは配列の要素の数だけループします。
         foreach (GameObject enemy in enemys)
         {
-            enemy.GetComponent<Enemy>()._moveSpeed *= 0.5f;
-            enemy.GetComponent<Enemy>()._speed_Bullet *= 0.5f;
+            //enemy.GetComponent<Enemy>()._moveSpeed *= 0.5f;
+            //enemy.GetComponent<Enemy>()._speed_Bullet *= 0.5f;
 
         }
     }

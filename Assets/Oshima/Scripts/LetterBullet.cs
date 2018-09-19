@@ -6,6 +6,7 @@ public class LetterBullet : ObjectHitCheck {
 
 
 public Transform target 	= null;
+public int sceneState = 0;
 
 
 
@@ -16,12 +17,13 @@ public Transform target 	= null;
 	
 	// Update is called once per frame
 	void Update () {
-		this.gameObject.transform.position += new Vector3(0.5f,0,0);
-
-		//Vector3 diff = (target.position - this.transform.position);
-        //diff.Normalize();
-		//this.transform.position += diff * 10f * Time.deltaTime;
-		
+		if(sceneState == 0){
+			this.gameObject.transform.position += new Vector3(0.5f,0,0);
+		}else if(sceneState == 1){
+			Vector3 diff = (target.position - this.transform.position);
+        	diff.Normalize();
+			this.transform.position += diff * 10f * Time.deltaTime;
+		}
 	}
 
 	public override void DoSomeEvent(int patern){

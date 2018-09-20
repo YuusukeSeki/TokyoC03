@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ObjectHitCheck : MonoBehaviour {
 
-/* 
+ 
 public void OnCollisionEnter2D(Collision2D collision){
 	// レイヤー名を取得
-    string layerName = LayerMask.LayerToName(collision.gameObject.layer);
-	if (layerName == "Player"){
-		Debug.Log("collision");
-		DoSomeEvent();
+    //string layerName = LayerMask.LayerToName(collision.gameObject.layer);
+	if (collision.gameObject.tag == "Ground"){
+		Debug.Log("Ground");
+		DoSomeEvent(3);
 	}
 }
-*/
+
 
 public void OnTriggerEnter2D(Collider2D collider){
 	// レイヤー名を取得
@@ -28,6 +28,9 @@ public void OnTriggerEnter2D(Collider2D collider){
 	else if(collider.gameObject.tag == "Target"){
 		DoSomeEvent(2);
 	}
+	//else if(collider.gameObject.tag == "Ground"){
+		//DoSomeEvent(3);
+	//}
 }
 
 public virtual void DoSomeEvent(int patern){

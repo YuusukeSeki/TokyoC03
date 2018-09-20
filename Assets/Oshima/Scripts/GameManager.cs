@@ -160,6 +160,7 @@ enum Status{
 	public void OnSkilButton(){
 		int playerNum = _uiManager.playerPos[0];
 		if(playerMPs[playerNum] >= 1){
+			_playerManager.Skill();
 			playerMPs[playerNum] = 0;
 		}
 	}

@@ -30,7 +30,10 @@ public int sceneState = 0;
         if(patern == 2){
             Debug.Log("target");
 			Destroy(this.gameObject);
-        }	
+        }else if(patern == 3){
+			Debug.Log("ground");
+			Destroy(this.gameObject);
+		}
 	}
 
 }

@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour {
 [SerializeField] GameObject pousePanel 			= null;
 [SerializeField] GameObject letter				= null;
 //int gameState									= 0;
-//EventSystem eventSystem 						= null;
 string touchLayerName							= "";
 Status status 									= Status.PLAYING;
 int score										= 0;
@@ -48,6 +47,7 @@ enum Status{
 		//Debug.Log("1: hp "+_playerManager.GetCharacterParamater(1)._hp+" pos "+_uiManager.SearchPlayerPos(1));
 		//Debug.Log("2: hp "+_playerManager.GetCharacterParamater(2)._hp+" pos "+_uiManager.SearchPlayerPos(2));
 		//Debug.Log("3: hp "+_playerManager.GetCharacterParamater(3)._hp+" pos "+_uiManager.SearchPlayerPos(3));
+		//Debug.Log("mp " + _playerManager.GetCharacterParamater(2)._healMP_PerSeconds);
 	}
 
 	private void Play(){
@@ -55,10 +55,10 @@ enum Status{
 		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(1)._hp, _uiManager.SearchPlayerPos(1));
 		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(2)._hp, _uiManager.SearchPlayerPos(2));
 		_uiManager.EditHpGauge(_playerManager.GetCharacterParamater(3)._hp, _uiManager.SearchPlayerPos(3));
-		MpCal(0, 1f);
-		MpCal(1, 2f);
-		MpCal(2, 3f);
-		MpCal(3, 4f);
+		MpCal(0, _playerManager.GetCharacterParamater(0)._healMP_PerSeconds);
+		MpCal(1, _playerManager.GetCharacterParamater(1)._healMP_PerSeconds);
+		MpCal(2, _playerManager.GetCharacterParamater(2)._healMP_PerSeconds);
+		MpCal(3, _playerManager.GetCharacterParamater(3)._healMP_PerSeconds);
 
 		
 		//if(Input.GetMouseButtonDown(0)) {
@@ -125,7 +125,7 @@ enum Status{
 		int playerPos = _uiManager.SearchPlayerPos(playerNum);
 		if(playerPos != 0){
 			if(playerMPs[playerNum] < 1){
-				playerMPs[playerNum] += 0.0005f*speed;
+				playerMPs[playerNum] += 0.002f*speed;
 			}else{
 				playerMPs[playerNum] = 1;
 			}
@@ -160,6 +160,7 @@ enum Status{
 	public void OnSkilButton(){
 		int playerNum = _uiManager.playerPos[0];
 		if(playerMPs[playerNum] >= 1){
+			_playerManager.Skill();
 			playerMPs[playerNum] = 0;
 		}
 	}

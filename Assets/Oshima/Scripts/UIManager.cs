@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour {
 //[SerializeField] Sprite[] sprites 	          = null;
 List<GameObject[]> pointsArray                = null; //pointsArray[i][j] i:HPbarの位置 j:pointの位置
 [SerializeField] PlayerManager _playerManager = null;
+[SerializeField] AudioManager _audioManager   = null;
 
 public int[] playerPos                        = new int[4]; //playerのposition
 public int friend                             = 0; //0:使用可能 1:使用中
@@ -84,17 +85,8 @@ public int SearchPlayerPos(int playerNum){
 
 //Iconをクリックした時
 public void OnIconClick(int num){
-    if(num == 0){
-        if(friend == 1){
-            if(friendSkil == true){
-                Debug.Log("friend skil");
-            }
-        }else{
-            Debug.Log("skil");
-        }
-        
-    }
-    else if(num == 1 || num == 2){
+    _audioManager.OnCharaSwitchPlay();
+    if(num == 1 || num == 2){
         _playerManager.ChangeCharacter(playerPos[num]);
         if(friend == 1){
             EditSprite(num,0);

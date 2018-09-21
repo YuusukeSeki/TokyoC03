@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 [SerializeField] PlayerManager _playerManager 	= null;
 //[SerializeField] Boss _boss					= null;
 [SerializeField] UIManager _uiManager 			= null;
-//[SerializeField] AudioManager _audioManager 	= null;
+[SerializeField] AudioManager _audioManager 	= null;
 [SerializeField] GameObject pousePanel 			= null;
 [SerializeField] GameObject letter				= null;
 //int gameState									= 0;
@@ -34,7 +34,6 @@ enum Status{
 	// Use this for initialization
 	void Start () {
 		Init();
-		//Debug.Log(_playerManager.GetCharacterParamater(1)._hp);
 	}
 	
 	// Update is called once per frame
@@ -60,8 +59,6 @@ enum Status{
 		MpCal(2, _playerManager.GetCharacterParamater(2)._healMP_PerSeconds);
 		MpCal(3, _playerManager.GetCharacterParamater(3)._healMP_PerSeconds);
 
-		
-		//if(Input.GetMouseButtonDown(0)) {
 		if(Input.touchCount > 0){
 			Touch touch = Input.GetTouch(0);
 			if(touch.phase == TouchPhase.Began){
@@ -97,17 +94,12 @@ enum Status{
 
 				if(isJump == true){
 					_playerManager.Jump();
+					_audioManager.OnJumpPlay();
 				}
 			}else if (touch.phase == TouchPhase.Ended){
 				isJump = true;
 			}
-
 　		}
-
-			//if(Input.GetMouseButtonUp (0)){
-			//	isJump = true;
-			//}	
-
 	}
 
 
@@ -167,6 +159,7 @@ enum Status{
 
 	public void OnPostButton(){
 		Instantiate(letter,_playerManager.GetMainCharacterPosition() + new Vector3(1f,0,0), Quaternion.identity);
+		_audioManager.OnLetterPlay();
 	}
 
 	public void OnPostButton2(){

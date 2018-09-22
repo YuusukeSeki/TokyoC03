@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61290297374160296
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -100,8 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPower: 1
-  _moveSpeed: {x: 0, y: 0, z: 0}
-  _bulletSpeed: 0
 --- !u!212 &212811762132598672
 SpriteRenderer:
   m_ObjectHideFlags: 1

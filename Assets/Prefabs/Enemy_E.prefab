@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61225762540240342
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -100,10 +100,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPower: 1
-  _moveSpeed: {x: 3, y: 0, z: 0}
-  _bulletSpeed: 0
+  _audioManager: {fileID: 0}
   _amplitude: 3
-  _playerManager: {fileID: 0}
+  _homingSpeed: 3
+  _playerManager: {fileID: 114689047208041382, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+    type: 2}
+  _rotateSpeed: 3
 --- !u!212 &212603226204926788
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -178,7 +178,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58146005395053850
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -206,16 +206,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPower: 1
-  _moveSpeed: {x: 0, y: 0, z: 0}
-  _bulletSpeed: 1
   _shotPos:
   - {fileID: 1916063242007876}
   - {fileID: 1380956935816472}
   - {fileID: 1091136300816106}
   - {fileID: 1771758280535146}
+  _shot_PerSeconds: 0.3
+  _bulletSpeed: 1
   _enemyBullet: {fileID: 1935526543435202, guid: cd696f579e3370f4798b048c4903053d,
     type: 2}
-  _shot_PerSeconds: 0.3
+  _rotateSpeed: 30
 --- !u!212 &212878979088492286
 SpriteRenderer:
   m_ObjectHideFlags: 1

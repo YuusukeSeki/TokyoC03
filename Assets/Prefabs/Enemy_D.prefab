@@ -91,7 +91,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61967217290843268
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -129,12 +129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPower: 1
-  _moveSpeed: {x: 0, y: 0, z: 0}
-  _bulletSpeed: 2
   _shotPos: {fileID: 1475844327689078}
   _enemyBullet: {fileID: 1771529521341622, guid: 461fc313b3034ae4eb3bd6c331745c60,
     type: 2}
-  _bulletVector: {x: 1, y: 5}
+  _maxBulletVector: {x: 1, y: 2}
+  _bulletSpeed: 3
   _shot_PerSeconds: 0.3
 --- !u!212 &212455605595020060
 SpriteRenderer:

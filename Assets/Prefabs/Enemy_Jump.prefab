@@ -90,8 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPower: 1
-  _moveSpeed: {x: 0, y: 100, z: 0}
-  _bulletSpeed: 0
+  _jumpPower: 30
 --- !u!212 &212930498353801606
 SpriteRenderer:
   m_ObjectHideFlags: 1

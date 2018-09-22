@@ -130,6 +130,15 @@ public class PlayerManager : MonoBehaviour {
 
         }
 
+        // バリア追従者変更
+        GameObject[] barriers = GameObject.FindGameObjectsWithTag("Barrier");
+        foreach (GameObject barrier in barriers)
+        {
+            barrier.GetComponent<Barrier>().SetBarrier(_charaLists[nextChara]);
+
+        }
+
+
         // 交代キャラクタとカメラの動きを設定
         SetMoveRoot(nextChara);
 

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Skill_Sliding : Skill
 {
-    [SerializeField] SpriteRenderer _spriteRenderer;
-    [SerializeField] ChangeSprite _changeSprite;
-    [SerializeField] BoxCollider2D _boxCollider2D;
+    SpriteRenderer _spriteRenderer;
+    ChangeSprite _changeSprite;
+    BoxCollider2D _boxCollider2D;
+    CapsuleCollider2D _capsuleCollider2D;
     Vector2 _before_bc2D_offset;
     Vector2 _before_bc2D_size;
-    [SerializeField] CapsuleCollider2D _capsuleCollider2D;
 
     [SerializeField] float _time;   // 効果時間
     float _cntTime;                 // 時間で解除
@@ -17,6 +17,11 @@ public class Skill_Sliding : Skill
 
     // Use this for initialization
     void Start () {
+        _spriteRenderer    = GetComponent<SpriteRenderer>();
+        _changeSprite      = GetComponent<ChangeSprite>();
+        _boxCollider2D     = GetComponent<BoxCollider2D>();
+        _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+
         _type = TYPE.NONE;
         _cntTime = -1;
 

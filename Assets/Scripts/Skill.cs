@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour {
 
-    public AudioManager _audioManager;
+    [SerializeField] protected AudioManager _audioManager;
 
     // スキルの種類　※スキル効果を、他のオブジェクトに与えるときに使用
     public enum TYPE

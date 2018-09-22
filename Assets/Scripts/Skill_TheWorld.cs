@@ -26,10 +26,7 @@ public class Skill_TheWorld : Skill
     {
         base.UseSkill();
 
-        // GameObject型の配列cubesに、"box"タグのついたオブジェクトをすべて格納
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-
-        // GameObject型の変数cubeに、cubesの中身を順番に取り出す。
         foreach (GameObject enemy in enemys)
         {
             enemy.GetComponent<Enemy>().ReceiveSkill(_type);

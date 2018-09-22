@@ -8,7 +8,13 @@ public class Barrier : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        // 以前に貼ったバリアを破棄
+        GameObject[] barriers = GameObject.FindGameObjectsWithTag("Barrier");
+        foreach (GameObject barrier in barriers)
+        {
+            if (barrier.gameObject != gameObject)
+                Destroy(barrier.gameObject);
+        }
     }
 
     // Update is called once per frame

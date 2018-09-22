@@ -33,16 +33,12 @@ public class Enemy_Jump : Enemy {
     {
         _rb.AddForce(Vector2.up * _jumpPower * 10);
 
-        Debug.Log("Jump");
     }
 
     // 接地時にジャンプ
     protected override void OnCollisionEnter2D(Collision2D col)
     {
         base.OnCollisionEnter2D(col);
-
-        Debug.Log("collision");
-        Debug.Log(col.gameObject.tag);
 
         if (col.gameObject.tag == "Ground")
         {

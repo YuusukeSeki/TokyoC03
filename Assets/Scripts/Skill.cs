@@ -5,7 +5,6 @@ using UnityEngine;
 public class Skill : MonoBehaviour {
 
     public AudioManager _audioManager;
-    Player _player;
 
     // スキルの種類　※スキル効果を、他のオブジェクトに与えるときに使用
     public enum TYPE
@@ -28,7 +27,6 @@ public class Skill : MonoBehaviour {
 
     protected virtual void Init()
     {
-        _player = GetComponent<Player>();
 
     }
 

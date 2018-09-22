@@ -4,22 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public float _attackPower;           // 攻撃力
+    public float _attackPower;
+    protected SpriteRenderer _sr;
 
-    public Vector3 _moveSpeed;             // 移動速度
-    public float _bulletSpeed;          // 弾の移動速度
-
-
-    //public PlayerManager _pm;
-    //public bool _shotBullet;             // true で射撃行動を取る
-    //public bool _aimingPlayer;           // true で弾をプレイヤー方向に撃つ
-    //public float _attackPower_Bullet;    // 弾による攻撃力
-
-    //public float _numShot_Seconds;       // 秒間発射数
-    //float _cntTime;                      // 秒数記憶バッファ
-
-    ////GameObject player;
-    //[SerializeField] GameObject bullet;
+    public AudioManager _audioManager;
 
     // Use this for initialization
     void Start () {
@@ -30,26 +18,15 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //// 移動処理
-        //Move();
-
-        //// 弾を撃つ
-        //ShotBullet();
 
     }
 
     // 初期化処理
     public virtual void Init()
     {
+        _sr = GetComponent<SpriteRenderer>();
         enabled = false;
 
-        //// フレームカウンター初期化
-        //_cntTime = 0;
-
-        //_pm =  GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-        ////player = _pm._charaLists[_pm._nowChara];
-
-        //enabled = false;
     }
 
     // プレイヤーとの接触処理
@@ -80,6 +57,7 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void OnTriggerStay2D(Collider2D col)
     {
+
         if (col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
@@ -87,18 +65,32 @@ public class Enemy : MonoBehaviour {
 
     }
 
-    // 画面外判定
+    // 画面外処理
     public virtual void OnBecameInvisible()
     {
-        enabled = false;
+        Destroy(gameObject);
 
     }
 
-    // 画面内判定
+    // 画面内処理
     public virtual void OnBecameVisible()
     {
         enabled = true;
 
+    }
+
+    // プレイヤーのスキル効果を受ける
+    // type : スキルの種類
+    public virtual void ReceiveSkill(Skill.TYPE type)
+    {
+        switch (type)
+        {
+            case Skill.TYPE.THE_WORLD:
+                // 色の変更
+                _sr.color = new Color(0.5f, 0.5f, 1.0f);
+
+                break;
+        }
     }
 
 

@@ -74,16 +74,17 @@ public class CameraFixing : MonoBehaviour {
 
     }
 
-    public void SetNowCharacterPosition()
+    public void FocusGameObject(GameObject obj)
     {
         _state = State.NORMAL;
 
         Vector3 pos = transform.position;
 
-        pos.x = _playerManager._charaLists[_playerManager._nowChara].transform.position.x + _offsetX;
+        pos.x = obj.transform.position.x + _offsetX;
         pos.y = 0;
 
         transform.position = pos;
+
     }
 
 }

@@ -17,6 +17,7 @@ public class Skill_Sliding : Skill
 
     // Use this for initialization
     void Start () {
+        _type = TYPE.NONE;
         _cntTime = -1;
 
         _before_bc2D_offset = _boxCollider2D.offset;
@@ -51,6 +52,7 @@ public class Skill_Sliding : Skill
 
         SetSliding();
 
+        _audioManager.OnSlidePlay();
     }
 
     // スライディング状態に切り替える

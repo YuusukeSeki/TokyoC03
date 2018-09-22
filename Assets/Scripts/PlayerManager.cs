@@ -11,8 +11,6 @@ public class PlayerManager : MonoBehaviour {
         GAMEOVER,
     };
 
-    public bool isUseDebugButton;
-
     public int _nowChara;                           //　現在操作中のキャラ
     public List<GameObject> _charaLists = null;     //　操作可能なゲームキャラクター
     public State _state;                            // 残りキャラクターの有無
@@ -27,13 +25,15 @@ public class PlayerManager : MonoBehaviour {
 
     Vector3 _respownPosition;   // 復帰時の座標
 
+    [SerializeField] UIManager _uiManager;
+
 
     // Use this for initialization
     void Start()
     {
         _fs = GameObject.Find("FadePanel").GetComponent<FadeScript>();
         _cf = GameObject.Find("Main Camera").GetComponent<CameraFixing>();
-        ChangeCharacter(_charaLists.Count);
+        _respownPosition = transform.position;
 
         Init();
 
@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        // クリアかゲームオーバーで初期化処理
+        // 初期化判定
         if(_state == State.CLEAR || _state == State.GAMEOVER)
         {
             if (_fs.GetFadeState() == FadeScript.FadeState.FADE_OUT_COMPRETED)
@@ -56,33 +56,6 @@ public class PlayerManager : MonoBehaviour {
         // キャラクタの状態をチェックする
         CheckCharacterState();
 
-        if (!isUseDebugButton)
-            return;
-
-        //　キーが押されたら操作キャラクターを変更する
-        if(_state != State.CLEAR && _state != State.GAMEOVER)
-        {
-            if (Input.GetKeyDown("1"))
-            {
-                ChangeCharacter(0);
-            }
-            else if (Input.GetKeyDown("2"))
-            {
-                ChangeCharacter(1);
-            }
-            else if (Input.GetKeyDown("3"))
-            {
-                ChangeCharacter(2);
-            }
-            else if (Input.GetKeyDown("4"))
-            {
-                ChangeCharacter(3);
-            }
-            else if (Input.GetKeyDown("s"))
-            {
-                Skill();
-            }
-        }
     }
 
     // 初期化処理
@@ -90,11 +63,12 @@ public class PlayerManager : MonoBehaviour {
     {
         _state = State.NONE;
 
-        ChangeCharacter(0);
+        ChangeCharacter(_nowChara);
 
         for (int i = 0; i < _charaLists.Count; i++)
         {
             _charaLists[i].GetComponent<Player>().Init();
+            _charaLists[i].transform.position = _respownPosition;
 
             if (_nowChara == i)
                 _charaLists[i].SetActive(true);
@@ -102,43 +76,39 @@ public class PlayerManager : MonoBehaviour {
                 _charaLists[i].SetActive(false);
         }
 
-        _cf.SetNowCharacterPosition();
+        _cf.FocusGameObject(_charaLists[_nowChara]);
 
     }
 
-    //　操作キャラクター変更メソッド
+    //　操作キャラ変更
     public void ChangeCharacter(int nextChara)
     {
-        // キャラクタに変更がなければ処理を行わない
         if (nextChara == _nowChara)
             return;
 
-        bool flag;  //　オン・オフのフラグ
-        
-        //　指定されたキャラクターが範囲外なら最初のキャラを操作キャラにする
+        //　範囲外時は0番
         if (nextChara >= _charaLists.Count || nextChara < 0)
-        {
             nextChara = 0;
-        }
 
-        // 指定されたキャラクターが死んでいたらキャラリストで一番若い番号の生きているものをメインキャラに設定する
-        if(_charaLists[nextChara].GetComponent<Player>()._state == Player.State.DEAD)
+        // 指定キャラ死亡時、生きているキャラを探す
+        if(GetCharacterParamater(nextChara)._hp <= 0)
         {
             for (int i = 0; i < _charaLists.Count; i++)
             {
-                // 生きている人を発見したら、次のキャラクターに設定してループを抜ける
-                if (_charaLists[i].GetComponent<Player>()._state != Player.State.DEAD)
+                // 生きているキャラ発見
+                if (GetCharacterParamater(i)._hp > 0)
                 {
                     nextChara = i;
-                    Debug.Log("ChangeChara : Dead & Next ");
-                    break;
-                }
 
-                // 全員死んでいたらGameOver
-                if(i == _charaLists.Count - 1)
+                    if (nextChara == _nowChara)
+                        return;
+                    else
+                        break;
+                }
+                // 全員死亡
+                else if(i == _charaLists.Count - 1)
                 {
                     _state = State.GAMEOVER;
-                    Debug.Log("ChangeChara : GameOver ");
                     _fs.SetColor(0, 0, 0);
                     _fs.StartFadeOut();
                     return;
@@ -146,37 +116,32 @@ public class PlayerManager : MonoBehaviour {
             }
         }
 
-        //　次か今の操作キャラクターだったらアクティブをONにし、それ以外だったらOFFにする
+        // キャラクタのアクティブ変更
         for (int i = 0; i < _charaLists.Count; i++)
         {
+            bool flag;
+
             if (i == nextChara || i == _nowChara)
-            {
                 flag = true;
-
-            }
             else
-            {
                 flag = false;
-            }
 
-            //　操作するキャラクターと操作しないキャラクターで機能のオン・オフをする
             _charaLists[i].SetActive(flag);
 
         }
 
-        // 交代中のキャラクタとカメラの動きを設定
+        // 交代キャラクタとカメラの動きを設定
         SetMoveRoot(nextChara);
 
-        //　次の操作キャラクターを現在操作しているキャラクターに設定して終了
         _nowChara = nextChara;
 
     }
 
-    // キャラクタ状態監視メソッド
+    // キャラ状態監視
     void CheckCharacterState()
     {
-        // クリアしていたら、フェードアウト終了時にプレイヤーを初期化する
-        if (_charaLists[_nowChara].GetComponent<Player>()._state == Player.State.CLEAR)
+        // クリア時
+        if (Player._isClear)
         {
             _state = State.CLEAR;
 
@@ -185,20 +150,31 @@ public class PlayerManager : MonoBehaviour {
 
         }
 
-        // 死亡していたらキャラクタを次のキャラクタに変える。いなければGameOver
-        if (_charaLists[_nowChara].GetComponent<Player>()._state == Player.State.DEAD)
+        // 死亡時
+        if (GetCharacterParamater(_nowChara)._hp <= 0)
         {
             ChangeCharacter(_nowChara + 1);
 
+            if(_state != State.GAMEOVER)
+            {
+                for (int i = 0; i < _charaLists.Count; ++i)
+                {
+                    if (_uiManager.playerPos[i] == _nowChara)
+                    {
+                        _uiManager.OnIconClick(i);
+                        break;
+                    }
+                }
+            }
         }
 
-        // 穴に落ちて死んだら、残りのキャラクタの生死を問わずGameOver
-        if(_charaLists[_nowChara].GetComponent<Player>()._state == Player.State.FALL_DEAD)
+        // 穴落ちた時
+        if (Player._isAllDead)
         {
+            _state = State.GAMEOVER;
+
             _fs.SetColor(0, 0, 0);
             _fs.StartFadeOut();
-
-            _state = State.GAMEOVER;
         }
 
     }
@@ -279,6 +255,26 @@ public class PlayerManager : MonoBehaviour {
         }
 
         return _charaLists[numCharacter].GetComponent<Player>()._paramater;
+    }
+
+    // 指定キャラが死んでるかどうか
+    // numCharacter : 指定キャラクタ番号(0~3)
+    // 返り値：true  - 死んでる
+    //         false - 死んでない
+    public bool isDead(int numCharacter)
+    {
+        if(numCharacter < 0 || numCharacter >= _charaLists.Count)
+        {
+            Debug.Log("ERROR!! : Alive(int numCharacter)");
+            return false;
+        }
+
+        if (GetCharacterParamater(numCharacter)._hp <= 0)
+            return true;
+        else
+            return false;
+
+
     }
 
 }

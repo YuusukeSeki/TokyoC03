@@ -16,9 +16,6 @@ public class Player : MonoBehaviour
         NONE,
         ENTRY,      // 交代（登場）
         EXIT,       // 交代（退場）
-        CLEAR,
-        DEAD,
-        FALL_DEAD,  // 穴に落ちて死んだ
     };
 
     public struct Paramater
@@ -31,9 +28,11 @@ public class Player : MonoBehaviour
 
     };
     
-    public Paramater _paramater;
+    public Paramater _paramater;    // パラメータ
+    [SerializeField] float _maxHp, _healMP_PerSeconds, _jumpPower, _runForce, _runMaxSpeed; // UnityGUIデータ一時保存領域
 
-    [SerializeField] float _maxHp, _healMP_PerSeconds, _jumpPower, _runForce, _runMaxSpeed;
+    public static bool _isAllDead;   // 全滅フラグ（穴落ちた時）
+    public static bool _isClear;     // クリアフラグ
 
     // 接地フラグ
     bool _isGround;
@@ -57,9 +56,6 @@ public class Player : MonoBehaviour
     // 状態
     public State _state;
 
-    // 初期座標（ゴール時、全滅時にこの地点に戻す）
-    Vector3 respownPosition;
-
     // 交代
     float _cntTime;
     float _changeTime;
@@ -68,14 +64,13 @@ public class Player : MonoBehaviour
 
     // スキル
     Skill _skill;
+
+    public AudioManager _audioManager;
     
 
     // Use this for initialization
     void Awake()
     {
-        // 初期座標取得
-        respownPosition = transform.position;
-
         // 初期化処理
         Init();
 
@@ -87,16 +82,8 @@ public class Player : MonoBehaviour
         // 状態の変更
         ChangeState();
 
-        // ゴールしてたら動かない
-        if (_state == State.CLEAR)
-            return;
-
-        // 死んでたら動かない
-        if (_state == State.DEAD)
-            return;
-
-        // 画面遷移中は動かさない
-        if (_fade.GetFadeState() != FadeScript.FadeState.NONE)
+        // ゴール、画面遷移中で無処理
+        if (_isClear || _fade.GetFadeState() != FadeScript.FadeState.NONE)
             return;
 
         // 移動処理
@@ -107,6 +94,9 @@ public class Player : MonoBehaviour
     // 初期化処理
     public void Init()
     {
+        _isAllDead = false;
+        _isClear = false;
+
         // コンポーネント取得
         _rb = GetComponent<Rigidbody2D>();
         _ff = GetComponent<FlashScript>();
@@ -126,6 +116,7 @@ public class Player : MonoBehaviour
         _paramater._jumpPower = _jumpPower;
         _paramater._runForce = _runForce;
         _paramater._runMaxSpeed = _runMaxSpeed;
+        _paramater._healMP_PerSeconds = _healMP_PerSeconds;
 
         // 体力
         _paramater._hp = _paramater._maxHp;
@@ -136,10 +127,6 @@ public class Player : MonoBehaviour
 
         // 状態
         _state = State.NONE;
-
-        // 座標
-        transform.position = respownPosition;
-
         // 速度
         _rb.velocity = new Vector2(0, 0);
 
@@ -150,7 +137,7 @@ public class Player : MonoBehaviour
     // 接地判定
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Obstacle")
         {
             if (col.gameObject.transform.position.y < transform.position.y)
             {
@@ -162,7 +149,7 @@ public class Player : MonoBehaviour
     }
     void OnCollisionStay2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Obstacle")
         {
             if (col.gameObject.transform.position.y < transform.position.y)
             {
@@ -173,7 +160,7 @@ public class Player : MonoBehaviour
 
     }
 
-    // 被弾判定,ゴール判定,画面外判定
+    // 被弾,ゴール,落下
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Bullet(Enemy)")
@@ -183,11 +170,12 @@ public class Player : MonoBehaviour
         }
         else if (col.gameObject.tag == "GoalFlag")
         {// ゴール判定
-            _state = State.CLEAR;
+            _isClear = true;
         }
         else if (col.gameObject.tag == "DeadLine")
         {// 画面外判定（底）
-            _state = State.FALL_DEAD;
+            if(_state != State.EXIT)
+                _isAllDead = true;
         }
 
     }
@@ -227,7 +215,7 @@ public class Player : MonoBehaviour
         }
         else if (_state == State.EXIT)
         {// 退場中
-            transform.position += new Vector3(-_paramater._runMaxSpeed * 0.5f * Time.deltaTime, 0, 0);
+            transform.position += new Vector3(-5 * Time.deltaTime, 0, 0);
         }
         else
         {// 通常時
@@ -249,6 +237,7 @@ public class Player : MonoBehaviour
         if (_isGround)
         {
             _rb.AddForce(Vector2.up * _paramater._jumpPower * 10);
+            _audioManager.OnJumpPlay();
         }
 
     }
@@ -258,28 +247,25 @@ public class Player : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         // ダメージを受けない条件
-        if (_invincible)
+        if (_invincible || _state == State.ENTRY || _state == State.EXIT)
             return;
-        if (_state != State.NONE && _state != State.ENTRY)
-            return;
-
+ 
         // HP減少
         _paramater._hp -= damage;
 
-        // 死亡時状態切り替え。キャラ交代はChangeCharaに任せる
+        // 体力判定
         if (_paramater._hp <= 0)
-        {
-            _state = State.DEAD;
+        {// 死亡時
 
         }
         else
-        {
+        {// 生存時
             SetInvincible();
-
             gameObject.tag = "PlayerDamage";
             gameObject.layer = LayerMask.NameToLayer("PlayerDamage"); ;
         }
 
+        _audioManager.OnDamagePlay();
     }
 
     // 無敵状態にする
@@ -337,11 +323,10 @@ public class Player : MonoBehaviour
     // 画面外判定
     void OnBecameInvisible()
     {
-        if (_state == State.EXIT)
+        if(_state == State.EXIT)
         {
             _state = State.NONE;
             gameObject.SetActive(false);
-
         }
     }
 

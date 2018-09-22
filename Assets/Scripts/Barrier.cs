@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour {
 
-    GameObject _followObject = null;
+    GameObject _followObject;
 
 	// Use this for initialization
 	void Start () {
@@ -16,9 +16,11 @@ public class Barrier : MonoBehaviour {
         if (!_followObject)
             return;
 
-        // 親のアクティブがOFFなら自分は消える
-        if (!_followObject.activeSelf)
-            Destroy(gameObject);
+        //// 親のアクティブがOFFなら自分は消える
+        //if (!_followObject.activeSelf)
+        //    enabled = false;
+        //else
+        //    enabled = true;
 
         transform.position = _followObject.transform.position;
 
@@ -32,11 +34,19 @@ public class Barrier : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Bullet(Enemy)")
-        {// 被弾判定
+        {
             Destroy(col.gameObject);
+
+            _followObject.GetComponent<Player>().ReceiveDamage(0);
+
             Destroy(gameObject);
         }
+        else if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "Obstacle")
+        {
+            _followObject.GetComponent<Player>().ReceiveDamage(0);
 
+            Destroy(gameObject);
+        }
     }
 
 }

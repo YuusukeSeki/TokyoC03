@@ -9,7 +9,8 @@ public class Skill_Barrier : Skill
 
 	// Use this for initialization
 	void Start () {
-		
+        _type = TYPE.NONE;
+
 	}
 	
 	// Update is called once per frame

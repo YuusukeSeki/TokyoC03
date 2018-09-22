@@ -12,6 +12,7 @@ public class Skill_Invisible : Skill {
 
 	// Use this for initialization
 	void Start () {
+        _type = TYPE.NONE;
         _cntTime = -1;
 
     }

@@ -2435,6 +2435,10 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
+    - target: {fileID: 1076618575281468, guid: 34afaef719b86b64d8dfe3b145146374, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34afaef719b86b64d8dfe3b145146374, type: 2}
   m_IsPrefabParent: 0
@@ -2886,6 +2890,10 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
+    - target: {fileID: 1446589796108092, guid: 8dffca467c43d374981e56932f3a4e77, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dffca467c43d374981e56932f3a4e77, type: 2}
   m_IsPrefabParent: 0
@@ -4747,6 +4755,10 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
+    - target: {fileID: 1615649875548876, guid: 167a47aa2cac5ce47afe3115a87a146e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 167a47aa2cac5ce47afe3115a87a146e, type: 2}
   m_IsPrefabParent: 0
@@ -5834,27 +5846,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114689047208041382, guid: a3f578cfb0b79324d9b0e58b7e79a225,
-        type: 2}
-      propertyPath: _uiManager
-      value: 
-      objectReference: {fileID: 1295119090}
-    - target: {fileID: 114828883223425780, guid: a3f578cfb0b79324d9b0e58b7e79a225,
-        type: 2}
-      propertyPath: _healMP_PerSeconds
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114596326589477158, guid: a3f578cfb0b79324d9b0e58b7e79a225,
-        type: 2}
-      propertyPath: _audioManager
-      value: 
-      objectReference: {fileID: 736768989}
     - target: {fileID: 114817409617184436, guid: a3f578cfb0b79324d9b0e58b7e79a225,
         type: 2}
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
-    - target: {fileID: 114024977580008208, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+    - target: {fileID: 114596326589477158, guid: a3f578cfb0b79324d9b0e58b7e79a225,
         type: 2}
       propertyPath: _audioManager
       value: 
@@ -5864,7 +5861,7 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
-    - target: {fileID: 114473189570989880, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+    - target: {fileID: 114024977580008208, guid: a3f578cfb0b79324d9b0e58b7e79a225,
         type: 2}
       propertyPath: _audioManager
       value: 
@@ -5874,7 +5871,7 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
-    - target: {fileID: 114828883223425780, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+    - target: {fileID: 114473189570989880, guid: a3f578cfb0b79324d9b0e58b7e79a225,
         type: 2}
       propertyPath: _audioManager
       value: 
@@ -5884,26 +5881,16 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
-    - target: {fileID: 114596326589477158, guid: a3f578cfb0b79324d9b0e58b7e79a225,
-        type: 2}
-      propertyPath: _maxHp
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114024977580008208, guid: a3f578cfb0b79324d9b0e58b7e79a225,
-        type: 2}
-      propertyPath: _maxHp
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114473189570989880, guid: a3f578cfb0b79324d9b0e58b7e79a225,
-        type: 2}
-      propertyPath: _maxHp
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 114828883223425780, guid: a3f578cfb0b79324d9b0e58b7e79a225,
         type: 2}
-      propertyPath: _maxHp
-      value: 4
-      objectReference: {fileID: 0}
+      propertyPath: _audioManager
+      value: 
+      objectReference: {fileID: 736768989}
+    - target: {fileID: 114689047208041382, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _uiManager
+      value: 
+      objectReference: {fileID: 1295119090}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3f578cfb0b79324d9b0e58b7e79a225, type: 2}
   m_IsPrefabParent: 0
@@ -7315,7 +7302,7 @@ Prefab:
       objectReference: {fileID: 736768989}
     - target: {fileID: 1893811811406584, guid: 72c076cf4b95fc64485d46355830994a, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72c076cf4b95fc64485d46355830994a, type: 2}

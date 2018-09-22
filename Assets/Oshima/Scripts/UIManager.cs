@@ -37,7 +37,7 @@ void Start(){
 
 //HPBarの操作
 public void EditHpGauge(float nowHp, int gaugeNum){
-    for(int i = 4; i>nowHp; i--){
+    for(int i = 4; i>nowHp && i > 0; i--){
         pointsArray[gaugeNum][i-1].SetActive(false);
     }
     for(int j = 0; j<nowHp; j++){
@@ -85,6 +85,9 @@ public int SearchPlayerPos(int playerNum){
 
 //Iconをクリックした時
 public void OnIconClick(int num){
+    if (_playerManager.isDead(playerPos[num]))  // ※※死んだキャラクターとは交代しない処理
+        return;                                 // ※※
+
     _audioManager.OnCharaSwitchPlay();
     if(num == 1 || num == 2){
         _playerManager.ChangeCharacter(playerPos[num]);

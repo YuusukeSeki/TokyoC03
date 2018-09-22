@@ -31,6 +31,17 @@ public class Barrier : MonoBehaviour {
         _followObject = followObject;
     }
 
+    void OnColiisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "Obstacle")
+        {
+            _followObject.GetComponent<Player>().ReceiveDamage(0);
+
+            Destroy(gameObject);
+        }
+
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Bullet(Enemy)")

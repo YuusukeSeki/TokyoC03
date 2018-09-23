@@ -117,7 +117,7 @@ enum Status{
 		int playerPos = _uiManager.SearchPlayerPos(playerNum);
 		if(playerPos != 0){
 			if(playerMPs[playerNum] < 1){
-				playerMPs[playerNum] += 0.002f*speed;
+				playerMPs[playerNum] += 0.0005f*speed;
 			}else{
 				playerMPs[playerNum] = 1;
 			}

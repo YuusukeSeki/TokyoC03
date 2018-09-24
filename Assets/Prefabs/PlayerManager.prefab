@@ -653,6 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a59ebab4cac0124989526c35a5a29b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debufState: 0
   _nowChara: 0
   _charaLists:
   - {fileID: 1981041405410676}
@@ -686,6 +687,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioManager: {fileID: 0}
   _time: 1
+  _state: 1
+  _isLinear: 1
+  _linearTime: 0.1
+  _zenkeiKakduo: 45
 --- !u!114 &114828883223425780
 MonoBehaviour:
   m_ObjectHideFlags: 1

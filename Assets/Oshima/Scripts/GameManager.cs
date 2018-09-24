@@ -158,6 +158,9 @@ enum Status{
 	}
 
 	public void OnPostButton(){
+        if (_playerManager._debufState == PlayerManager.DebufState.NG_LETTERBULLET)
+            return;
+
 		Instantiate(letter,_playerManager.GetMainCharacterPosition() + new Vector3(1f,0,0), Quaternion.identity);
 		_audioManager.OnLetterPlay();
 	}

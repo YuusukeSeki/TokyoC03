@@ -18,6 +18,7 @@ public class Enemy_B : Enemy {
 	
 	// Update is called once per frame
 	void Update () {
+        DebufUpdate();
 
         Move();
 
@@ -33,7 +34,17 @@ public class Enemy_B : Enemy {
     void Move()
     {
         Vector3 pos = transform.position;
-        pos.x += _moveSpeed * -1 * Time.deltaTime;
+
+        // デバフ状態によっては速度を上げる
+        if (_debuf == Debuf.SPEED_UP && _cntDebufTime > 0)
+        {
+            pos.x += _moveSpeed * _debufRate * -1 * Time.deltaTime;
+        }
+        else
+        {
+            pos.x += _moveSpeed * -1 * Time.deltaTime;
+
+        }
         transform.position = pos;
 
     }
@@ -53,8 +64,20 @@ public class Enemy_B : Enemy {
                 break;
 
         }
-
-
     }
+
+    // 手紙に当たった時の効果
+    public override void ReceiveLettterBullet()
+    {
+        base.ReceiveLettterBullet();
+
+        switch (_debuf)
+        {
+            case Debuf.SPEED_UP:
+                GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f);
+                break;
+        }
+    }
+
 
 }

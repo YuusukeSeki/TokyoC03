@@ -11,10 +11,20 @@ public class PlayerManager : MonoBehaviour {
         GAMEOVER,
     };
 
+    public enum DebufState
+    {
+        NONE,
+        NG_JUMP,
+        NG_LETTERBULLET,
+    };
+
+    public DebufState _debufState;
+    float _cntDebufTime;
+
     public int _nowChara;                           //　現在操作中のキャラ
     public List<GameObject> _charaLists = null;     //　操作可能なゲームキャラクター
     public State _state;                            // 残りキャラクターの有無
-    FadeScript _fs;
+    //FadeScript _fs;
     CameraFixing _cf;
 
     float _changeTime = 0.3f;   // 交代にかかる時間
@@ -31,7 +41,7 @@ public class PlayerManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        _fs = GameObject.Find("FadePanel").GetComponent<FadeScript>();
+        //_fs = GameObject.Find("FadePanel").GetComponent<FadeScript>();
         _cf = GameObject.Find("Main Camera").GetComponent<CameraFixing>();
         _respownPosition = transform.position;
 
@@ -45,15 +55,20 @@ public class PlayerManager : MonoBehaviour {
         // 初期化判定
         if(_state == State.CLEAR || _state == State.GAMEOVER)
         {
-            if (_fs.GetFadeState() == FadeScript.FadeState.FADE_OUT_COMPRETED)
-            {
-                Init();
-            }
+            //if (_fs.GetFadeState() == FadeScript.FadeState.FADE_OUT_COMPRETED)
+            //{
+            //    Init();
+            //}
+
+            //Init();
 
             return;
         }
 
-        // キャラクタの状態をチェックする
+        // デバフ状態の変化
+        CheckDebuf();
+
+        // キャラクタ状態の変化
         CheckCharacterState();
 
     }
@@ -78,6 +93,7 @@ public class PlayerManager : MonoBehaviour {
 
         _cf.FocusGameObject(_charaLists[_nowChara]);
 
+        _cntDebufTime = 0;
     }
 
     //　操作キャラ変更
@@ -109,8 +125,8 @@ public class PlayerManager : MonoBehaviour {
                 else if(i == _charaLists.Count - 1)
                 {
                     _state = State.GAMEOVER;
-                    _fs.SetColor(0, 0, 0);
-                    _fs.StartFadeOut();
+                    //_fs.SetColor(0, 0, 0);
+                    //_fs.StartFadeOut();
                     return;
                 }
             }
@@ -154,8 +170,8 @@ public class PlayerManager : MonoBehaviour {
         {
             _state = State.CLEAR;
 
-            _fs.SetColor((192f / 255f), (192f / 255f), (192f / 255f));
-            _fs.StartFadeOut();
+            //_fs.SetColor((192f / 255f), (192f / 255f), (192f / 255f));
+            //_fs.StartFadeOut();
 
         }
 
@@ -182,8 +198,8 @@ public class PlayerManager : MonoBehaviour {
         {
             _state = State.GAMEOVER;
 
-            _fs.SetColor(0, 0, 0);
-            _fs.StartFadeOut();
+            //_fs.SetColor(0, 0, 0);
+            //_fs.StartFadeOut();
         }
 
     }
@@ -209,7 +225,8 @@ public class PlayerManager : MonoBehaviour {
         // ② 初期座標の算出し、次のキャラクターに設定
         Vector3 initPos = _cf.transform.position;
         initPos.x -= _cf._screenSize.x * 0.5f + _charaLists[nextChara].GetComponent<SpriteRenderer>().bounds.size.x * 0.5f;    // x座標は左端の画面外
-        initPos.y = _charaLists[_nowChara].transform.position.y;                                                               // y座標は交代前のキャラに合わせる
+        //initPos.y = _charaLists[_nowChara].transform.position.y;                                                               // y座標は交代前のキャラに合わせる
+        initPos.y = _cf.transform.position.y;                                                               // y座標は交代前のキャラに合わせる
         initPos.z = 0;                                                                                                         // z座標は0
         _charaLists[nextChara].GetComponent<Player>().SetEntry(initPos, _targetPos, _changeTime);
 
@@ -239,6 +256,12 @@ public class PlayerManager : MonoBehaviour {
     // 操作中のキャラクタをジャンプさせる
     public void Jump()
     {
+        if (_debufState == DebufState.NG_JUMP)
+        {
+            Debug.Log("NG_JUMP");
+            return;
+        }
+
         _charaLists[_nowChara].GetComponent<Player>().Jump();
     }
 
@@ -282,7 +305,49 @@ public class PlayerManager : MonoBehaviour {
             return true;
         else
             return false;
+    }
 
+    public void SetDebuf(Enemy.Debuf debuf, float time)
+    {
+        switch (debuf)
+        {
+            case Enemy.Debuf.NG_LETTERBULLET:
+                _debufState = DebufState.NG_LETTERBULLET;
+                for(int i = 0; i < _charaLists.Count; i++)
+                {
+                    _charaLists[i].GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1);
+                }
+                break;
+
+            case Enemy.Debuf.NG_JUMP:
+                _debufState = DebufState.NG_JUMP;
+                for (int i = 0; i < _charaLists.Count; i++)
+                {
+                    _charaLists[i].GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1);
+                }
+                break;
+
+        }
+
+        _cntDebufTime = time;
+
+    }
+
+    void CheckDebuf()
+    {
+        if (_cntDebufTime <= 0)
+            return;
+
+        _cntDebufTime -= Time.deltaTime;
+
+        if (_cntDebufTime <= 0)
+        {
+            _debufState = DebufState.NONE;
+            for (int i = 0; i < _charaLists.Count; i++)
+            {
+                _charaLists[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+            }
+        }
 
     }
 

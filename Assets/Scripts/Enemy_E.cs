@@ -14,8 +14,6 @@ public class Enemy_E : Enemy {
     public float _homingSpeed;
     int _leftCnt, _rightCnt;
 
-    [SerializeField] PlayerManager _playerManager;
-
     [SerializeField] float _rotateSpeed = 1;
     float _angle = 0;
 

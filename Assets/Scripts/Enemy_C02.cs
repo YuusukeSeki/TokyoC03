@@ -12,7 +12,7 @@ public class Enemy_C02 : Enemy {
 
     static float _limitPosY;    // Y座標の下限
     static float _spece = 0.1f; // 下限に加える余白
-
+    float _scaleX;
 
     // Use this for initialization
     void Start()
@@ -32,6 +32,9 @@ public class Enemy_C02 : Enemy {
 
         // 基点の設定
         _basePosition = transform.position;
+
+        // 
+        _scaleX = transform.lossyScale.x;
 
         // 初期化処理
         Init();
@@ -66,11 +69,11 @@ public class Enemy_C02 : Enemy {
         Vector3 scale = transform.localScale;
         if (pos.x < transform.position.x)
         {
-            scale.x = 1;
+            scale.x = _scaleX;
         }
         else
         {
-            scale.x = -1;
+            scale.x = -_scaleX;
         }
 
         //// 下限判定

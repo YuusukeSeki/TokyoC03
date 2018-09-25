@@ -2706,6 +2706,26 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
+    - target: {fileID: 114819689133890460, guid: 8121327b356bb2a43a0d1ff10ea855eb,
+        type: 2}
+      propertyPath: _debuf
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114819689133890460, guid: 8121327b356bb2a43a0d1ff10ea855eb,
+        type: 2}
+      propertyPath: _debufRate
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114819689133890460, guid: 8121327b356bb2a43a0d1ff10ea855eb,
+        type: 2}
+      propertyPath: _debufTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114819689133890460, guid: 8121327b356bb2a43a0d1ff10ea855eb,
+        type: 2}
+      propertyPath: _playerManager
+      value: 
+      objectReference: {fileID: 1041939644}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8121327b356bb2a43a0d1ff10ea855eb, type: 2}
   m_IsPrefabParent: 0
@@ -3975,6 +3995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerManager: {fileID: 1041939644}
   _screenSize: {x: 0, y: 0}
+  _state: 0
 --- !u!4 &1046243125
 Transform:
   m_ObjectHideFlags: 0
@@ -4618,7 +4639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8223438, y: 0.04046895}
   m_AnchorMax: {x: 0.93750006, y: 0.23366669}
-  m_AnchoredPosition: {x: -3, y: 7.500061}
+  m_AnchoredPosition: {x: -3, y: 7.5000763}
   m_SizeDelta: {x: 2, y: 11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1395293084
@@ -5674,11 +5695,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4193687726116492, guid: 638ead55a17fb1740aafaf56151fa79c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 13.63
+      value: 15.93
       objectReference: {fileID: 0}
     - target: {fileID: 4193687726116492, guid: 638ead55a17fb1740aafaf56151fa79c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.72
+      value: 3.25
       objectReference: {fileID: 0}
     - target: {fileID: 4193687726116492, guid: 638ead55a17fb1740aafaf56151fa79c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5709,6 +5730,46 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
+    - target: {fileID: 114232291116917352, guid: 638ead55a17fb1740aafaf56151fa79c,
+        type: 2}
+      propertyPath: _amplitude.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232291116917352, guid: 638ead55a17fb1740aafaf56151fa79c,
+        type: 2}
+      propertyPath: _amplitude.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232291116917352, guid: 638ead55a17fb1740aafaf56151fa79c,
+        type: 2}
+      propertyPath: _moveSpeed.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232291116917352, guid: 638ead55a17fb1740aafaf56151fa79c,
+        type: 2}
+      propertyPath: _moveSpeed.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232291116917352, guid: 638ead55a17fb1740aafaf56151fa79c,
+        type: 2}
+      propertyPath: _debufTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232291116917352, guid: 638ead55a17fb1740aafaf56151fa79c,
+        type: 2}
+      propertyPath: _debufRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232291116917352, guid: 638ead55a17fb1740aafaf56151fa79c,
+        type: 2}
+      propertyPath: _debuf
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232291116917352, guid: 638ead55a17fb1740aafaf56151fa79c,
+        type: 2}
+      propertyPath: _playerManager
+      value: 
+      objectReference: {fileID: 1041939644}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 638ead55a17fb1740aafaf56151fa79c, type: 2}
   m_IsPrefabParent: 0
@@ -5946,6 +6007,40 @@ Prefab:
     - target: {fileID: 1981041405410676, guid: a3f578cfb0b79324d9b0e58b7e79a225, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078424955620698, guid: a3f578cfb0b79324d9b0e58b7e79a225, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114817409617184436, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _isLinear
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114817409617184436, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _linearTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114817409617184436, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596326589477158, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _runMaxSpeed
+      value: 6.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114817409617184436, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _zenkeiKakduo
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114817409617184436, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _state
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3f578cfb0b79324d9b0e58b7e79a225, type: 2}

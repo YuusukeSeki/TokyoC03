@@ -9,6 +9,23 @@ public class Enemy : MonoBehaviour {
 
     public AudioManager _audioManager;
 
+    [SerializeField] protected PlayerManager _playerManager;
+
+    public enum Debuf
+    {
+        NONE,
+        SPEED_UP,
+        NG_LETTERBULLET,
+        NG_JUMP,
+        DAMAGE_HP,
+    };
+
+    [SerializeField] protected Debuf _debuf;
+    [SerializeField] protected float _debufTime;
+    [SerializeField] protected float _debufRate;
+    protected float _cntDebufTime;
+
+
     // Use this for initialization
     void Start () {
         // 初期化処理
@@ -29,12 +46,16 @@ public class Enemy : MonoBehaviour {
 
     }
 
-    // プレイヤーとの接触処理
+    // プレイヤー、手紙との接触処理
     protected virtual void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
+        }
+        else if(col.gameObject.tag == "LetterBullet")
+        {
+            ReceiveLettterBullet();
         }
 
     }
@@ -51,6 +72,10 @@ public class Enemy : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Player>().ReceiveDamage(_attackPower);
+        }
+        else if (col.gameObject.tag == "LetterBullet")
+        {
+            ReceiveLettterBullet();
         }
 
     }
@@ -93,6 +118,50 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    // 手紙に当たった時の効果
+    public virtual void ReceiveLettterBullet()
+    {
+        _cntDebufTime = _debufTime;
+
+        Debug.Log("ReceiveBullet");
+
+        switch (_debuf)
+        {
+            case Debuf.NG_LETTERBULLET:
+                _playerManager.SetDebuf(_debuf, _debufTime);
+                break;
+
+            case Debuf.NG_JUMP:
+                _playerManager.SetDebuf(_debuf, _debufTime);
+                break;
+
+            case Debuf.DAMAGE_HP:
+                _playerManager._charaLists[_playerManager._nowChara].GetComponent<Player>().ReceiveDamage(1);
+                break;
+
+        }
+
+    }
+
+    void DebufReset()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = new Color(1, 1, 1);
+
+
+    }
+
+    protected void DebufUpdate()
+    {
+        if(_cntDebufTime <= 0)
+            return;
+
+        _cntDebufTime -= Time.deltaTime;
+
+        if (_cntDebufTime <= 0)
+            DebufReset();
+
+    }
 
 
     //// 移動処理

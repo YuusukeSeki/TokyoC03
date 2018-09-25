@@ -40,6 +40,8 @@ public class Skill_Invisible : Skill {
         _before_invincibleTime = gameObject.GetComponent<Player>()._invincibleTime;
         gameObject.GetComponent<Player>()._invincibleTime = _time;
         gameObject.GetComponent<Player>().SetInvincible();
+        gameObject.tag = "PlayerDamage";
+        gameObject.layer = LayerMask.NameToLayer("PlayerDamage"); ;
 
     }
 

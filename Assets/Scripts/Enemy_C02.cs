@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Enemy_C02 : Enemy {
 
-    [SerializeField] float _amplitude;  // 振幅
-    Vector3 _basePosition;              // 基点
-    float _angle = 0;
+    [SerializeField] Vector2 _amplitude;    // 振幅
+    Vector3 _basePosition;                  // 基点
+    Vector2 _angle;
 
-    [SerializeField] float _moveSpeed;  // 移動速度
+    [SerializeField] Vector2 _moveSpeed;  // 移動速度
 
     static float _limitPosY;    // Y座標の下限
     static float _spece = 0.1f; // 下限に加える余白
-
+    float _scaleX;
 
     // Use this for initialization
     void Start()
@@ -33,6 +33,9 @@ public class Enemy_C02 : Enemy {
         // 基点の設定
         _basePosition = transform.position;
 
+        // 
+        _scaleX = transform.lossyScale.x;
+
         // 初期化処理
         Init();
     }
@@ -40,30 +43,44 @@ public class Enemy_C02 : Enemy {
     // Update is called once per frame
     void Update()
     {
-        // 左右に振動させる（ふわふわを表現）
-        _angle += _moveSpeed * Time.deltaTime;
-        float posXSin = Mathf.Sin(_angle) * _amplitude;
+        DebufUpdate();
+
+        // 両軸にサインカーブをかける
+        // デバフ状態によっては速度を上げる
+        if (_debuf == Debuf.SPEED_UP && _cntDebufTime > 0)
+        {
+            _angle += _moveSpeed * _debufRate * Time.deltaTime;
+        }
+        else
+        {
+            _angle += _moveSpeed * Time.deltaTime;
+        }
+
+        Vector2 posSin;
+        posSin.x = Mathf.Sin(_angle.x) * _amplitude.x;
+        posSin.y = Mathf.Sin(_angle.y) * _amplitude.y;
 
         // 基点に振動を足した座標を求める
         Vector3 pos = _basePosition;
-        pos.x += posXSin;
+        pos.x += posSin.x;
+        pos.y += posSin.y;
 
         // 進行方向に応じて向きを変える
         Vector3 scale = transform.localScale;
         if (pos.x < transform.position.x)
         {
-            scale.x = 1;
+            scale.x = _scaleX;
         }
         else
         {
-            scale.x = -1;
+            scale.x = -_scaleX;
         }
 
-        // 下限判定
-        if (pos.y < _limitPosY)
-        {
-            pos.y = _limitPosY;
-        }
+        //// 下限判定
+        //if (pos.y < _limitPosY)
+        //{
+        //    pos.y = _limitPosY;
+        //}
 
         // Objectに適用
         transform.position = pos;
@@ -76,7 +93,7 @@ public class Enemy_C02 : Enemy {
     {
         base.Init();
 
-        _angle = 0;
+        _angle = new Vector2(0, 0);
     }
 
     // プレイヤーのスキル効果を受ける
@@ -90,9 +107,21 @@ public class Enemy_C02 : Enemy {
             case Skill.TYPE.THE_WORLD:
                 // 移動速度の変更
                 _moveSpeed *= Skill_TheWorld._magMoveSpeed;
-
                 break;
-
         }
     }
+
+    // 手紙に当たった時の効果
+    public override void ReceiveLettterBullet()
+    {
+        base.ReceiveLettterBullet();
+
+        switch (_debuf)
+        {
+            case Debuf.SPEED_UP:
+                GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f);
+                break;
+        }
+    }
+
 }

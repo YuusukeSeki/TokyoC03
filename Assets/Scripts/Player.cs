@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     Rigidbody2D _rb;
     FlashScript _ff;
     FadeScript _fade;
+    CameraFixing _cf;
 
     // 上移動
     float _jumpThreshold;               // 空中判定の閾値
@@ -101,6 +102,7 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _ff = GetComponent<FlashScript>();
         _skill = GetComponent<Skill>();
+        _cf = GameObject.Find("Main Camera").GetComponent<CameraFixing>();
 
         // ジャンプ判定の閾値設定
         _jumpThreshold = 0.00001f;
@@ -137,19 +139,34 @@ public class Player : MonoBehaviour
     // 接地判定
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Obstacle")
+        if (col.gameObject.tag == "Ground")
         {
             if (col.gameObject.transform.position.y < transform.position.y)
             {
                 if (!_isGround)
                     _isGround = true;
             }
+        }
+        if (col.gameObject.tag == "Obstacle")
+        {
+            if (col.gameObject.transform.position.y < transform.position.y)
+            {
+                if (!_isGround)
+                    _isGround = true;
+            }
+            if (col.gameObject.transform.position.x - col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f
+                < transform.position.x + GetComponent<SpriteRenderer>().bounds.size.x * 0.5f)
+            {
+                _cf._state = CameraFixing.State.TUKKAETERU;
+
+            }
+
         }
 
     }
     void OnCollisionStay2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Obstacle")
+        if (col.gameObject.tag == "Ground")
         {
             if (col.gameObject.transform.position.y < transform.position.y)
             {
@@ -157,8 +174,33 @@ public class Player : MonoBehaviour
                     _isGround = true;
             }
         }
+        if (col.gameObject.tag == "Obstacle")
+        {
+            if (col.gameObject.transform.position.y < transform.position.y)
+            {
+                if (!_isGround)
+                    _isGround = true;
+            }
+            if (col.gameObject.transform.position.x - col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f
+                < transform.position.x + GetComponent<SpriteRenderer>().bounds.size.x * 0.5f)
+            {
+                _cf._state = CameraFixing.State.TUKKAETERU;
+
+            }
+
+        }
 
     }
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Obstacle")
+        {
+            _cf._state = CameraFixing.State.NORMAL;
+
+        }
+
+    }
+
 
     // 被弾,ゴール,落下
     void OnTriggerEnter2D(Collider2D col)

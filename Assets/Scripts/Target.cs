@@ -6,7 +6,14 @@ using UnityEngine.UI;
 public class Target : ObjectHitCheck {
 
 [SerializeField] GameManager _gameManager = null;
+[SerializeField] Sprite afterImg          = null;
 bool receiveLetter                        = false;
+SpriteRenderer _spriteRenderer         = null;
+
+
+    void Start(){
+        _spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+    }
 
     public override void DoSomeEvent(int patern){
         
@@ -19,6 +26,7 @@ bool receiveLetter                        = false;
             else if(patern == 1){
                 //Debug.Log("letter");
                 _gameManager.ScoreCal();
+                _spriteRenderer.sprite = afterImg;
 		        //Destroy(this.gameObject);
             }
         }

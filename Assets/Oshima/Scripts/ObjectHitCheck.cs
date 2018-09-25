@@ -8,9 +8,12 @@ public class ObjectHitCheck : MonoBehaviour {
 public void OnCollisionEnter2D(Collision2D collision){
 	// レイヤー名を取得
     //string layerName = LayerMask.LayerToName(collision.gameObject.layer);
-	if (collision.gameObject.tag == "Ground"){
-		Debug.Log("Ground");
+	if (collision.gameObject.tag == "Obstacle"){
+		Debug.Log("Obstacle");
 		DoSomeEvent(3);
+	}else if(collision.gameObject.tag == "Enemy"){
+		Debug.Log("Enemy");
+		DoSomeEvent(4);
 	}
 }
 

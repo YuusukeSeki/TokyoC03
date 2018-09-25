@@ -33,6 +33,9 @@ public int sceneState = 0;
         }else if(patern == 3){
 			Debug.Log("ground");
 			Destroy(this.gameObject);
+		}else if(patern == 4){
+			Debug.Log("enemy");
+			Destroy(this.gameObject);
 		}
 	}
 

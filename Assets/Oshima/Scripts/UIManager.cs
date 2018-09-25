@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour {
 
 [SerializeField] Text[] texts 		          = null; //0:score
 [SerializeField] Image[] Icons 	              = null;
-[SerializeField] Image[] Frames               = null; //0:friend 1:sub
+[SerializeField] Image[] Frames               = null; //0:friend 1:sub 2:main 3:mainfriend
 [SerializeField] Image[] HpBars 	          = null; //0:mainHP 1:HPbar1 2:HPbar2 3:HPbar2 
 [SerializeField] Image[] MpBars 	          = null; //0:mainMPbar 1:MPbar1 2:MPbar2 3:MPbar3
 //[SerializeField] Sprite[] sprites 	          = null;
@@ -32,6 +32,8 @@ void Start(){
     }
     Frames[0].gameObject.SetActive(true);
     Frames[1].gameObject.SetActive(false);
+    Frames[2].gameObject.SetActive(true);
+    Frames[3].gameObject.SetActive(false);
    
 }
 
@@ -54,7 +56,7 @@ public void EditItemNumber(){
 }
 
 public void EditScore(int score){
-	texts[0].text = "× " + score.ToString();
+	texts[0].text = score.ToString();
 }
 
 //Spriteの交換
@@ -99,6 +101,8 @@ public void OnIconClick(int num){
             friend = 0;
             Frames[0].gameObject.SetActive(true);
             Frames[1].gameObject.SetActive(false);
+            Frames[2].gameObject.SetActive(true);
+            Frames[3].gameObject.SetActive(false);
         }else{
             EditSprite(num,0);
             ExChangePos(num,0);
@@ -109,10 +113,14 @@ public void OnIconClick(int num){
             friend = 1;
             Frames[0].gameObject.SetActive(false);
             Frames[1].gameObject.SetActive(true);
+            Frames[2].gameObject.SetActive(false);
+            Frames[3].gameObject.SetActive(true);
         }else{
             friend = 0;
             Frames[0].gameObject.SetActive(true);
             Frames[1].gameObject.SetActive(false);
+            Frames[2].gameObject.SetActive(true);
+            Frames[3].gameObject.SetActive(false);
         }
         EditSprite(num,0);
         ExChangePos(num,0);

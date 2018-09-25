@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 [SerializeField] UIManager _uiManager 			= null;
 [SerializeField] AudioManager _audioManager 	= null;
 [SerializeField] GameObject pousePanel 			= null;
+[SerializeField] GameObject pousePanel2 		= null;
+[SerializeField] GameObject resultPanel 		= null;
 [SerializeField] GameObject letter				= null;
 //int gameState									= 0;
 string touchLayerName							= "";
@@ -38,8 +40,13 @@ enum Status{
 	
 	// Update is called once per frame
 	void Update () {
-		if(status == Status.PLAYING){
+		if(_playerManager._state == PlayerManager.State.NONE){
 			Play();
+		}
+		
+		if(_playerManager._state == PlayerManager.State.CLEAR || _playerManager._state == PlayerManager.State.GAMEOVER){
+			pousePanel2.SetActive(true);
+			resultPanel.SetActive(true);
 		}
 		//Debug.Log(playerMPs[0]+" "+playerMPs[1]+" "+playerMPs[2]+" "+playerMPs[3]);
 		//Debug.Log("0: hp "+_playerManager.GetCharacterParamater(0)._hp+" pos "+_uiManager.SearchPlayerPos(0));

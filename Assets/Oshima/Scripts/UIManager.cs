@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
-[SerializeField] Text[] texts 		          = null; //0:score
+[SerializeField] Text[] texts 		          = null; //0:score 1:result
 [SerializeField] Image[] Icons 	              = null;
 [SerializeField] Image[] Frames               = null; //0:friend 1:sub 2:main 3:mainfriend
 [SerializeField] Image[] HpBars 	          = null; //0:mainHP 1:HPbar1 2:HPbar2 3:HPbar2 
@@ -51,8 +51,8 @@ public void EditMpGauge(float nowMp, int playerPos){
     MpBars[playerPos].fillAmount = nowMp;
 }
 
-public void EditItemNumber(){
-
+public void EditResultScore(int score){
+    texts[1].text = "Score:"+score.ToString();
 }
 
 public void EditScore(int score){

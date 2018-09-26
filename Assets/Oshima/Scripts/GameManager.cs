@@ -45,6 +45,8 @@ enum Status{
 		}
 		
 		if(_playerManager._state == PlayerManager.State.CLEAR || _playerManager._state == PlayerManager.State.GAMEOVER){
+			Time.timeScale = 0f;
+			_uiManager.EditResultScore(score);
 			pousePanel2.SetActive(true);
 			resultPanel.SetActive(true);
 		}
@@ -111,6 +113,7 @@ enum Status{
 
 
 	public void Init(){
+		Time.timeScale = 1f;
 		status = Status.PLAYING;
 		//eventSystem = EventSystem.current;
 		pousePanel.SetActive(false);

@@ -16,6 +16,7 @@ public class CameraFocus : MonoBehaviour {
     Vector3 _baseSize;  // 画面範囲が１のときの範囲（この数値を基準とします）
     float span = 1.0f;
     float currentTime = 0f;
+    [SerializeField] GameObject text = null;
 
 
     // Use this for initialization
@@ -53,6 +54,10 @@ public class CameraFocus : MonoBehaviour {
         if(currentTime > span && index < 4){
             ++index;
             currentTime = 0f;
+        }
+
+        if(index > 3 && currentTime > span){
+            text.SetActive(true);
         }
 
         // 照準を合わせる対象の変更（例として入力制御にしてます）

@@ -8,4 +8,5 @@ public class SceneChangeManager : MonoBehaviour {
 	public void SceneChange(int id){
 		SceneManager.LoadScene ("scene" + id.ToString());
 	}
+
 }

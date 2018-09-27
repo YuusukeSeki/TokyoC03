@@ -21,6 +21,7 @@ public class CameraFocus : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Time.timeScale = 1f;
         // 基準となる範囲を求める
         {
             // Camera コンポーネント取得
@@ -49,7 +50,12 @@ public class CameraFocus : MonoBehaviour {
         bool isInput = true;
         int index = _index;
 
-        currentTime += Time.deltaTime;
+        Debug.Log("index:"+index+" currentTime:"+currentTime+" isInput:"+isInput);
+ 
+        if(currentTime < span){
+            currentTime += Time.deltaTime*1f;
+        }
+        
 
         if(currentTime > span && index < 4){
             ++index;
@@ -58,7 +64,9 @@ public class CameraFocus : MonoBehaviour {
 
         if(index > 3 && currentTime > span){
             text.SetActive(true);
+            currentTime = 0;
         }
+        
 
         // 照準を合わせる対象の変更（例として入力制御にしてます）
         if (Input.GetKeyDown(KeyCode.UpArrow))

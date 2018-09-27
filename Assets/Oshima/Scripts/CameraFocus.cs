@@ -16,11 +16,16 @@ public class CameraFocus : MonoBehaviour {
     Vector3 _baseSize;  // 画面範囲が１のときの範囲（この数値を基準とします）
     float span = 1.0f;
     float currentTime = 0f;
+    float startTime = 0f;
+    float time = 0f;
+    bool start = false;
     [SerializeField] GameObject text = null;
+    [SerializeField] GameObject title = null;
 
 
     // Use this for initialization
     void Start () {
+        Time.timeScale = 1f;
         // 基準となる範囲を求める
         {
             // Camera コンポーネント取得
@@ -48,17 +53,30 @@ public class CameraFocus : MonoBehaviour {
 
         bool isInput = true;
         int index = _index;
+        
 
+        //Debug.Log("index:"+index+" currentTime:"+currentTime+" isInput:"+isInput);
+        Debug.Log(time-startTime);
         currentTime += Time.deltaTime;
+        time += Time.deltaTime;
+        
 
         if(currentTime > span && index < 4){
             ++index;
             currentTime = 0f;
         }
 
-        if(index > 3 && currentTime > span){
+        if(index > 3 && currentTime > span && start == false){
+            startTime = time;
+            start = true;
+            title.SetActive(true);
+            currentTime = 0;
+        }
+
+        if(((time-startTime) > 2)&&start == true){
             text.SetActive(true);
         }
+        
 
         // 照準を合わせる対象の変更（例として入力制御にしてます）
         if (Input.GetKeyDown(KeyCode.UpArrow))

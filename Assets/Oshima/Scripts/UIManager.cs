@@ -49,6 +49,19 @@ public void EditHpGauge(float nowHp, int gaugeNum){
 
 public void EditMpGauge(float nowMp, int playerPos){
     MpBars[playerPos].fillAmount = nowMp;
+    RectTransform _recttransform = MpBars[playerPos].gameObject.GetComponent <RectTransform>();
+    if(nowMp == 1){
+        if(_recttransform.localScale.x < 1.2f){
+            _recttransform.localScale += new Vector3 (0.01f, 0.01f, 0.01f);
+        }
+    }else{
+        _recttransform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
+    }
+    if(playerPos == 0 && nowMp == 1){
+        _recttransform.localScale = new Vector3 (1.2f, 1.2f, 1.2f);
+    }else if(playerPos == 0 && nowMp < 1){
+        _recttransform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
+    }
 }
 
 public void EditResultScore(int score){

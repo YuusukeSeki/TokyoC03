@@ -16,7 +16,11 @@ public class CameraFocus : MonoBehaviour {
     Vector3 _baseSize;  // 画面範囲が１のときの範囲（この数値を基準とします）
     float span = 1.0f;
     float currentTime = 0f;
+    float startTime = 0f;
+    float time = 0f;
+    bool start = false;
     [SerializeField] GameObject text = null;
+    [SerializeField] GameObject title = null;
 
 
     // Use this for initialization
@@ -49,12 +53,12 @@ public class CameraFocus : MonoBehaviour {
 
         bool isInput = true;
         int index = _index;
+        
 
-        Debug.Log("index:"+index+" currentTime:"+currentTime+" isInput:"+isInput);
- 
-        if(currentTime < span){
-            currentTime += Time.deltaTime*1f;
-        }
+        //Debug.Log("index:"+index+" currentTime:"+currentTime+" isInput:"+isInput);
+        Debug.Log(time-startTime);
+        currentTime += Time.deltaTime;
+        time += Time.deltaTime;
         
 
         if(currentTime > span && index < 4){
@@ -62,9 +66,15 @@ public class CameraFocus : MonoBehaviour {
             currentTime = 0f;
         }
 
-        if(index > 3 && currentTime > span){
-            text.SetActive(true);
+        if(index > 3 && currentTime > span && start == false){
+            startTime = time;
+            start = true;
+            title.SetActive(true);
             currentTime = 0;
+        }
+
+        if(((time-startTime) > 2)&&start == true){
+            text.SetActive(true);
         }
         
 

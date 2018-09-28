@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour {
 [SerializeField] Image[] Frames               = null; //0:friend 1:sub 2:main 3:mainfriend
 [SerializeField] Image[] HpBars 	          = null; //0:mainHP 1:HPbar1 2:HPbar2 3:HPbar2 
 [SerializeField] Image[] MpBars 	          = null; //0:mainMPbar 1:MPbar1 2:MPbar2 3:MPbar3
+[SerializeField] Image[] KiraKira             = null; //0:sub1 1:sub2 2:sub3
 //[SerializeField] Sprite[] sprites 	          = null;
 List<GameObject[]> pointsArray                = null; //pointsArray[i][j] i:HPbarの位置 j:pointの位置
 [SerializeField] PlayerManager _playerManager = null;
@@ -52,7 +53,26 @@ public void EditMpGauge(float nowMp, int playerPos){
     RectTransform _recttransform = MpBars[playerPos].gameObject.GetComponent <RectTransform>();
     if(nowMp == 1){
         if(_recttransform.localScale.x < 1.2f){
-            _recttransform.localScale += new Vector3 (0.01f, 0.01f, 0.01f);
+            _recttransform.localScale += new Vector3 (0.03f, 0.03f, 0.03f);
+            if(playerPos != 0){
+                RectTransform e_recttransform = KiraKira[playerPos-1].gameObject.GetComponent <RectTransform>();
+                KiraKira[playerPos-1].color = new Color(1f,1f,1f,1f);
+                KiraKira[playerPos-1].gameObject.SetActive(true);
+                e_recttransform.localScale += new Vector3(0.03f, 0.03f, 0.03f);
+                e_recttransform.Rotate (0, 0, 2f);
+            }
+        }else{
+            if(playerPos != 0){
+                RectTransform e_recttransform = KiraKira[playerPos-1].gameObject.GetComponent <RectTransform>();
+                if(KiraKira[playerPos-1].color.a > 0){
+                    e_recttransform.localScale += new Vector3(0.03f, 0.03f, 0.03f);
+                    e_recttransform.Rotate (0, 0, 2f);
+                    KiraKira[playerPos-1].color -= new Color(0,0,0,0.03f);
+                }else{
+                    e_recttransform.localScale = new Vector3(1f,1f,1f);
+                    KiraKira[playerPos-1].gameObject.SetActive(false);
+                }
+            }
         }
     }else{
         _recttransform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
@@ -100,13 +120,16 @@ public int SearchPlayerPos(int playerNum){
 
 //Iconをクリックした時
 public void OnIconClick(int num){
+    RectTransform e_recttransform = KiraKira[num-1].gameObject.GetComponent <RectTransform>();
+    e_recttransform.localScale = new Vector3(1f,1f,1f);
+    KiraKira[num-1].gameObject.SetActive(false);
     if (_playerManager.isDead(playerPos[num]))  // ※※死んだキャラクターとは交代しない処理
         return;                                 // ※※
-
     _audioManager.OnCharaSwitchPlay();
     if(num == 1 || num == 2){
         _playerManager.ChangeCharacter(playerPos[num]);
         if(friend == 1){
+            KiraKira[2].gameObject.SetActive(false);
             EditSprite(num,0);
             EditSprite(3,num);
             ExChangePos(num,0);

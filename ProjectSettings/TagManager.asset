@@ -8,12 +8,13 @@ TagManager:
   - Ground
   - Bullet(Enemy)
   - GoalFlag
-  - DeadLine
   - Barrier
   - Target
   - LetterBullet
   - PlayerDamage
   - Obstacle
+  - Fire
+  - Hole
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Barrier
   - PlayerDamage
   - Obstacle
-  - 
+  - Hole
   - 
   - 
   - 
@@ -50,6 +51,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Effect
+    uniqueID: 3087763031
     locked: 0
   - name: Player
     uniqueID: 2544949187

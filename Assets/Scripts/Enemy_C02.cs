@@ -10,11 +10,7 @@ public class Enemy_C02 : Enemy {
 
     [SerializeField] Vector2 _moveSpeed;  // 移動速度
 
-    static float _limitPosY;    // Y座標の下限
-    static float _spece = 0.1f; // 下限に加える余白
     float _scaleX;
-
-    Enemy_C02_Motion _motion;
 
     // Use this for initialization
     void Start()
@@ -36,8 +32,6 @@ public class Enemy_C02 : Enemy {
         _basePosition = transform.position;
 
         _scaleX = transform.lossyScale.x;
-
-        _motion = GetComponent<Enemy_C02_Motion>();
 
         // 初期化処理
         Init();

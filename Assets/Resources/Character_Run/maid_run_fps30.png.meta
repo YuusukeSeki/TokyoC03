@@ -1,0 +1,556 @@
+fileFormatVersion: 2
+guid: e170823123b36e64faee16de8b280555
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: maid_run_fps30_0
+    21300002: maid_run_fps30_1
+    21300004: maid_run_fps30_2
+    21300006: maid_run_fps30_3
+    21300008: maid_run_fps30_4
+    21300010: maid_run_fps30_5
+    21300012: maid_run_fps30_6
+    21300014: maid_run_fps30_7
+    21300016: maid_run_fps30_8
+    21300018: maid_run_fps30_9
+    21300020: maid_run_fps30_10
+    21300022: maid_run_fps30_11
+    21300024: maid_run_fps30_12
+    21300026: maid_run_fps30_13
+    21300028: maid_run_fps30_14
+    21300030: maid_run_fps30_15
+    21300032: maid_run_fps30_16
+    21300034: maid_run_fps30_17
+    21300036: maid_run_fps30_18
+    21300038: maid_run_fps30_19
+    21300040: maid_run_fps30_20
+    21300042: maid_run_fps30_21
+    21300044: maid_run_fps30_22
+    21300046: maid_run_fps30_23
+    21300048: maid_run_fps30_24
+    21300050: maid_run_fps30_25
+    21300052: maid_run_fps30_26
+    21300054: maid_run_fps30_27
+    21300056: maid_run_fps30_28
+    21300058: maid_run_fps30_29
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: maid_run_fps30_0
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 2688
+        width: 297
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_1
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 2669
+        width: 271
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_2
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 2654
+        width: 244
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_3
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 2642
+        width: 249
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_4
+      rect:
+        serializedVersion: 2
+        x: 2165
+        y: 2627
+        width: 250
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_5
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 2104
+        width: 247
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_6
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 2096
+        width: 237
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_7
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 2093
+        width: 220
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_8
+      rect:
+        serializedVersion: 2
+        x: 1688
+        y: 2095
+        width: 216
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_9
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 2101
+        width: 217
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_10
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 1598
+        width: 214
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_11
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 1610
+        width: 227
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_12
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 1616
+        width: 239
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_13
+      rect:
+        serializedVersion: 2
+        x: 1653
+        y: 1625
+        width: 251
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_14
+      rect:
+        serializedVersion: 2
+        x: 2156
+        y: 1636
+        width: 259
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_15
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 1135
+        width: 282
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_16
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 1121
+        width: 258
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_17
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 1111
+        width: 253
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_18
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 1102
+        width: 258
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_19
+      rect:
+        serializedVersion: 2
+        x: 2157
+        y: 1094
+        width: 258
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_20
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 574
+        width: 255
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_21
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 568
+        width: 245
+        height: 379
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_22
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 563
+        width: 229
+        height: 381
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_23
+      rect:
+        serializedVersion: 2
+        x: 1686
+        y: 562
+        width: 218
+        height: 379
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_24
+      rect:
+        serializedVersion: 2
+        x: 2202
+        y: 563
+        width: 213
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_25
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 62
+        width: 211
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_26
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 77
+        width: 229
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_27
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 92
+        width: 244
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_28
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 107
+        width: 265
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: maid_run_fps30_29
+      rect:
+        serializedVersion: 2
+        x: 2145
+        y: 127
+        width: 300
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

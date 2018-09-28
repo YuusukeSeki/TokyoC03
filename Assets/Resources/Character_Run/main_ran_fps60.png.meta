@@ -1,0 +1,1006 @@
+fileFormatVersion: 2
+guid: ef2ba075682133240a61a3fa37c904b8
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: main_ran_fps60_0
+    21300002: main_ran_fps60_1
+    21300004: main_ran_fps60_2
+    21300006: main_ran_fps60_3
+    21300008: main_ran_fps60_4
+    21300010: main_ran_fps60_5
+    21300012: main_ran_fps60_6
+    21300014: main_ran_fps60_7
+    21300016: main_ran_fps60_8
+    21300018: main_ran_fps60_9
+    21300020: main_ran_fps60_10
+    21300022: main_ran_fps60_11
+    21300024: main_ran_fps60_12
+    21300026: main_ran_fps60_13
+    21300028: main_ran_fps60_14
+    21300030: main_ran_fps60_15
+    21300032: main_ran_fps60_16
+    21300034: main_ran_fps60_17
+    21300036: main_ran_fps60_18
+    21300038: main_ran_fps60_19
+    21300040: main_ran_fps60_20
+    21300042: main_ran_fps60_21
+    21300044: main_ran_fps60_22
+    21300046: main_ran_fps60_23
+    21300048: main_ran_fps60_24
+    21300050: main_ran_fps60_25
+    21300052: main_ran_fps60_26
+    21300054: main_ran_fps60_27
+    21300056: main_ran_fps60_28
+    21300058: main_ran_fps60_29
+    21300060: main_ran_fps60_30
+    21300062: main_ran_fps60_31
+    21300064: main_ran_fps60_32
+    21300066: main_ran_fps60_33
+    21300068: main_ran_fps60_34
+    21300070: main_ran_fps60_35
+    21300072: main_ran_fps60_36
+    21300074: main_ran_fps60_37
+    21300076: main_ran_fps60_38
+    21300078: main_ran_fps60_39
+    21300080: main_ran_fps60_40
+    21300082: main_ran_fps60_41
+    21300084: main_ran_fps60_42
+    21300086: main_ran_fps60_43
+    21300088: main_ran_fps60_44
+    21300090: main_ran_fps60_45
+    21300092: main_ran_fps60_46
+    21300094: main_ran_fps60_47
+    21300096: main_ran_fps60_48
+    21300098: main_ran_fps60_49
+    21300100: main_ran_fps60_50
+    21300102: main_ran_fps60_51
+    21300104: main_ran_fps60_52
+    21300106: main_ran_fps60_53
+    21300108: main_ran_fps60_54
+    21300110: main_ran_fps60_55
+    21300112: main_ran_fps60_56
+    21300114: main_ran_fps60_57
+    21300116: main_ran_fps60_58
+    21300118: main_ran_fps60_59
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: main_ran_fps60_0
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 5723
+        width: 297
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_1
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 5717
+        width: 294
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_2
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 5708
+        width: 288
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_3
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 5702
+        width: 285
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_4
+      rect:
+        serializedVersion: 2
+        x: 2154
+        y: 5699
+        width: 280
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_5
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 5183
+        width: 273
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_6
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 5180
+        width: 270
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_7
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 5177
+        width: 261
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_8
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 5177
+        width: 255
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_9
+      rect:
+        serializedVersion: 2
+        x: 2185
+        y: 5174
+        width: 247
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_10
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 4661
+        width: 246
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_11
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 4661
+        width: 246
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_12
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 4661
+        width: 243
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_13
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 4661
+        width: 243
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_14
+      rect:
+        serializedVersion: 2
+        x: 2191
+        y: 4661
+        width: 243
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_15
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 4154
+        width: 243
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_16
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 4157
+        width: 243
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_17
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 4160
+        width: 246
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_18
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 4166
+        width: 255
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_19
+      rect:
+        serializedVersion: 2
+        x: 2174
+        y: 4172
+        width: 260
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_20
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 3665
+        width: 264
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_21
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 3656
+        width: 270
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_22
+      rect:
+        serializedVersion: 2
+        x: 1136
+        y: 3653
+        width: 273
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_23
+      rect:
+        serializedVersion: 2
+        x: 1643
+        y: 3650
+        width: 279
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_24
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 3647
+        width: 281
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_25
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 3137
+        width: 285
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_26
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 3140
+        width: 291
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_27
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 3146
+        width: 291
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_28
+      rect:
+        serializedVersion: 2
+        x: 1628
+        y: 3146
+        width: 294
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_29
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 3152
+        width: 299
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_30
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 2645
+        width: 300
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_31
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 2639
+        width: 300
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_32
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 2633
+        width: 294
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_33
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 2627
+        width: 291
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_34
+      rect:
+        serializedVersion: 2
+        x: 2150
+        y: 2624
+        width: 284
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_35
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 2108
+        width: 279
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_36
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 2105
+        width: 273
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_37
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 2105
+        width: 267
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_38
+      rect:
+        serializedVersion: 2
+        x: 1661
+        y: 2102
+        width: 261
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_39
+      rect:
+        serializedVersion: 2
+        x: 2180
+        y: 2099
+        width: 252
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_40
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 1586
+        width: 249
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_41
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 1586
+        width: 246
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_42
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 1586
+        width: 243
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_43
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 1586
+        width: 243
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_44
+      rect:
+        serializedVersion: 2
+        x: 2191
+        y: 1586
+        width: 243
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_45
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 1076
+        width: 243
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_46
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 1079
+        width: 243
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_47
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 1082
+        width: 240
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_48
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 1085
+        width: 246
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_49
+      rect:
+        serializedVersion: 2
+        x: 2181
+        y: 1091
+        width: 253
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_50
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 584
+        width: 258
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_51
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 584
+        width: 264
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_52
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 579
+        width: 270
+        height: 385
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_53
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 578
+        width: 276
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_54
+      rect:
+        serializedVersion: 2
+        x: 2153
+        y: 578
+        width: 281
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_55
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 68
+        width: 285
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_56
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 74
+        width: 288
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_57
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 77
+        width: 291
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_58
+      rect:
+        serializedVersion: 2
+        x: 1628
+        y: 83
+        width: 294
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: main_ran_fps60_59
+      rect:
+        serializedVersion: 2
+        x: 2136
+        y: 92
+        width: 298
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

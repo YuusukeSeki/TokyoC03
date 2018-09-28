@@ -30,6 +30,7 @@ public class Skill_TheWorld : Skill
         foreach (GameObject enemy in enemys)
         {
             enemy.GetComponent<Enemy>().ReceiveSkill(_type);
+            enemy.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1.0f);
 
         }
     }

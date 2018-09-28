@@ -27,7 +27,9 @@ public class Player : MonoBehaviour
         public float _runMaxSpeed;          // 最大速度
 
     };
-    
+
+    public GameObject _effect01, _effect02;
+
     public Paramater _paramater;    // パラメータ
     [SerializeField] float _maxHp, _healMP_PerSeconds, _jumpPower, _runForce, _runMaxSpeed; // UnityGUIデータ一時保存領域
 
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
     FlashScript _ff;
     FadeScript _fade;
     CameraFixing _cf;
+    Animator _animator;
 
     // 上移動
     float _jumpThreshold;               // 空中判定の閾値
@@ -67,7 +70,12 @@ public class Player : MonoBehaviour
     Skill _skill;
 
     public AudioManager _audioManager;
-    
+
+    float angle;
+
+    Color _nowColor;
+
+
 
     // Use this for initialization
     void Awake()
@@ -89,6 +97,12 @@ public class Player : MonoBehaviour
 
         // 移動処理
         Move();
+        
+        if(Input.GetKeyDown(KeyCode.J))
+            Jump();
+
+        // アニメーションの変更処理
+        ChangeAnimation();
 
     }
 
@@ -97,12 +111,12 @@ public class Player : MonoBehaviour
     {
         _isAllDead = false;
         _isClear = false;
-
         // コンポーネント取得
         _rb = GetComponent<Rigidbody2D>();
         _ff = GetComponent<FlashScript>();
         _skill = GetComponent<Skill>();
         _cf = GameObject.Find("Main Camera").GetComponent<CameraFixing>();
+        _animator = GetComponent<Animator>();
 
         // ジャンプ判定の閾値設定
         _jumpThreshold = 0.00001f;
@@ -154,13 +168,18 @@ public class Player : MonoBehaviour
                 if (!_isGround)
                     _isGround = true;
             }
-            if (col.gameObject.transform.position.x - col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f
-                < transform.position.x + GetComponent<SpriteRenderer>().bounds.size.x * 0.5f)
+            if (col.gameObject.transform.position.x - col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x * 0.3f
+                > transform.position.x + GetComponent<SpriteRenderer>().bounds.size.x * 0.3f)
             {
                 _cf._state = CameraFixing.State.TUKKAETERU;
 
             }
 
+        }
+        if(col.gameObject.tag == "Hole")
+        {
+            if (_isGround)
+                _isAllDead = true;
         }
 
     }
@@ -181,8 +200,8 @@ public class Player : MonoBehaviour
                 if (!_isGround)
                     _isGround = true;
             }
-            if (col.gameObject.transform.position.x - col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f
-                < transform.position.x + GetComponent<SpriteRenderer>().bounds.size.x * 0.5f)
+            if (col.gameObject.transform.position.x - col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x * 0.3f
+                > transform.position.x + GetComponent<SpriteRenderer>().bounds.size.x * 0.3f)
             {
                 _cf._state = CameraFixing.State.TUKKAETERU;
 
@@ -269,6 +288,25 @@ public class Player : MonoBehaviour
             }
 
             transform.position += new Vector3(_runSpeed * Time.deltaTime, 0, 0);
+        }
+
+    }
+
+    // アニメーションの変更
+    void ChangeAnimation()
+    {
+        if (_isGround)
+        {
+            _animator.speed = 1.0f;
+        }
+        else
+        {
+            _animator.speed = 0.5f;
+        }
+
+        if(_cf._state == CameraFixing.State.TUKKAETERU)
+        {
+            _animator.speed = 0;
         }
 
     }
@@ -377,6 +415,13 @@ public class Player : MonoBehaviour
     {
         _skill.UseSkill();
 
+    }
+
+    
+    public void SetEffect(bool bSwitch)
+    {
+        _effect01.gameObject.SetActive(bSwitch);
+        _effect02.gameObject.SetActive(bSwitch);
     }
 
 }

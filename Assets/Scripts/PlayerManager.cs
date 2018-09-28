@@ -35,6 +35,7 @@ public class PlayerManager : MonoBehaviour {
 
     Vector3 _respownPosition;   // 復帰時の座標
 
+    [SerializeField] GameManager _gameManager;
     [SerializeField] UIManager _uiManager;
 
 
@@ -202,6 +203,24 @@ public class PlayerManager : MonoBehaviour {
             //_fs.StartFadeOut();
         }
 
+        // ＭＰ満タン時
+        for (int i = 0; i < _charaLists.Count; ++i)
+        {
+            if (i == _nowChara)
+            {
+                if(_gameManager.playerMPs[i] >= 1)
+                {
+                    _charaLists[_nowChara].GetComponent<Player>().SetEffect(true);
+                }
+                else
+                {
+                    _charaLists[_nowChara].GetComponent<Player>().SetEffect(false);
+                }
+
+                break;
+            }
+        }
+
     }
 
     // 交代中のキャラクターやカメラの動き方を設定
@@ -307,27 +326,28 @@ public class PlayerManager : MonoBehaviour {
             return false;
     }
 
-    public void SetDebuf(Enemy.Debuf debuf, float time)
+    //public void SetDebuf(Enemy.Debuf debuf, float time)
+    public void SetDebuf(float time)
     {
-        switch (debuf)
+        //switch (debuf)
+        //{
+        //    case Enemy.Debuf.NG_LETTERBULLET:
+        _debufState = DebufState.NG_LETTERBULLET;
+        for (int i = 0; i < _charaLists.Count; i++)
         {
-            case Enemy.Debuf.NG_LETTERBULLET:
-                _debufState = DebufState.NG_LETTERBULLET;
-                for(int i = 0; i < _charaLists.Count; i++)
-                {
-                    _charaLists[i].GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1);
-                }
-                break;
-
-            case Enemy.Debuf.NG_JUMP:
-                _debufState = DebufState.NG_JUMP;
-                for (int i = 0; i < _charaLists.Count; i++)
-                {
-                    _charaLists[i].GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1);
-                }
-                break;
-
+            _charaLists[i].GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1);
         }
+        //        break;
+
+        //    case Enemy.Debuf.NG_JUMP:
+        //        _debufState = DebufState.NG_JUMP;
+        //        for (int i = 0; i < _charaLists.Count; i++)
+        //        {
+        //            _charaLists[i].GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1);
+        //        }
+        //        break;
+
+        //}
 
         _cntDebufTime = time;
 
@@ -350,5 +370,6 @@ public class PlayerManager : MonoBehaviour {
         }
 
     }
+
 
 }

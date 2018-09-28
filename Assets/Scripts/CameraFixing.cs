@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFixing : MonoBehaviour {
+public class CameraFixing : MonoBehaviour
+{
 
     [SerializeField] PlayerManager _playerManager = null;
     float _offsetX, _initOffsetX;
@@ -20,8 +21,9 @@ public class CameraFixing : MonoBehaviour {
     float _cntTime;
     float _charaChangeTime;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Vector3 leftTop = GetComponent<Camera>().ScreenToWorldPoint(Vector3.zero);
         Vector3 rightBottom = GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
         Vector3 size = rightBottom - leftTop;
@@ -36,7 +38,8 @@ public class CameraFixing : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.L))
             _state = State.NORMAL;
         if (Input.GetKeyDown(KeyCode.K))
@@ -48,11 +51,11 @@ public class CameraFixing : MonoBehaviour {
 
         if (_state == State.NORMAL)
         {
-            if(_offsetX != _initOffsetX)
+            if (_offsetX != _initOffsetX)
             {
                 _offsetX -= 1.0f * Time.deltaTime;
 
-                if(_offsetX < _initOffsetX)
+                if (_offsetX < _initOffsetX)
                 {
                     _offsetX = _initOffsetX;
                 }
@@ -63,7 +66,7 @@ public class CameraFixing : MonoBehaviour {
 
             transform.position = pos;
         }
-        else if(_state == State.CHARACTER_CHANGE)
+        else if (_state == State.CHARACTER_CHANGE)
         {
             _cntTime += Time.deltaTime;
 
@@ -89,7 +92,7 @@ public class CameraFixing : MonoBehaviour {
 
             transform.position = pos;
 
-            if(_playerManager.GetMainCharacterPosition().x + _playerManager._charaLists[_playerManager._nowChara].GetComponent<SpriteRenderer>().bounds.size.x
+            if (_playerManager.GetMainCharacterPosition().x + _playerManager._charaLists[_playerManager._nowChara].GetComponent<SpriteRenderer>().bounds.size.x
                 < transform.position.x - _screenSize.x * 0.5f)
             {
                 Debug.Log("画面外まで押し出されました。GameOverです");

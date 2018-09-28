@@ -14,27 +14,30 @@ public class Enemy_C02 : Enemy {
     static float _spece = 0.1f; // 下限に加える余白
     float _scaleX;
 
+    Enemy_C02_Motion _motion;
+
     // Use this for initialization
     void Start()
     {
-        // Y座標の下限を決める
-        // 地面のY座標と高さを取得
-        // プレイヤーの高さを取得
-        // 自分の高さを取得
-        // _limitPosY = 地面のY座標 + 地面の高さ * 0.5f + プレイヤーの高さ + 自分の高さ * 0.5f + 余分な幅
-        float groundPosY = GameObject.Find("floor").transform.position.y;
-        float groundHalfHeight = GameObject.Find("floor").GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
-        float playerHeight = GameObject.Find("PlayerManager").GetComponent<PlayerManager>()._charaLists[0].GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
+        //// Y座標の下限を決める
+        //// 地面のY座標と高さを取得
+        //// プレイヤーの高さを取得
+        //// 自分の高さを取得
+        //// _limitPosY = 地面のY座標 + 地面の高さ * 0.5f + プレイヤーの高さ + 自分の高さ * 0.5f + 余分な幅
+        //float groundPosY = GameObject.Find("floor").transform.position.y;
+        //float groundHalfHeight = GameObject.Find("floor").GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
+        //float playerHeight = GameObject.Find("PlayerManager").GetComponent<PlayerManager>()._charaLists[0].GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
 
-        //_limitPosY = groundPosY + groundHalfHeight + playerHeight + GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
-        _limitPosY = groundPosY + groundHalfHeight + playerHeight;
-        _limitPosY += _spece;
+        ////_limitPosY = groundPosY + groundHalfHeight + playerHeight + GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
+        //_limitPosY = groundPosY + groundHalfHeight + playerHeight;
+        //_limitPosY += _spece;
 
         // 基点の設定
         _basePosition = transform.position;
 
-        // 
         _scaleX = transform.lossyScale.x;
+
+        _motion = GetComponent<Enemy_C02_Motion>();
 
         // 初期化処理
         Init();
@@ -47,14 +50,14 @@ public class Enemy_C02 : Enemy {
 
         // 両軸にサインカーブをかける
         // デバフ状態によっては速度を上げる
-        if (_debuf == Debuf.SPEED_UP && _cntDebufTime > 0)
-        {
-            _angle += _moveSpeed * _debufRate * Time.deltaTime;
-        }
-        else
-        {
+        //if (_debuf == Debuf.SPEED_UP && _cntDebufTime > 0)
+        //{
+        //    _angle += _moveSpeed * _debufRate * Time.deltaTime;
+        //}
+        //else
+        //{
             _angle += _moveSpeed * Time.deltaTime;
-        }
+        //}
 
         Vector2 posSin;
         posSin.x = Mathf.Sin(_angle.x) * _amplitude.x;
@@ -116,12 +119,19 @@ public class Enemy_C02 : Enemy {
     {
         base.ReceiveLettterBullet();
 
-        switch (_debuf)
-        {
-            case Debuf.SPEED_UP:
-                GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f);
-                break;
-        }
+        //switch (_debuf)
+        //{
+        //    case Debuf.SPEED_UP:
+        //        GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f);
+        //        break;
+        //}
     }
+
+
+    public override void OnBecameInvisible()
+    {
+        enabled = true;
+    }
+
 
 }

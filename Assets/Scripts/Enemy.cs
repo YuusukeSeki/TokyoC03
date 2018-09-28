@@ -11,18 +11,18 @@ public class Enemy : MonoBehaviour {
 
     [SerializeField] protected PlayerManager _playerManager;
 
-    public enum Debuf
-    {
-        NONE,
-        SPEED_UP,
-        NG_LETTERBULLET,
-        NG_JUMP,
-        DAMAGE_HP,
-    };
+    //public enum Debuf
+    //{
+    //    NONE,
+    //    SPEED_UP,
+    //    NG_LETTERBULLET,
+    //    NG_JUMP,
+    //    DAMAGE_HP,
+    //};
 
-    [SerializeField] protected Debuf _debuf;
+    //[SerializeField] protected Debuf _debuf;
     [SerializeField] protected float _debufTime;
-    [SerializeField] protected float _debufRate;
+    //[SerializeField] protected float _debufRate;
     protected float _cntDebufTime;
 
 
@@ -93,7 +93,8 @@ public class Enemy : MonoBehaviour {
     // 画面外処理
     public virtual void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        enabled = false;
 
     }
 
@@ -108,14 +109,7 @@ public class Enemy : MonoBehaviour {
     // type : スキルの種類
     public virtual void ReceiveSkill(Skill.TYPE type)
     {
-        switch (type)
-        {
-            case Skill.TYPE.THE_WORLD:
-                // 色の変更
-                _sr.color = new Color(0.5f, 0.5f, 1.0f);
 
-                break;
-        }
     }
 
     // 手紙に当たった時の効果
@@ -123,23 +117,23 @@ public class Enemy : MonoBehaviour {
     {
         _cntDebufTime = _debufTime;
 
-        Debug.Log("ReceiveBullet");
+        //Debug.Log("ReceiveBullet");
 
-        switch (_debuf)
-        {
-            case Debuf.NG_LETTERBULLET:
-                _playerManager.SetDebuf(_debuf, _debufTime);
-                break;
+        //switch (_debuf)
+        //{
+        //    case Debuf.NG_LETTERBULLET:
+                _playerManager.SetDebuf(_debufTime);
+        //        break;
 
-            case Debuf.NG_JUMP:
-                _playerManager.SetDebuf(_debuf, _debufTime);
-                break;
+        //    case Debuf.NG_JUMP:
+        //        _playerManager.SetDebuf(_debuf, _debufTime);
+        //        break;
 
-            case Debuf.DAMAGE_HP:
-                _playerManager._charaLists[_playerManager._nowChara].GetComponent<Player>().ReceiveDamage(1);
-                break;
+        //    case Debuf.DAMAGE_HP:
+        //        _playerManager._charaLists[_playerManager._nowChara].GetComponent<Player>().ReceiveDamage(1);
+        //        break;
 
-        }
+        //}
 
     }
 

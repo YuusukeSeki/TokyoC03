@@ -35,16 +35,16 @@ public class Enemy_B : Enemy {
     {
         Vector3 pos = transform.position;
 
-        // デバフ状態によっては速度を上げる
-        if (_debuf == Debuf.SPEED_UP && _cntDebufTime > 0)
-        {
-            pos.x += _moveSpeed * _debufRate * -1 * Time.deltaTime;
-        }
-        else
-        {
+        //// デバフ状態によっては速度を上げる
+        //if (_debuf == Debuf.SPEED_UP && _cntDebufTime > 0)
+        //{
+        //    pos.x += _moveSpeed * _debufRate * -1 * Time.deltaTime;
+        //}
+        //else
+        //{
             pos.x += _moveSpeed * -1 * Time.deltaTime;
 
-        }
+        //}
         transform.position = pos;
 
     }
@@ -71,12 +71,12 @@ public class Enemy_B : Enemy {
     {
         base.ReceiveLettterBullet();
 
-        switch (_debuf)
-        {
-            case Debuf.SPEED_UP:
-                GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f);
-                break;
-        }
+        //switch (_debuf)
+        //{
+        //    case Debuf.SPEED_UP:
+        //        GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f);
+        //        break;
+        //}
     }
 
 

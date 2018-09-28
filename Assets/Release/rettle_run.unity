@@ -147,7 +147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.35675, y: 0.053796373}
   m_AnchorMax: {x: 0.5, y: 0.25618565}
-  m_AnchoredPosition: {x: -1.6077881, y: 2.536499}
+  m_AnchoredPosition: {x: -1.6077881, y: 2.5364838}
   m_SizeDelta: {x: -4.7, y: -10.7941}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &2576920
@@ -22847,7 +22847,7 @@ MonoBehaviour:
   resultPanel: {fileID: 136607431}
   letter: {fileID: 1075879207102656, guid: 9177859cbf8b44813bfc33a9dc032ff0, type: 2}
   hitTarget: 0
-  sceneState: 0
+  sceneState: 3
   playerMPs:
   - 0
   - 0
@@ -26607,7 +26607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.266504, y: 0.06310488}
   m_AnchorMax: {x: 0.37026793, y: 0.24687713}
-  m_AnchoredPosition: {x: 2.2243652, y: 4.133362}
+  m_AnchoredPosition: {x: 2.2243652, y: 4.1333466}
   m_SizeDelta: {x: -4.133667, y: -10.421997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &600110244
@@ -26806,7 +26806,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37624404, y: 0.06310488}
   m_AnchorMax: {x: 0.48000002, y: 0.24687713}
-  m_AnchoredPosition: {x: -1.2705078, y: 2.9682007}
+  m_AnchoredPosition: {x: -1.2705078, y: 2.9681854}
   m_SizeDelta: {x: -4.5, y: -8.0919}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &650628811
@@ -47422,7 +47422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24700001, y: 0.053796373}
   m_AnchorMax: {x: 0.395, y: 0.25618565}
-  m_AnchoredPosition: {x: -1, y: 3.2799683}
+  m_AnchoredPosition: {x: -1, y: 3.279953}
   m_SizeDelta: {x: -4.026642, y: -13.51001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &1567565160
@@ -58587,7 +58587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37624404, y: 0.06310488}
   m_AnchorMax: {x: 0.48000002, y: 0.24687713}
-  m_AnchoredPosition: {x: -1.2705078, y: 2.9646606}
+  m_AnchoredPosition: {x: -1.2705078, y: 2.9646454}
   m_SizeDelta: {x: -4.5, y: -8.0848}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1735352088

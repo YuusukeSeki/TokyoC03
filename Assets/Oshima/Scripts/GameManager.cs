@@ -23,8 +23,10 @@ private bool isJump								= true;
 
 public int sceneState 							= 0;
 
+public float[] playerMPs						= new float[4];
 
-float[] playerMPs								= new float[4];
+public int _scoreRate = 1;
+
 
 
 enum Status{
@@ -138,7 +140,7 @@ enum Status{
 	}
 
 	public void ScoreCal(){
-		score += 1;
+		score += 1 * _scoreRate;
 		_uiManager.EditScore(score);
 		hitTarget = false;
 	}

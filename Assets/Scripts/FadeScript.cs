@@ -7,7 +7,9 @@ public class FadeScript : MonoBehaviour
 {
     float alfa;
     float speed = 0.01f;
-    float red, green, blue;
+    float red = 0, green = 0, blue = 0;
+
+    [SerializeField] float _fadeOutTime, _fadeInTime;
 
     public enum FadeState
     {
@@ -22,10 +24,10 @@ public class FadeScript : MonoBehaviour
 
     void Start()
     {
-        _fadeState = FadeState.NONE;
-        red = GetComponent<Image>().color.r;
-        green = GetComponent<Image>().color.g;
-        blue = GetComponent<Image>().color.b;
+        //_fadeState = FadeState.NONE;
+        //red = GetComponent<Image>().color.r;
+        //green = GetComponent<Image>().color.g;
+        //blue = GetComponent<Image>().color.b;
 
     }
 
@@ -37,7 +39,7 @@ public class FadeScript : MonoBehaviour
         switch (_fadeState)
         {
             case FadeState.FADE_OUT:
-                alfa += speed;
+                alfa += Time.deltaTime / _fadeOutTime;
                 if (alfa >= 1)
                 {
                     alfa = 1;
@@ -50,11 +52,12 @@ public class FadeScript : MonoBehaviour
                 break;
 
             case FadeState.FADE_IN:
-                alfa -= speed;
+                alfa -= Time.deltaTime / _fadeInTime;
                 if (alfa <= 0)
                 {
                     alfa = 0;
                     _fadeState = FadeState.NONE;
+                    gameObject.SetActive(false);
                 }
                 break;
 
@@ -71,6 +74,8 @@ public class FadeScript : MonoBehaviour
 
         _fadeState = FadeState.FADE_OUT;
 
+        gameObject.SetActive(true);
+
     }
 
     public void SetColor(float r, float g, float b)
@@ -84,5 +89,9 @@ public class FadeScript : MonoBehaviour
     {
         return _fadeState;
     }
+
+
+
+
 
 }

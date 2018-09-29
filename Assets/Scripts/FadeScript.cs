@@ -9,6 +9,8 @@ public class FadeScript : MonoBehaviour
     float speed = 0.01f;
     float red, green, blue;
 
+    [SerializeField] float _fadeOutTime, _fadeInTime;
+
     public enum FadeState
     {
         NONE,
@@ -31,13 +33,16 @@ public class FadeScript : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+            StartFadeOut();
+
         if (_fadeState == FadeState.NONE)
             return;
 
         switch (_fadeState)
         {
             case FadeState.FADE_OUT:
-                alfa += speed;
+                alfa += Time.deltaTime / _fadeOutTime;
                 if (alfa >= 1)
                 {
                     alfa = 1;
@@ -50,7 +55,7 @@ public class FadeScript : MonoBehaviour
                 break;
 
             case FadeState.FADE_IN:
-                alfa -= speed;
+                alfa -= Time.deltaTime / _fadeInTime;
                 if (alfa <= 0)
                 {
                     alfa = 0;
@@ -84,5 +89,9 @@ public class FadeScript : MonoBehaviour
     {
         return _fadeState;
     }
+
+
+
+
 
 }

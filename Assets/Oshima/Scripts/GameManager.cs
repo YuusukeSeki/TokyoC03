@@ -6,26 +6,31 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour {
 
-[SerializeField] PlayerManager _playerManager 	= null;
-//[SerializeField] Boss _boss					= null;
-[SerializeField] UIManager _uiManager 			= null;
-[SerializeField] AudioManager _audioManager 	= null;
-[SerializeField] GameObject pousePanel 			= null;
-[SerializeField] GameObject pousePanel2 		= null;
-[SerializeField] GameObject resultPanel 		= null;
-[SerializeField] GameObject letter				= null;
-//int gameState									= 0;
-string touchLayerName							= "";
-Status status 									= Status.PLAYING;
-int score										= 0;
-public bool hitTarget							= false;
-private bool isJump								= true;
+[SerializeField] PlayerManager _playerManager 			= null;
+//[SerializeField] Boss _boss							= null;
+[SerializeField] UIManager _uiManager 					= null;
+[SerializeField] AudioManager _audioManager 			= null;
+[SerializeField] SceneChangeManager _sceneChangeManager = null;
+[SerializeField] GameObject pousePanel 					= null;
+[SerializeField] GameObject pousePanel2 				= null;
+[SerializeField] GameObject resultPanel 				= null;
+[SerializeField] GameObject letter						= null;
+[SerializeField] GameObject tapEffect 					= null;
+[SerializeField] GameObject mainCamera					= null;
+//int gameState											= 0;
+string touchLayerName									= "";
+Status status 											= Status.PLAYING;
+int score												= 0;
+public bool hitTarget									= false;
+private bool isJump										= true;
 
-public int sceneState 							= 0;
+public int sceneState 									= 0;
 
-public float[] playerMPs						= new float[4];
+public float[] playerMPs								= new float[4];
 
-public int _scoreRate = 1;
+public int _scoreRate 									= 1;
+
+private Vector2 tapPoint 								= new Vector2(0,0);
 
 
 
@@ -46,11 +51,13 @@ enum Status{
 			Play();
 		}
 		
-		if(_playerManager._state == PlayerManager.State.CLEAR || _playerManager._state == PlayerManager.State.GAMEOVER){
+		if((_playerManager._state == PlayerManager.State.CLEAR || _playerManager._state == PlayerManager.State.GAMEOVER)&&_sceneChangeManager.changeFlag == false){
 			Time.timeScale = 0f;
 			_uiManager.EditResultScore(score);
 			pousePanel2.SetActive(true);
 			resultPanel.SetActive(true);
+		}else if(_sceneChangeManager.changeFlag == true){
+			Time.timeScale = 1f;
 		}
 		//Debug.Log(playerMPs[0]+" "+playerMPs[1]+" "+playerMPs[2]+" "+playerMPs[3]);
 		//Debug.Log("0: hp "+_playerManager.GetCharacterParamater(0)._hp+" pos "+_uiManager.SearchPlayerPos(0));
@@ -74,7 +81,7 @@ enum Status{
 			Touch touch = Input.GetTouch(0);
 			if(touch.phase == TouchPhase.Began){
 			//アイコン以外をタップ時何をタップしているかの判定
-				Vector2 tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     			Collider2D collition2d = Physics2D.OverlapPoint(tapPoint);
     			if (collition2d) {
         			RaycastHit2D hitObject = Physics2D.Raycast(tapPoint,-Vector2.up);
@@ -104,6 +111,8 @@ enum Status{
 				}
 
 				if(isJump == true){
+					GameObject Effect = Instantiate(tapEffect,new Vector3(tapPoint.x,tapPoint.y,0),Quaternion.identity);
+					Effect.transform.parent = mainCamera.transform;
 					_playerManager.Jump();
 					_audioManager.OnJumpPlay();
 				}

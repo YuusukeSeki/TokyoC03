@@ -7,7 +7,9 @@ public class FadeScript : MonoBehaviour
 {
     float alfa;
     float speed = 0.01f;
-    float red, green, blue;
+    float red = 0, green = 0, blue = 0;
+
+    [SerializeField] float _fadeOutTime, _fadeInTime;
 
     [SerializeField] float _fadeOutTime, _fadeInTime;
 
@@ -24,10 +26,10 @@ public class FadeScript : MonoBehaviour
 
     void Start()
     {
-        _fadeState = FadeState.NONE;
-        red = GetComponent<Image>().color.r;
-        green = GetComponent<Image>().color.g;
-        blue = GetComponent<Image>().color.b;
+        //_fadeState = FadeState.NONE;
+        //red = GetComponent<Image>().color.r;
+        //green = GetComponent<Image>().color.g;
+        //blue = GetComponent<Image>().color.b;
 
     }
 
@@ -60,6 +62,7 @@ public class FadeScript : MonoBehaviour
                 {
                     alfa = 0;
                     _fadeState = FadeState.NONE;
+                    gameObject.SetActive(false);
                 }
                 break;
 
@@ -75,6 +78,8 @@ public class FadeScript : MonoBehaviour
             return;
 
         _fadeState = FadeState.FADE_OUT;
+
+        gameObject.SetActive(true);
 
     }
 

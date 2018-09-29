@@ -45,7 +45,8 @@ public class Player : MonoBehaviour
     // Component
     Rigidbody2D _rb;
     FlashScript _ff;
-    FadeScript _fade;
+    //[SerializeField] GameObject _fadeObj;
+    //FadeScript _fade;
     CameraFixing _cf;
     Animator _animator;
 
@@ -88,11 +89,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.F))
+        //    _fade.StartFadeOut();
+
         // 状態の変更
         ChangeState();
 
         // ゴール、画面遷移中で無処理
-        if (_isClear || _fade.GetFadeState() != FadeScript.FadeState.NONE)
+        //if (_isClear || _fade.GetFadeState() != FadeScript.FadeState.NONE)
+        if (_isClear)
             return;
 
         // 移動処理
@@ -124,8 +129,10 @@ public class Player : MonoBehaviour
         // 点滅時間の設定
         _ff.SetFrashTime(_invincibleTime);
 
-        // フェード取得
-        _fade = GameObject.Find("FadePanel").GetComponent<FadeScript>();
+        //// フェード取得
+        //_fadeObj.SetActive(true);
+        //_fade = _fadeObj.GetComponent<FadeScript>();
+        //_fadeObj.SetActive(false);
 
         // Unity 上の数字と同期
         _paramater._maxHp = _maxHp;

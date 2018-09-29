@@ -66,6 +66,7 @@ public class Boss : Enemy {
     [SerializeField] GameObject _laser;
 
 
+
     // Use this for initialization
     void Start () {
         // ベース座標取得
@@ -197,6 +198,7 @@ public class Boss : Enemy {
                 PlayMotion();
                 break;
         }
+
     }
 
     // 初期化
@@ -249,7 +251,7 @@ public class Boss : Enemy {
                 if (_cntShot >= _numShot_ChangeRest)
                 {
                     _state = State.REST;
-                    _cntShot = 0; // コメントを外すと組み合わせによっては、１つの発射口からしかレーザーが出なくなる。コメントアウトでオーバーフローの可能性有り。
+                    _cntShot = 0; // コメントを外すと組み合わせによっては、１つの発射口からしかレーザーが出なくなる。コメントアウトでオーバーフローの危険性有り。
                 }
                 break;
 
@@ -296,7 +298,7 @@ public class Boss : Enemy {
             CreateLazer();
             _cntShot++;
 
-            if (_isRandomShotPosition || _cntShot >= _numShot_ChangePosition)
+            if (_isRandomShotPosition || _cntShot % _numShot_ChangePosition == 0)
                 ChangeShotPosition();
         }
     }
@@ -304,7 +306,8 @@ public class Boss : Enemy {
     // レーザー生成
     void CreateLazer()
     {
-        Instantiate(_laser, _shotPosition[_currentShotPosition].transform.position, new Quaternion());
+        GameObject obj = Instantiate(_laser, _shotPosition[_currentShotPosition].transform.position, new Quaternion());
+        obj.transform.GetChild(0).GetComponent<Laser>().SetCreatorObject(_shotPosition[_currentShotPosition]);
     }
 
     // 発射口切り替え処理

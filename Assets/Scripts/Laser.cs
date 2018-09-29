@@ -16,6 +16,8 @@ public class Laser : MonoBehaviour {
 
     Quaternion _startQuaternion, _endQuaternion;    // 開始時の回転率、終了時の回転率
 
+    [SerializeField] float _rotateAxisZ;            // 回転軸Z値
+
 
     enum State
     {// 状態
@@ -30,13 +32,15 @@ public class Laser : MonoBehaviour {
     const int ROOT_MAX = 1;
 
     [SerializeField] GameObject _parent;    // 親オブジェクトである基点
+    GameObject _creator;                    // 自分を生成したオブジェクト
+
 
 
 	// Use this for initialization
 	void Start () {
         // 回転経路の生成
         _rotateRoot = new Quaternion[ROOT_MAX];
-        _rotateRoot[0] = Quaternion.AngleAxis(-180 , new Vector3(0, 1, -0.2f));
+        _rotateRoot[0] = Quaternion.AngleAxis(-180 , new Vector3(0, 1, _rotateAxisZ));
         //_rotateRoot[1] = Quaternion.AngleAxis(-180, new Vector3(0, 1, 0.3f));
 
         // どこまで伸びればいいのかを求める
@@ -65,11 +69,11 @@ public class Laser : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        // 時間経過処理
-        ElapsedTime();
-
         // 状態の変更
         ChangeState();
+
+        // 時間経過処理
+        ElapsedTime();
 
         // 現在の状態を見て、処理を変える
         switch(_state)
@@ -91,6 +95,9 @@ public class Laser : MonoBehaviour {
                 break;
 
         }
+
+        // 生成者との座標を同期する
+        Follow();
 
     }
 
@@ -193,7 +200,21 @@ public class Laser : MonoBehaviour {
         }
     }
 
+    // 生成者のゲームオブジェクト情報の設定
+    public void SetCreatorObject(GameObject obj)
+    {
+        _creator = obj;
+    }
 
+    // 生成者と座標を同期する
+    void Follow()
+    {
+        if (_creator == null)
+            return;
 
+        Vector3 pos = _parent.transform.position;
+        pos.x = _creator.transform.position.x;
+        _parent.transform.position = pos;
+    }
 
 }

@@ -21,6 +21,8 @@ public class CameraFixing : MonoBehaviour
     float _cntTime;
     float _charaChangeTime;
 
+    Vector3 _prePosition;
+
     // Use this for initialization
     void Start()
     {
@@ -35,19 +37,15 @@ public class CameraFixing : MonoBehaviour
         _movePos = new Vector2(0, 0);
         _cntTime = 0;
 
+        _prePosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-            _state = State.NORMAL;
-        if (Input.GetKeyDown(KeyCode.K))
-            _state = State.TUKKAETERU;
-
-
-
+        _prePosition = transform.position;
         Vector3 pos = transform.position;
+
 
         if (_state == State.NORMAL)
         {
@@ -128,6 +126,11 @@ public class CameraFixing : MonoBehaviour
     public void SetState(State state)
     {
         _state = state;
+    }
+
+    public Vector3 Sabun()
+    {
+        return transform.position - _prePosition;
     }
 
 

@@ -176,12 +176,6 @@ public class Player : MonoBehaviour
             }
 
         }
-        if(col.gameObject.tag == "Hole")
-        {
-            if (_isGround)
-                _isAllDead = true;
-        }
-
     }
     void OnCollisionStay2D(Collision2D col)
     {
@@ -233,12 +227,21 @@ public class Player : MonoBehaviour
         {// ゴール判定
             _isClear = true;
         }
-        else if (col.gameObject.tag == "DeadLine")
-        {// 画面外判定（底）
-            if(_state != State.EXIT)
+        else if (col.gameObject.tag == "Hole")
+        {
+            if (_isGround)
                 _isAllDead = true;
         }
 
+
+    }
+    void OnTriggaerStay2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Hole")
+        {
+            if (_isGround)
+                _isAllDead = true;
+        }
     }
 
     // 状態の変更

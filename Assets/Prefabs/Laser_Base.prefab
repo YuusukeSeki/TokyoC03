@@ -111,7 +111,8 @@ MonoBehaviour:
   _growTime: 0.1
   _stayTime: 1
   _rotateTime: 0.5
-  _eraseTime: 1
+  _eraseTime: 0
+  _rotateAxisZ: -0.1
   _parent: {fileID: 1389634638524652}
 --- !u!212 &212325674153227242
 SpriteRenderer:

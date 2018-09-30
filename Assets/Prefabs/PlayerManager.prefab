@@ -439,7 +439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4035807157581496}
   - component: {fileID: 114596326589477158}
-  - component: {fileID: 114322980371821124}
+  - component: {fileID: 114825053156526026}
   - component: {fileID: 114839579798165860}
   - component: {fileID: 114681465420984838}
   - component: {fileID: 212332480085986240}
@@ -1225,20 +1225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _SpriteStanding: {fileID: 21300000, guid: 5410c8f73d448b441a9816d93138e234, type: 3}
   _SpriteSliding: {fileID: 21300000, guid: e4c4fef8ef4c1a041ab4b5106a519f10, type: 3}
---- !u!114 &114322980371821124
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1981041405410676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cd0e7f45dcf094498dde624a82235d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioManager: {fileID: 0}
-  _time: 1
-  _gameManager: {fileID: 0}
 --- !u!114 &114365705179857924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1303,9 +1289,9 @@ MonoBehaviour:
   _effect02: {fileID: 1727561852576830}
   _maxHp: 4
   _healMP_PerSeconds: 10
-  _jumpPower: 20
+  _jumpPower: 25
   _runForce: 100
-  _runMaxSpeed: 6.4
+  _runMaxSpeed: 4
   _invincibleTime: 1
   _state: 0
   _audioManager: {fileID: 0}
@@ -1368,6 +1354,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioManager: {fileID: 0}
+--- !u!114 &114825053156526026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1981041405410676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd0e7f45dcf094498dde624a82235d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioManager: {fileID: 0}
+  _time: 1
+  _gameManager: {fileID: 0}
 --- !u!114 &114828883223425780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69393,8 +69393,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1750018109
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6052a89fd29e83144a3f94055d9f1590, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

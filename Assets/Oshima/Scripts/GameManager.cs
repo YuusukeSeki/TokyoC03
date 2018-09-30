@@ -162,12 +162,14 @@ enum Status{
 		Time.timeScale = 0f;
 		status = Status.POUSE;
 		pousePanel.SetActive(true);
+		resultPanel.SetActive(true);
 	}
 	
 	public void OnRestartButton(){
 		Time.timeScale = 1f;
 		status = Status.PLAYING;
 		pousePanel.SetActive(false);
+		resultPanel.SetActive(false);
 	}
 
 	public void OnSkilButton(){

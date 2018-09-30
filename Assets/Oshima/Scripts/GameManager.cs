@@ -32,6 +32,8 @@ public int _scoreRate 									= 1;
 
 private Vector2 tapPoint 								= new Vector2(0,0);
 
+private bool effOn										= true;
+
 
 
 enum Status{
@@ -53,6 +55,7 @@ enum Status{
 		
 		if((_playerManager._state == PlayerManager.State.CLEAR || _playerManager._state == PlayerManager.State.GAMEOVER)&&_sceneChangeManager.changeFlag == false){
 			Time.timeScale = 0f;
+			effOn = false;
 			_uiManager.EditResultScore(score);
 			pousePanel2.SetActive(true);
 			resultPanel.SetActive(true);
@@ -110,7 +113,7 @@ enum Status{
 					isJump = false;
 				}
 
-				if(isJump == true){
+				if(isJump == true && effOn == true){
 					GameObject Effect = Instantiate(tapEffect,new Vector3(tapPoint.x,tapPoint.y,0),Quaternion.identity);
 					Effect.transform.parent = mainCamera.transform;
 					_playerManager.Jump();
@@ -125,6 +128,7 @@ enum Status{
 
 	public void Init(){
 		Time.timeScale = 1f;
+		effOn = true;
 		status = Status.PLAYING;
 		//eventSystem = EventSystem.current;
 		pousePanel.SetActive(false);
@@ -160,14 +164,18 @@ enum Status{
 
 	public void OnPauseButton(){
 		Time.timeScale = 0f;
+		effOn = false;
 		status = Status.POUSE;
 		pousePanel.SetActive(true);
+		resultPanel.SetActive(true);
 	}
 	
 	public void OnRestartButton(){
 		Time.timeScale = 1f;
+		effOn = true;
 		status = Status.PLAYING;
 		pousePanel.SetActive(false);
+		resultPanel.SetActive(false);
 	}
 
 	public void OnSkilButton(){

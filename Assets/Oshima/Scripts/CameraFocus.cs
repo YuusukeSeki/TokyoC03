@@ -56,7 +56,7 @@ public class CameraFocus : MonoBehaviour {
         
 
         //Debug.Log("index:"+index+" currentTime:"+currentTime+" isInput:"+isInput);
-        Debug.Log(time-startTime);
+       
         currentTime += Time.deltaTime;
         time += Time.deltaTime;
         

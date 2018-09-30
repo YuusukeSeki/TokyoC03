@@ -11,8 +11,6 @@ public class FadeScript : MonoBehaviour
 
     [SerializeField] float _fadeOutTime, _fadeInTime;
 
-    [SerializeField] float _fadeOutTime, _fadeInTime;
-
     public enum FadeState
     {
         NONE,

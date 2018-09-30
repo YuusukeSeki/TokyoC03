@@ -33,7 +33,7 @@ public class Laser : MonoBehaviour {
 
     [SerializeField] GameObject _parent;    // 親オブジェクトである基点
     GameObject _creator;                    // 自分を生成したオブジェクト
-
+    Boss _boss;
 
 
 	// Use this for initialization
@@ -156,7 +156,12 @@ public class Laser : MonoBehaviour {
     void SelfDelete()
     {
         if (_cntTime >= 1)
+        {
+            Debug.Log("Rest!!");
+
+            _boss.SetOnRest();
             Destroy(_parent.gameObject);
+        }
     }
 
     // 状態の変更
@@ -201,9 +206,10 @@ public class Laser : MonoBehaviour {
     }
 
     // 生成者のゲームオブジェクト情報の設定
-    public void SetCreatorObject(GameObject obj)
+    public void SetCreatorObject(GameObject obj , Boss boss)
     {
         _creator = obj;
+        _boss = boss;
     }
 
     // 生成者と座標を同期する

@@ -261,15 +261,6 @@ public class PlayerManager : MonoBehaviour {
         // ⑤カメラ側でやります
 
 
-        // 以下旧式（その場で一瞬で切り替わる）
-        // _charaLists[nextChara].transform.position = _charaLists[_nowChara].transform.position;
-
-        //// 状態を変更する
-        //_charaLists[nextChara].GetComponent<Player>()._state = Player.State.ENTRY;
-
-        //if (_charaLists[_nowChara].GetComponent<Player>()._state != Player.State.DEAD)
-        //    _charaLists[_nowChara].GetComponent<Player>()._state = Player.State.EXIT;
-
     }
 
     // 操作中のキャラクタをジャンプさせる

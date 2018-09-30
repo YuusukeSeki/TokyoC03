@@ -281,6 +281,9 @@ public class Player : MonoBehaviour
             {
                 _state = State.NONE;
                 _cntTime = 0;
+                tag = "Player";
+                gameObject.layer = LayerMask.NameToLayer("Player"); ;
+
             }
 
         }
@@ -401,12 +404,18 @@ public class Player : MonoBehaviour
         _endPos = endPos;
         _changeTime = changeTime;
 
+        // タグ・レイヤーの切り替え
+        tag = "PlayerChange";
+        gameObject.layer = LayerMask.NameToLayer("PlayerChange"); ;
+
     }
 
     // 退場時の処理
     public void SetExit()
     {
         _state = State.EXIT;
+        tag = "PlayerChange";
+        gameObject.layer = LayerMask.NameToLayer("PlayerChange"); ;
 
     }
 

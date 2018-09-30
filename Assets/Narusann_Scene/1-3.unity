@@ -18435,6 +18435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d3788fce97084c879b98430f564c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fadeOutTime: 0
+  _fadeInTime: 0
 --- !u!114 &319811995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22467,8 +22469,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6511855, y: 0.021000002}
   m_AnchorMax: {x: 0.95037156, y: 0.2814516}
-  m_AnchoredPosition: {x: 3.600006, y: -2.8310852}
-  m_SizeDelta: {x: -13.3, y: -7.1472}
+  m_AnchoredPosition: {x: 0, y: 4.299988}
+  m_SizeDelta: {x: -90.8, y: 20.999985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &446740029
 MonoBehaviour:
@@ -22541,7 +22543,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9c2d1b3ab6eb0418fb8a0534e146e599, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54745846d45b6664eb84789952f35d70, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -23011,7 +23013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.028468668, y: 0.07241339}
   m_AnchorMax: {x: 0.158, y: 0.3045829}
-  m_AnchoredPosition: {x: -3.0512695, y: -0.47119904}
+  m_AnchoredPosition: {x: -3.0512695, y: -0.4711914}
   m_SizeDelta: {x: -2.4385223, y: -6.031067}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &493177739
@@ -23269,10 +23271,13 @@ MonoBehaviour:
   _playerManager: {fileID: 1041939644}
   _uiManager: {fileID: 1295119090}
   _audioManager: {fileID: 736768989}
+  _sceneChangeManager: {fileID: 1867473112}
   pousePanel: {fileID: 1919949711}
   pousePanel2: {fileID: 413981422}
   resultPanel: {fileID: 136607431}
   letter: {fileID: 1075879207102656, guid: 9177859cbf8b44813bfc33a9dc032ff0, type: 2}
+  tapEffect: {fileID: 1905045399452178, guid: 0e6cb3c54326c4e9387bb81eb9dcf097, type: 2}
+  mainCamera: {fileID: 1046243121}
   hitTarget: 0
   sceneState: 0
   playerMPs:
@@ -32127,6 +32132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d3788fce97084c879b98430f564c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fadeOutTime: 0
+  _fadeInTime: 0
 --- !u!1 &898922325
 GameObject:
   m_ObjectHideFlags: 0
@@ -67652,6 +67659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355f03926ae014d7592f69ffb6d80876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fadePanael: {fileID: 894533800}
+  changeFlag: 0
 --- !u!1 &1871591515
 GameObject:
   m_ObjectHideFlags: 0

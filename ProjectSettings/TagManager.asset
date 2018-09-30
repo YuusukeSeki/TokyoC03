@@ -15,6 +15,7 @@ TagManager:
   - Obstacle
   - Fire
   - Hole
+  - PlayerChange
   layers:
   - Default
   - TransparentFX
@@ -35,7 +36,7 @@ TagManager:
   - PlayerDamage
   - Obstacle
   - Hole
-  - 
+  - PlayerChange
   - 
   - 
   - 

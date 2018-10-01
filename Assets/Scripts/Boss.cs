@@ -12,6 +12,7 @@ public class Boss : Enemy {
     [SerializeField] float _restTime;               // 小休止の時間
     float _cntLaserTime;                            // レーザー発射用の時間計測バッファ
     int _cntShot;                                   // 小休止から復帰してから撃った回数
+    int _cntShot_End;                               // 撃ち終わった数
     int _currentShotPosition;                       // 現在の発射口
 
     enum State
@@ -212,6 +213,7 @@ public class Boss : Enemy {
 
         _cntLaserTime = _laserStartDelay;
         _cntShot = 0;
+        _cntShot_End = 0;
         _currentShotPosition = 0;
         _state = State.REST;
     }
@@ -248,11 +250,11 @@ public class Boss : Enemy {
         switch (_state)
         {
             case State.BATTLE:
-                if (_cntShot >= _numShot_ChangeRest)
-                {
-                    _state = State.REST;
-                    _cntShot = 0; // コメントを外すと組み合わせによっては、１つの発射口からしかレーザーが出なくなる。コメントアウトでオーバーフローの危険性有り。
-                }
+                //if (_cntShot >= _numShot_ChangeRest)
+                //{
+                //    _state = State.REST;
+                //    _cntShot = 0; // コメントを外すと組み合わせによっては、１つの発射口からしかレーザーが出なくなる。コメントアウトでオーバーフローの危険性有り。
+                //}
                 break;
 
             case State.REST:
@@ -279,7 +281,7 @@ public class Boss : Enemy {
                     break;
 
                 case State.REST:
-                    _cntLaserTime = _restTime;
+                    //_cntLaserTime = _restTime;
                     break;
 
             }
@@ -293,7 +295,7 @@ public class Boss : Enemy {
     // 攻撃処理
     void Attack()
     {
-        if(_cntLaserTime <= 0)
+        if(_cntLaserTime <= 0 && _cntShot < _numShot_ChangeRest)
         {
             CreateLazer();
             _cntShot++;
@@ -307,7 +309,7 @@ public class Boss : Enemy {
     void CreateLazer()
     {
         GameObject obj = Instantiate(_laser, _shotPosition[_currentShotPosition].transform.position, new Quaternion());
-        obj.transform.GetChild(0).GetComponent<Laser>().SetCreatorObject(_shotPosition[_currentShotPosition]);
+        obj.transform.GetChild(0).GetComponent<Laser>().SetCreatorObject(_shotPosition[_currentShotPosition], this);
     }
 
     // 発射口切り替え処理
@@ -323,6 +325,20 @@ public class Boss : Enemy {
         // 回数で変更時の処理
         _currentShotPosition = _currentShotPosition + 1 >= 2 ? 0 : 1;
 
+    }
+
+    // 休憩モードに切り替え
+    public void SetOnRest()
+    {
+        _cntShot_End++;
+
+        if (_cntShot_End >= _numShot_ChangeRest)
+        {
+            _state = State.REST;
+            _cntShot = 0; // コメントを外すと組み合わせによっては、１つの発射口からしかレーザーが出なくなる。コメントアウトでオーバーフローの危険性有り。
+            _cntShot_End = 0;
+            _cntLaserTime = _restTime;
+        }
     }
 
 }

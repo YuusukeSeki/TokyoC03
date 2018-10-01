@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 [SerializeField] SceneChangeManager _sceneChangeManager = null;
 [SerializeField] GameObject pousePanel 					= null;
 [SerializeField] GameObject pousePanel2 				= null;
+[SerializeField] GameObject gameOverPanel 				= null;
 [SerializeField] GameObject resultPanel 				= null;
 [SerializeField] GameObject letter						= null;
 [SerializeField] GameObject tapEffect 					= null;
@@ -58,7 +59,11 @@ enum Status{
 			effOn = false;
 			_uiManager.EditResultScore(score);
 			pousePanel2.SetActive(true);
-			resultPanel.SetActive(true);
+			if(_playerManager._state == PlayerManager.State.CLEAR){
+				resultPanel.SetActive(true);
+			}else if(_playerManager._state == PlayerManager.State.GAMEOVER){
+				gameOverPanel.SetActive(true);
+			}
 		}else if(_sceneChangeManager.changeFlag == true){
 			Time.timeScale = 1f;
 		}
@@ -167,7 +172,7 @@ enum Status{
 		effOn = false;
 		status = Status.POUSE;
 		pousePanel.SetActive(true);
-		resultPanel.SetActive(true);
+		//resultPanel.SetActive(true);
 	}
 	
 	public void OnRestartButton(){
@@ -175,7 +180,7 @@ enum Status{
 		effOn = true;
 		status = Status.PLAYING;
 		pousePanel.SetActive(false);
-		resultPanel.SetActive(false);
+		//resultPanel.SetActive(false);
 	}
 
 	public void OnSkilButton(){

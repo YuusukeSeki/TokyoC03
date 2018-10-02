@@ -50,7 +50,7 @@ enum Status{
 	
 	// Update is called once per frame
 	void Update () {
-		if(_playerManager._state == PlayerManager.State.NONE){
+		if(_playerManager._state == PlayerManager.State.NONE && status == Status.PLAYING){
 			Play();
 		}
 		
@@ -127,7 +127,46 @@ enum Status{
 			}else if (touch.phase == TouchPhase.Ended){
 				isJump = true;
 			}
-　		}
+　		}else if(Input.GetMouseButtonDown(0)){
+			tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    			Collider2D collition2d = Physics2D.OverlapPoint(tapPoint);
+    			if (collition2d) {
+        			RaycastHit2D hitObject = Physics2D.Raycast(tapPoint,-Vector2.up);
+        			if (hitObject) {
+						if(hitObject.collider.gameObject.tag == "Target" && sceneState == 1){
+							GameObject Letter = Instantiate(letter,_playerManager.GetMainCharacterPosition() + new Vector3(1f,0,0), Quaternion.identity);
+							Letter.GetComponent<LetterBullet>().target = hitObject.collider.gameObject.transform;
+							Letter.GetComponent<LetterBullet>().sceneState = sceneState;
+							isJump = false;
+						}
+        			}
+    			}
+
+			//画面タップ時アイコンをタップしているかどうかの判定
+				touchLayerName = "";
+　　　		 	 PointerEventData pointer = new PointerEventData(EventSystem.current);
+        		pointer.position = Input.mousePosition;
+        		List<RaycastResult> result = new List<RaycastResult>();
+        		EventSystem.current.RaycastAll(pointer, result);
+
+        		foreach (RaycastResult raycastResult in result)
+        		{
+            		touchLayerName = LayerMask.LayerToName(raycastResult.gameObject.layer);
+        		}
+				if(touchLayerName == "Icon"){
+					isJump = false;
+				}
+
+				if(isJump == true && effOn == true){
+					GameObject Effect = Instantiate(tapEffect,new Vector3(tapPoint.x,tapPoint.y,0),Quaternion.identity);
+					Effect.transform.parent = mainCamera.transform;
+					_playerManager.Jump();
+					_audioManager.OnJumpPlay();
+				}
+		}else if(Input.GetMouseButtonUp(0)){
+			isJump = true;
+		}
+
 	}
 
 

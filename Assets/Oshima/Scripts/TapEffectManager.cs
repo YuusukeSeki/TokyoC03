@@ -16,6 +16,9 @@ public class TapEffectManager : MonoBehaviour {
 				Debug.Log("tap");
 				Debug.Log(new Vector3(tapPoint.x,tapPoint.y,0));
 			}
+		}else if(Input.GetMouseButtonDown(0)){
+			Vector2 tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			GameObject Effect = Instantiate(tapEffect,new Vector3(tapPoint.x,tapPoint.y,0),Quaternion.identity);
 		}
 	}
 }

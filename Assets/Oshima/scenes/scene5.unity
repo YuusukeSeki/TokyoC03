@@ -549,6 +549,16 @@ Prefab:
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 736768989}
+    - target: {fileID: 114366579792847534, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _gameManager
+      value: 
+      objectReference: {fileID: 508387132}
+    - target: {fileID: 114366579792847534, guid: a3f578cfb0b79324d9b0e58b7e79a225,
+        type: 2}
+      propertyPath: _audioManager
+      value: 
+      objectReference: {fileID: 736768989}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3f578cfb0b79324d9b0e58b7e79a225, type: 2}
   m_IsPrefabParent: 0
@@ -4274,7 +4284,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

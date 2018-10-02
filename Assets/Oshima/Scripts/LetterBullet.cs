@@ -28,13 +28,13 @@ public int sceneState = 0;
 
 	public override void DoSomeEvent(int patern){
         if(patern == 2){
-            Debug.Log("target");
+            //Debug.Log("target");
 			Destroy(this.gameObject);
         }else if(patern == 3){
-			Debug.Log("ground");
+			//Debug.Log("ground");
 			Destroy(this.gameObject);
 		}else if(patern == 4){
-			Debug.Log("enemy");
+			//Debug.Log("enemy");
 			Destroy(this.gameObject);
 		}
 	}

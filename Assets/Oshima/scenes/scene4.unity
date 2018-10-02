@@ -37046,7 +37046,7 @@ GameObject:
   - component: {fileID: 1322377168}
   - component: {fileID: 1322377167}
   m_Layer: 5
-  m_Name: pouse
+  m_Name: pause
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37102,7 +37102,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pouse
+  m_Text: Pause
 --- !u!222 &1322377168
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -66802,7 +66802,7 @@ GameObject:
   - component: {fileID: 1919949714}
   - component: {fileID: 1919949713}
   m_Layer: 5
-  m_Name: PousePanel
+  m_Name: PausePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

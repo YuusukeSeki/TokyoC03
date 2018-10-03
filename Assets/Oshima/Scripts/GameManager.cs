@@ -34,6 +34,8 @@ public int _scoreRate 									= 1;
 private Vector2 tapPoint 								= new Vector2(0,0);
 
 private bool effOn										= true;
+private bool bgmChange									= true;
+private bool clearSE									= true;
 
 
 
@@ -55,11 +57,19 @@ enum Status{
 		}
 		
 		if((_playerManager._state == PlayerManager.State.CLEAR || _playerManager._state == PlayerManager.State.GAMEOVER)&&_sceneChangeManager.changeFlag == false){
-			Time.timeScale = 0f;
 			effOn = false;
+			Time.timeScale = 0f;
+			if(bgmChange == true){
+				_audioManager.OnResultPlay();
+				bgmChange = false;
+			}
 			_uiManager.EditResultScore(score);
 			pousePanel2.SetActive(true);
 			if(_playerManager._state == PlayerManager.State.CLEAR){
+				if(clearSE == true){
+					_audioManager.OnClearPlay();
+					clearSE = false;
+				}
 				resultPanel.SetActive(true);
 			}else if(_playerManager._state == PlayerManager.State.GAMEOVER){
 				gameOverPanel.SetActive(true);
@@ -173,6 +183,8 @@ enum Status{
 	public void Init(){
 		Time.timeScale = 1f;
 		effOn = true;
+		bgmChange = true;
+		clearSE = true;
 		status = Status.PLAYING;
 		//eventSystem = EventSystem.current;
 		pousePanel.SetActive(false);

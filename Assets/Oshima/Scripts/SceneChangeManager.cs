@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneChangeManager : MonoBehaviour {
 [SerializeField] GameObject _fadePanael = null;
 public bool changeFlag 					= false;
-private int Id = 0;
+private int Id 							= 0;
 	
 	void Update(){
 		if(_fadePanael.GetComponent<FadeScript>().GetFadeState() == FadeScript.FadeState.FADE_OUT_COMPRETED) 

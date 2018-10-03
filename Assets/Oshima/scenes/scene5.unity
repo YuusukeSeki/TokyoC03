@@ -1048,6 +1048,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 736768989}
+        m_MethodName: OnTapPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &179927553
@@ -1683,7 +1694,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.166252, y: 0.06310488}
   m_AnchorMax: {x: 0.266504, y: 0.23744318}
-  m_AnchoredPosition: {x: -1.1187134, y: 1.9779205}
+  m_AnchoredPosition: {x: -1.1187134, y: 1.9779053}
   m_SizeDelta: {x: -1.5001831, y: -2.421936}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255576670
@@ -1882,6 +1893,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 736768989}
+        m_MethodName: OnTapPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &261845945
@@ -2023,7 +2045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.166252, y: 0.06310488}
   m_AnchorMax: {x: 0.266504, y: 0.23744318}
-  m_AnchoredPosition: {x: -0.13903809, y: 2.0244293}
+  m_AnchoredPosition: {x: -0.13903809, y: 2.024414}
   m_SizeDelta: {x: -5.9299927, y: -6.123001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &278833048
@@ -2851,6 +2873,17 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 736768989}
+        m_MethodName: OnTapPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4525,6 +4558,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0675e90ddab3b483a9ce6477959b7a7c, type: 3}
   - {fileID: 8300000, guid: 5ba13d3dd356a49b79b9127497137713, type: 3}
   - {fileID: 8300000, guid: 141fa46786df742028f3b8c09f977e13, type: 3}
+  - {fileID: 8300000, guid: 4aac3b68da1444191b8504393bd44346, type: 3}
+  - {fileID: 8300000, guid: 5516f1d40d6ad447d828c1d83c2e35ff, type: 3}
+  - {fileID: 8300000, guid: df75275b992024445b11d644bcf1726d, type: 3}
+  - {fileID: 8300000, guid: 7a40d491dc9444ec8ba84e694c3153b8, type: 3}
+  - {fileID: 8300000, guid: 166b4827e14224958aec6abe64777ee2, type: 3}
+  - {fileID: 8300000, guid: ed34bbf85292340ba8b2d8cf0fd5b5ea, type: 3}
+  scene: 2
 --- !u!4 &736768990
 Transform:
   m_ObjectHideFlags: 0
@@ -6237,6 +6277,17 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 736768989}
+        m_MethodName: OnTapPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8783,6 +8834,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 736768989}
+        m_MethodName: OnTapPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1651809189
@@ -9241,7 +9303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.266504, y: 0.06310488}
   m_AnchorMax: {x: 0.37026793, y: 0.23744318}
-  m_AnchoredPosition: {x: 2.4481812, y: 0.7867584}
+  m_AnchoredPosition: {x: 2.4481812, y: 0.78674316}
   m_SizeDelta: {x: -4.133667, y: -3.421997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1804079320
@@ -9933,7 +9995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13624136, y: 0.12474126}
   m_AnchorMax: {x: 0.4236517, y: 0.44337064}
-  m_AnchoredPosition: {x: 1.25, y: 3.5000076}
+  m_AnchoredPosition: {x: 1.25, y: 3.5}
   m_SizeDelta: {x: 3.5, y: -4.800003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928980525
@@ -9982,6 +10044,17 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 736768989}
+        m_MethodName: OnTapPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10176,6 +10249,17 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 736768989}
+        m_MethodName: OnTapPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

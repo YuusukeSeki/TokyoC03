@@ -8,6 +8,8 @@ public class Skill_TheWorld : Skill
     public static float _magBulletSpeed;    // 弾速倍率
     public static float _magNextBullet;     // 射撃間隔倍率
 
+    [SerializeField] List<GameObject> _effect;
+
     // Use this for initialization
     void Start () {
         _type = TYPE.THE_WORLD;
@@ -26,6 +28,8 @@ public class Skill_TheWorld : Skill
     {
         base.UseSkill();
 
+        _effect[0].GetComponent<Skef_TheWorld>().StartEffect();
+
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemys)
         {
@@ -33,6 +37,7 @@ public class Skill_TheWorld : Skill
             enemy.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1.0f);
 
         }
+
     }
 
 }
